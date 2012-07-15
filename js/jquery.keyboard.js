@@ -315,15 +315,13 @@ $.keyboard = function(el, options){
 				// Mapped Keys - allows typing on a regular keyboard and the mapped key is entered
 				// Set up a key in the layout as follows: "m(a):label"; m = key to map, (a) = actual keyboard key to map to (optional), ":label" = title/tooltip (optional)
 				// example: \u0391 or \u0391(A) or \u0391:alpha or \u0391(A):alpha
-                // // TODO: ALEX: Insert the hook to forward keyboard to mouse clicks here
-            if (base.hasMappedKeys) {
-					if (base.mappedKeys.hasOwnProperty(k)){
-						base.insertText( base.mappedKeys[k] );
+                if (base.hasMappedKeys) {
+			        if (base.mappedKeys.hasOwnProperty(k)){
+					    base.insertText( base.mappedKeys[k] );
 						e.preventDefault();
 					}
 				}
 				base.checkMaxLength();
-
 			})
 			.bind('keyup.keyboard', function(e){
 				switch (e.which) {
