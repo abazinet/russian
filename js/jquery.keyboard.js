@@ -1258,7 +1258,7 @@ $.keyboard = function(el, options){
 		appendLocally: false,
 
 		// If false, the shift key will remain active until the next key is (mouse) clicked on; if true it will stay active until pressed again
-		stickyShift  : false,
+		stickyShift  : true,
 
 		// Prevent pasting content into the area
 		preventPaste : false,
