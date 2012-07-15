@@ -337,6 +337,11 @@ $.keyboard = function(el, options){
 						}
 						break;
 
+	    			case 16:
+					    base.shiftActive = false;
+						base.showKeySet(this);
+						break;
+						
 					// Escape will hide the keyboard
 					case 27:
 						base.close();
@@ -368,12 +373,12 @@ $.keyboard = function(el, options){
 						$.keyboard.keyaction.enter(base, null, e);
 						break;
 
-					// Show capsLock
-					case 20:
-						base.shiftActive = base.capsLock = !base.capsLock;
+					// Show shift keyboard
+					case 16:
+					    base.shiftActive = true;
 						base.showKeySet(this);
 						break;
-
+						
 					case 86:
 						// prevent ctrl-v/cmd-v
 						if (e.ctrlKey || e.metaKey) {
