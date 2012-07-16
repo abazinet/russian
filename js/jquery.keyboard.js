@@ -324,7 +324,7 @@ $.keyboard = function(el, options){
 					}
 				}
 				base.checkMaxLength();
-
+	
 				var pressedButton = base.$keyboard.find('.ui-keyboard-' + k.charCodeAt(0));
 				pressedButton.addClass(o.css.buttonHover);
 				setTimeout(function() {
@@ -364,18 +364,6 @@ $.keyboard = function(el, options){
 
 				base.checkMaxLength();
 				base.$el.trigger( 'change.keyboard', [ base, base.el ] );
-				
-
-				//$(e.target).removeClass(o.css.buttonHover);
-				//base.$keyboard.find(".ui-keyboard-" + e.keyCode).removeClass(o.css.buttonHover);
-				//var buttonKey = '.ui-keyboard-' + String.fromCharCode(e.charCode || e.which).charCodeAt(0);
-				//base.$keyboard.find(buttonKey).removeClass(o.css.buzttonHover);
-
-				//$.keyboard.keyaction.removeClass(o.css.buttonHover)
-				//base.$el.removeClass(o.css.buttonHover)
-				//base.$e1.removeClass(o.css.buttonHover)
-						//base.$el.removeClass(o.css.buttonAction);
-				
 			})
 			.bind('keydown.keyboard', function(e){
 				switch (e.which) {
@@ -407,35 +395,6 @@ $.keyboard = function(el, options){
 						}
 						break;
 				}
-				//base.$el.addClass(o.css.buttonAction);
-				//base.$e1.addClass(o.css.buttonHover)
-				//var $this = $(this)
-				//$.keyboard.keyaction.addClass(o.css.buttonHover)
-				//base.$keyboard.find('.ui-keyboard-alt').addClass(o.css.buttonHover)				
-				//$(e.target).addClass(o.css.buttonHover);
-				/*var buttonKey = '.ui-keyboard-' e.keyCode;
-				if (base.hasMappedKeys) {
-			        if (base.mappedKeys.hasOwnProperty(k)){
-					    base.insertText( base.mappedKeys[k] );
-						e.preventDefault();
-					}
-				}
-				String.fromCharCode(e.keyCode).charCodeAt(0);*/
-				
-				/*var key  = String.fromCharCode(e.charCode || e.which);
-				console.log('Code: ' + e.which + ' KEY: ' + key);
-				if (base.hasMappedKeys) {
-			        if (base.mappedKeys.hasOwnProperty(key)){
-					    key = base.mappedKeys[key];
-					}
-				}
-
-				var buttonKey = '.ui-keyboard-' + key.charCodeAt(0);
-				console.log('buttonKey ' + buttonKey);
-				//base.$keyboard.find(buttonKey).addClass(o.css.buzttonHover);
-				
-				base.$keyboard.find('.ui-keyboard-1103').addClass(o.css.buttonHover);*/
-				
 			})
 			.bind('mouseup.keyboard', function(){
 				if (base.checkCaret) { base.lastCaret = base.$preview.caret(); }
