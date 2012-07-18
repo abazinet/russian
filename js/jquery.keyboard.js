@@ -75,23 +75,6 @@ Options:
 				{sp:#}        - Replace # with a numerical value, adds blank space, value of 1 ~ width of one key
 				{space}       - Spacebar
 				{t}, {tab}    - Tab
-
-CSS:
-	.ui-keyboard { padding: .3em; position: absolute; left: 0; top: 0; z-index: 16000; }
-	.ui-keyboard-has-focus { z-index: 16001; }
-	.ui-keyboard div { font-size: 1.1em; }
-	.ui-keyboard-button { height: 2em; width: 2em; margin: .1em; cursor: pointer; overflow: hidden; line-height: 2em; }
-	.ui-keyboard-button span { padding: 0; margin: 0; white-space:nowrap; }
-	.ui-keyboard-button-endrow { clear: left; }
-	.ui-keyboard-widekey { width: 4em; }
-	.ui-keyboard-space { width: 15em; text-indent: -999em; }
-	.ui-keyboard-preview-wrapper { text-align: center; }
-	.ui-keyboard-preview { text-align: left; margin: 0 0 3px 0; display: inline; width: 99%;} - width is calculated in IE, since 99% = 99% full browser width
-	.ui-keyboard-keyset { text-align: center; }
-	.ui-keyboard-input { text-align: left; }
-	.ui-keyboard-input-current { -moz-box-shadow: 1px 1px 10px #00f; -webkit-box-shadow: 1px 1px 10px #00f; box-shadow: 1px 1px 10px #00f; }
-	.ui-keyboard-placeholder { color: #888; }
-	.ui-keyboard-nokeyboard { color: #888; border-color: #888; } - disabled or readonly inputs, or use input[disabled='disabled'] { color: #f00; }
 */
 
 ;(function($){
@@ -315,12 +298,11 @@ $.keyboard = function(el, options){
 				// Mapped Keys - allows typing on a regular keyboard and the mapped key is entered
 				// Set up a key in the layout as follows: "m(a):label"; m = key to map, (a) = actual keyboard key to map to (optional), ":label" = title/tooltip (optional)
 				// example: \u0391 or \u0391(A) or \u0391:alpha or \u0391(A):alpha
-                if (base.hasMappedKeys) {
-			        if (base.mappedKeys.hasOwnProperty(k)){
-					    k = base.mappedKeys[k]
+        if (base.hasMappedKeys) {
+			    if (base.mappedKeys.hasOwnProperty(k)){
+					  k = base.mappedKeys[k]
 						base.insertText( k );
 						e.preventDefault();
-						
 					}
 				}
 				base.checkMaxLength();
@@ -347,7 +329,7 @@ $.keyboard = function(el, options){
 
 	    			case 16:
 					    base.shiftActive = false;
-						base.showKeySet(this);
+						  base.showKeySet(this);
 						break;
 						
 					// Escape will hide the keyboard
@@ -394,6 +376,9 @@ $.keyboard = function(el, options){
 							base.checkCombos(); // check pasted content
 						}
 						break;
+				
+				  case 32:
+				    $.playAudio(base.$preview.val());
 				}
 			})
 			.bind('mouseup.keyboard', function(){
@@ -910,81 +895,10 @@ $.keyboard = function(el, options){
 
 							// switch needed for action keys with multiple names/shortcuts or
 							// default will catch all others
-							switch(action){
-
-								case 'a':
-								case 'accept':
-									base
-										.addKey('accept', action)
-										.addClass(o.css.buttonAction);
-									break;
-
-								case 'alt':
-								case 'altgr':
-									base.addKey('alt', 'alt');
-									break;
-
-								case 'b':
-								case 'bksp':
-									base.addKey('bksp', action);
-									break;
-
-								case 'c':
-								case 'cancel':
-									base
-										.addKey('cancel', action)
-										.addClass(o.css.buttonAction);
-									break;
-
-								// toggle combo/diacritic key
-								case 'combo':
-									base
-										.addKey('combo', 'combo')
-										.addClass(o.css.buttonAction);
-									break;
-
-								// Decimal - unique decimal point (num pad layout)
-								case 'dec':
-									base.acceptedKeys.push((base.decimal) ? '.' : ',');
-									base.addKey('dec', 'dec');
-									break;
-
-								case 'e':
-								case 'enter':
-									base
-										.addKey('enter', action)
-										.addClass(o.css.buttonAction);
-									break;
-
-								case 's':
-								case 'shift':
-									base.addKey('shift', action);
-									break;
-
-								// Change sign (for num pad layout)
-								case 'sign':
-									base.acceptedKeys.push('-');
-									base.addKey('sign', 'sign');
-									break;
-
-								case 'space':
-									base.acceptedKeys.push(' ');
-									base.addKey('space', 'space');
-									break;
-
-								case 't':
-								case 'tab':
-									base.addKey('tab', action);
-									break;
-
-								default:
-									if ($.keyboard.keyaction.hasOwnProperty(action)){
-										// base.acceptedKeys.push(action);
-										base.addKey(action, action);
-									}
-
+							if ($.keyboard.keyaction.hasOwnProperty(action)){
+								// base.acceptedKeys.push(action);
+								base.addKey(action, action);
 							}
-
 						} else {
 
 							// regular button (not an action key)
@@ -1095,98 +1009,7 @@ $.keyboard = function(el, options){
 		}
 	};
 
-	// Default keyboard layouts
-	$.keyboard.layouts = {
-		'alpha' : {
-			'default': [
-				'` 1 2 3 4 5 6 7 8 9 0 - = {bksp}',
-				'{tab} a b c d e f g h i j [ ] \\',
-				'k l m n o p q r s ; \' {enter}',
-				'{shift} t u v w x y z , . / {shift}',
-				'{accept} {space} {cancel}'
-			],
-			'shift': [
-				'~ ! @ # $ % ^ & * ( ) _ + {bksp}',
-				'{tab} A B C D E F G H I J { } |',
-				'K L M N O P Q R S : " {enter}',
-				'{shift} T U V W X Y Z < > ? {shift}',
-				'{accept} {space} {cancel}'
-			]
-		},
-		'qwerty' : {
-			'default': [
-				'` 1 2 3 4 5 6 7 8 9 0 - = {bksp}',
-				'{tab} q w e r t y u i o p [ ] \\',
-				'a s d f g h j k l ; \' {enter}',
-				'{shift} z x c v b n m , . / {shift}',
-				'{accept} {space} {cancel}'
-			],
-			'shift': [
-				'~ ! @ # $ % ^ & * ( ) _ + {bksp}',
-				'{tab} Q W E R T Y U I O P { } |',
-				'A S D F G H J K L : " {enter}',
-				'{shift} Z X C V B N M < > ? {shift}',
-				'{accept} {space} {cancel}'
-			]
-		},
-		'international' : {
-			'default': [
-				'` 1 2 3 4 5 6 7 8 9 0 - = {bksp}',
-				'{tab} q w e r t y u i o p [ ] \\',
-				'a s d f g h j k l ; \' {enter}',
-				'{shift} z x c v b n m , . / {shift}',
-				'{accept} {alt} {space} {alt} {cancel}'
-			],
-			'shift': [
-				'~ ! @ # $ % ^ & * ( ) _ + {bksp}',
-				'{tab} Q W E R T Y U I O P { } |',
-				'A S D F G H J K L : " {enter}',
-				'{shift} Z X C V B N M < > ? {shift}',
-				'{accept} {alt} {space} {alt} {cancel}'
-			],
-			'alt': [
-				'~ \u00a1 \u00b2 \u00b3 \u00a4 \u20ac \u00bc \u00bd \u00be \u2018 \u2019 \u00a5 \u00d7 {bksp}',
-				'{tab} \u00e4 \u00e5 \u00e9 \u00ae \u00fe \u00fc \u00fa \u00ed \u00f3 \u00f6 \u00ab \u00bb \u00ac',
-				'\u00e1 \u00df \u00f0 f g h j k \u00f8 \u00b6 \u00b4 {enter}',
-				'{shift} \u00e6 x \u00a9 v b \u00f1 \u00b5 \u00e7 > \u00bf {shift}',
-				'{accept} {alt} {space} {alt} {cancel}'
-			],
-			'alt-shift': [
-				'~ \u00b9 \u00b2 \u00b3 \u00a3 \u20ac \u00bc \u00bd \u00be \u2018 \u2019 \u00a5 \u00f7 {bksp}',
-				'{tab} \u00c4 \u00c5 \u00c9 \u00ae \u00de \u00dc \u00da \u00cd \u00d3 \u00d6 \u00ab \u00bb \u00a6',
-				'\u00c4 \u00a7 \u00d0 F G H J K \u00d8 \u00b0 \u00a8 {enter}',
-				'{shift} \u00c6 X \u00a2 V B \u00d1 \u00b5 \u00c7 . \u00bf {shift}',
-				'{accept} {alt} {space} {alt} {cancel}'
-			]
-		},
-		'dvorak' : {
-			'default': [
-				'` 1 2 3 4 5 6 7 8 9 0 [ ] {bksp}',
-				'{tab} \' , . p y f g c r l / = \\',
-				'a o e u i d h t n s - {enter}',
-				'{shift} ; q j k x b m w v z {shift}',
-				'{accept} {space} {cancel}'
-			],
-			'shift' : [
-				'~ ! @ # $ % ^ & * ( ) { } {bksp}',
-				'{tab} " < > P Y F G C R L ? + |', 
-				'A O E U I D H T N S _ {enter}',
-				'{shift} : Q J K X B M W V Z {shift}',
-				'{accept} {space} {cancel}'
-			]
-		},
-		'num' : {
-			'default' : [
-				'= ( ) {b}',
-				'{clear} / * -',
-				'7 8 9 +',
-				'4 5 6 {sign}',
-				'1 2 3 %',
-				'0 . {a} {c}'
-			]
-		}
-	};
-
+	$.keyboard.layouts = {};
 	$.keyboard.defaultOptions = {
 
 		// *** choose layout & positioning ***

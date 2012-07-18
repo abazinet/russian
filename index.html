@@ -12,7 +12,11 @@
 	<link href="css/keyboard.css" rel="stylesheet">
 	<script src="js/jquery.keyboard.js"></script>
 	<script src="js/jquery.mousewheel.js"></script>
-    <script src="layouts/russian.js" type="text/javascript"></script>
+  <script src="layouts/russian.js" type="text/javascript"></script>
+  
+  <!-- audio -->
+  <script src="js/audio.js" type="text/javascript"></script>
+
 	<script>
 		$(function(){
 			$('#keyboard').keyboard();
@@ -21,12 +25,6 @@
 </head>
 <body>
     <audio autoplay controls src=""></audio>
-	<script type="text/javascript">
-	  var audioElement = document.getElementsByTagName('audio')[0];
-      audioElement.src="http://translate.google.com/translate_tts?tl=en&q=michael+has+nice+features";
-      audioElement.load();
-      audioElement.play();
-    </script>
     <input id="keyboard" type="text">
 </body>
 </html>
