@@ -9,72 +9,9 @@ Licensed under the MIT License
 Caret code from jquery.caret.1.02.js
 Licensed under the MIT License:
 http://www.opensource.org/licenses/mit-license.php
+
+Modified from original
 -----------------------------------------
-
-An on-screen virtual keyboard embedded within the browser window which
-will popup when a specified entry field is focused. The user can then
-type and preview their input before Accepting or Canceling.
-
-As a plugin to jQuery UI styling and theme will automatically
-match that used by jQuery UI with the exception of the required
-CSS listed below.
-
-Requires:
-	jQuery
-	jQuery UI (position utility only) & CSS
-
-Usage:
-	$('input[type=text], input[type=password], textarea')
-		.keyboard({
-			layout:"qwerty",
-			customLayout: {
-				'default': [
-					"q w e r t y {bksp}",
-					"s a m p l e {shift}",
-					"{accept} {space} {cancel}"
-				],
-				'shift' : [
-					"Q W E R T Y {bksp}",
-					"S A M P L E {shift}",
-					"{accept} {space} {cancel}"
-				]
-			}
-		});
-
-Options:
-	layout
-		[String] specify which keyboard layout to use
-		qwerty - Standard QWERTY layout (Default)
-		international - US international layout
-		alpha  - Alphabetical layout
-		dvorak - Dvorak Simplified layout
-		num    - Numerical (ten-key) layout
-		custom - Uses a custom layout as defined by the customLayout option
-
-	customLayout
-		[Object] Specify a custom layout
-			An Object containing a set of key:value pairs, each key is a keyset.
-			The key can be one to four rows (default, shifted, alt and alt-shift) or any number of meta key sets (meta1, meta2, etc).
-			The value is an array with string elements of which each defines a new keyboard row.
-			Each string element must have each character or key seperated by a space.
-			To include an action key, select the desired one from the list below, or define your own by adding it to the $.keyboard.keyaction variable
-			In the list below where two special/"Action" keys are shown, both keys have the same action but different appearances (abbreviated/full name keys).
-			Special/"Action" keys include:
-				{a}, {accept} - Updates element value and closes keyboard
-				{alt},{altgr} - AltGr for International keyboard
-				{b}, {bksp}   - Backspace
-				{c}, {cancel} - Clears changes and closes keyboard
-				{clear}       - Clear input window - used in num pad
-				{combo}       - Toggle combo (diacritic) key
-				{dec}         - Decimal for numeric entry, only allows one decimal (optional use in num pad)
-				{e}, {enter}  - Return/New Line
-				{lock}        - Caps lock key
-				{meta#}       - Meta keys that change the key set (# can be any integer)
-				{s}, {shift}  - Shift
-				{sign}        - Change sign of numeric entry (positive or negative)
-				{sp:#}        - Replace # with a numerical value, adds blank space, value of 1 ~ width of one key
-				{space}       - Spacebar
-				{t}, {tab}    - Tab
 */
 
 ;(function($){
