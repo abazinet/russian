@@ -315,7 +315,8 @@ $.keyboard = function(el, options){
 						break;
 				
 				  case 32:
-				    $.playAudio(base.$preview.val());
+				    //$.playAudio(base.$preview.val());
+				    $.readDocument("http://www.kommersant.ru/doc/2009152");
 				}
 			})
 			.bind('mouseup.keyboard', function(){
@@ -456,7 +457,7 @@ $.keyboard = function(el, options){
 		bksp = (txt === 'bksp' && pos.start === pos.end) ? true : false;
 		txt = (txt === 'bksp') ? '' : txt;
 		t = pos.start + (bksp ? -1 : txt.length);
-		scrL += parseInt(base.$preview.css('fontSize'),10) * (txt === 'bksp' ? -1 : 1);
+		scrL += parseInt(base.$preview.css('fontSize'), 10) * (txt === 'bksp' ? -1 : 1);
 
 		base.$preview
 			.val( base.$preview.val().substr(0, pos.start - (bksp ? 1 : 0)) + txt + base.$preview.val().substr(pos.end) )
