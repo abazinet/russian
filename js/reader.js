@@ -2,11 +2,14 @@
 
 $.readDocument = function(url) {
   $.ajax({
-    type:"GET",
-    url: url,
-    success: function(html){
-      console.log(html);
-      $("#textContainer").html(html);
+    url: "http://query.yahooapis.com/v1/public/yql",
+    dataType: "html",
+    data: {
+      q: "select * from html where url=\"" + url + "\"",
+      format: "html"
+    },
+    success: function(content) {
+      $("#textContainer").html(content);
     }
   });
 };
