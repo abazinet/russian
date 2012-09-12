@@ -705,25 +705,33 @@ $.keyboard = function(el, options){
 		.attr({ 'role': 'button', 'aria-disabled': 'false', 'tabindex' : '-1' })
 		.addClass('ui-keyboard-button');
 
-  base.showSampleText = function(sampleText, container) {
+  base.buildSampleText = function(sampleText) {
     var position = 0
+    var toReturn = $('<div />');
     for(var rows=0; rows<3 && position<sampleText.length; rows++) {
-  	  var row = $('<div />').addClass('ui-keyboard-preview-wrapper')
+      var row = $('<div />').addClass('ui-keyboard-preview-wrapper');
       for (var columns=0; columns<20 && position<sampleText.length; columns++) {
-        row.append(base.keyBtn
-  		       .clone()
-  			     .attr('disabled','disabled')
-  			     .removeClass('ui-keyboard-button')
-  			     .addClass('ui-keyboard-button.disabled')
-  			     .html('<span>' + sampleText[rows+columns] + '</span>'))
-  	       .appendTo(container);
+        var letter = sampleText[position];
+        if(letter === ' ') {
+          row.append($('<span>&nbsp;</span>')
+			      .width('1em')
+						.addClass('ui-keyboard-button ui-keyboard-spacer'));
+        } else {
+          row.append(base.keyBtn
+  		      .clone()
+  		      .removeClass('ui-keyboard-button')
+  		      .css('margin', '0em')
+  			    .attr({'disabled': 'disabled', 'aria-disabled': 'false'})
+  			    .html('<span>' + letter + '</span>'));
+  			}
+  			toReturn.append(row);
   	    position++;
   	  }
     }
+    return toReturn;
   }
 
-	// Add key function
-	// keyName = the name of the function called in $.keyboard.keyaction when the button is clicked
+  // keyName = the name of the function called in $.keyboard.keyaction when the button is clicked
 	// name = name added to key, or cross-referenced in the display options
 	// newSet = keyset to attach the new button
 	// regKey = true when it is not an action key
@@ -790,7 +798,8 @@ $.keyboard = function(el, options){
 		base.$preview.attr( (o.lockInput) ? { 'readonly': 'readonly'} : {} );
 
 	  // build text sample
-	  base.showSampleText('bobbie is a very nice girl', container);
+	  base.buildSampleText('кстрадиции которого по обвинению в подготовке покушения на Владимира Путина и Рамзана Кадырова настаивала Ген')
+	      .appendTo(container);
 
 		// build preview container and append preview display
 		if (o.usePreview) {
