@@ -705,6 +705,23 @@ $.keyboard = function(el, options){
 		.attr({ 'role': 'button', 'aria-disabled': 'false', 'tabindex' : '-1' })
 		.addClass('ui-keyboard-button');
 
+  base.showSampleText = function(sampleText, container) {
+    var position = 0
+    for(var rows=0; rows<3 && position<sampleText.length; rows++) {
+  	  var row = $('<div />').addClass('ui-keyboard-preview-wrapper')
+      for (var columns=0; columns<20 && position<sampleText.length; columns++) {
+        row.append(base.keyBtn
+  		       .clone()
+  			     .attr('disabled','disabled')
+  			     .removeClass('ui-keyboard-button')
+  			     .addClass('ui-keyboard-button.disabled')
+  			     .html('<span>' + sampleText[rows+columns] + '</span>'))
+  	       .appendTo(container);
+  	    position++;
+  	  }
+    }
+  }
+
 	// Add key function
 	// keyName = the name of the function called in $.keyboard.keyaction when the button is clicked
 	// name = name added to key, or cross-referenced in the display options
@@ -755,7 +772,7 @@ $.keyboard = function(el, options){
 		container = $('<div />')
 			.addClass('ui-keyboard ' + o.css.container + (o.alwaysOpen ? ' ui-keyboard-always-open' : '') )
 			.attr({ 'role': 'textbox' })
-			.hide();
+			.hide();    
 
 		// build preview display
 		if (o.usePreview) {
@@ -772,6 +789,9 @@ $.keyboard = function(el, options){
 		}
 		base.$preview.attr( (o.lockInput) ? { 'readonly': 'readonly'} : {} );
 
+	  // build text sample
+	  base.showSampleText('bobbie is a very nice girl', container);
+
 		// build preview container and append preview display
 		if (o.usePreview) {
 			$('<div />')
@@ -779,7 +799,7 @@ $.keyboard = function(el, options){
 				.append(base.$preview)
 				.appendTo(container);
 		}
-
+		
 		// verify layout or setup custom keyboard
 		if (o.layout === 'custom' || !$.keyboard.layouts.hasOwnProperty(o.layout)) {
 			o.layout = 'custom';
