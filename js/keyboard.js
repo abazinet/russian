@@ -4,9 +4,6 @@ Version 1.9.15
 Author: Jeremy Satterfield
 Modified: Rob Garrison (Mottie on github)
 -----------------------------------------
-Licensed under the MIT License
-
-Caret code from jquery.caret.1.02.js
 Licensed under the MIT License:
 http://www.opensource.org/licenses/mit-license.php
 
@@ -23,7 +20,7 @@ $.keyboard = function(el, options){
 	base.el = el;
 
 	// Add a reverse reference to the DOM object
-	base.$el.data("keyboard", base);
+	base.$el.data("document", base);
 
 	base.init = function(){
 		base.options = o = $.extend(true, {}, $.keyboard.defaultOptions, options);
@@ -35,22 +32,11 @@ $.keyboard = function(el, options){
 		base.rows = [ '', '-shift', '-alt', '-alt-shift' ];
 		base.acceptedKeys = [];
 		base.mappedKeys = {}; // for remapping manually typed in keys
-		$('<!--[if lte IE 8]><script>jQuery("body").addClass("oldie");</script><![endif]--><!--[if IE]><script>jQuery("body").addClass("ie");</script><![endif]-->').appendTo('body').remove();
-		base.msie = $('body').hasClass('oldie'); // Old IE flag, used for caret positioning
-		base.allie = $('body').hasClass('ie'); // $.browser.msie being removed soon
 		base.inPlaceholder = base.$el.attr('placeholder') || '';
 		base.watermark = (typeof(document.createElement('input').placeholder) !== 'undefined' && base.inPlaceholder !== ''); // html 5 placeholder/watermark
 		base.regex = $.keyboard.comboRegex; // save default regex (in case loading another layout changes it)
 		base.decimal = ( /^\./.test(o.display.dec) ) ? true : false; // determine if US "." or European "," system being used
 		base.repeatTime = 1000/o.repeatRate; // convert mouse repeater rate (characters per second) into a time in milliseconds.
-
-		// Check if caret position is saved when input is hidden or loses focus
-		// (*cough* all versions of IE and I think Opera has/had an issue as well
-		base.temp = $('<input style="position:absolute;left:-9999em;top:-9999em;" type="text" value="testing">').appendTo('body').caret(3,3);
-		// Also save caret position of the input if it is locked
-		base.checkCaret = (o.lockInput || base.temp.hide().show().caret().start !== 3 ) ? true : false;
-		base.temp.remove();
-		base.lastCaret = { start:0, end:0 };
 
 		base.temp = [ '', 0, 0 ]; // used when building the keyboard - [keyset element, row, index]
 
@@ -60,14 +46,6 @@ $.keyboard = function(el, options){
 				base.$el.bind(f + '.keyboard', o[f]);
 			}
 		});
-
-		// Close with esc key & clicking outside
-		if (o.alwaysOpen) { o.stayOpen = true; }
-		if (!o.stayOpen){
-			$(document).bind('mousedown.keyboard keyup.keyboard', function(e){
-				base.escClose(e);
-			});
-		}
 
 		// Display keyboard on focus
 		base.$el
@@ -92,25 +70,7 @@ $.keyboard = function(el, options){
 		}
 
 		base.$el.trigger( 'initialized.keyboard', [ base, base.el ] );
-
-		// initialized with keyboard open
-		if (o.alwaysOpen) {
-			base.reveal();
-		}
-
-	};
-
-	base.focusOn = function(){
-		if (base.$el.is(':visible')) {
-			// caret position is always 0,0 in webkit; and nothing is focused at this point... odd
-			// save caret position in the input to transfer it to the preview
-			base.lastCaret = base.$el.caret();
-		}
-		if (!base.isVisible || o.alwaysOpen) {
-			clearTimeout(base.timer);
-			base.reveal();
-			setTimeout(function(){ base.$preview.focus(); }, 100);
-		}
+		base.reveal();
 	};
 
 	base.reveal = function(){
@@ -131,10 +91,6 @@ $.keyboard = function(el, options){
 		// build keyboard if it doesn't exist
 		if (typeof(base.$keyboard) === 'undefined') { base.startup(); }
 
-		// ui-keyboard-has-focus is applied in case multiple keyboards have alwaysOpen = true and are stacked
-		$('.ui-keyboard-has-focus').removeClass('ui-keyboard-has-focus');
-		$('.ui-keyboard-input-current').removeClass('ui-keyboard-input-current');
-
 		base.$el.addClass('ui-keyboard-input-current');
 		base.isCurrent = true;
 
@@ -146,10 +102,6 @@ $.keyboard = function(el, options){
 		}
 		// save starting content, in case we cancel
 		base.originalContent = base.$el.val();
-		base.$preview.val( base.originalContent );
-
-		// disable/enable accept button
-		if (o.acceptValid) { base.checkValid(); }
 
 		// get single target position || target stored in element data (multiple targets) || default, at the element
 		var p, s, position = o.position;
@@ -163,43 +115,12 @@ $.keyboard = function(el, options){
 			.addClass('ui-keyboard-has-focus')
 			.show();
 
-		// adjust keyboard preview window width - save width so IE won't keep expanding (fix issue #6)
-		if (o.usePreview && base.msie) {
-			if (typeof base.width === 'undefined') {
-				base.$preview.hide(); // preview is 100% browser width in IE7, so hide the damn thing
-				base.width = Math.ceil(base.$keyboard.width()); // set input width to match the widest keyboard row
-				base.$preview.show();
-			}
-			base.$preview.width(base.width);
-		}
 
-		base.$keyboard.position(position); // position after keyboard is visible (required for UI position utility) and appropriately sized (*cough*)
-
-		$(window).resize(function(){
-			if (base.isVisible) {
-				base.$keyboard.position(position);
-			}
-		});
-
-		base.$preview.focus();
 		base.isVisible = true;
-
-		base.checkDecimal();
 
 		// get preview area line height
 		// add roughly 4px to get line height from font height, works well for font-sizes from 14-36px - needed for textareas
 		base.lineHeight = parseInt( base.$preview.css('lineHeight'), 10) || parseInt(base.$preview.css('font-size') ,10) + 4;
-
-		// IE caret haxx0rs
-		if (base.allie){
-			// ensure caret is at the end of the text (needed for IE)
-			s = base.lastCaret.start || base.originalContent.length;
-			p = { start: s, end: s };
-			if (!base.lastCaret) { base.lastCaret = p; } // set caret at end of content, if undefined
-			if (base.lastCaret.end === 0 && base.lastCaret.start > 0) { base.lastCaret.end = base.lastCaret.start; } // sometimes end = 0 while start is > 0
-			if (base.lastCaret.start < 0) { base.lastCaret = p; } // IE will have start -1, end of 0 when not focused (see demo: http://jsfiddle.net/Mottie/fgryQ/3/).
-		}
-		base.$preview.caret(base.lastCaret.start, base.lastCaret.end );
 
 		base.$el.trigger( 'visible.keyboard', [ base, base.el ] );
 		return base;
@@ -208,27 +129,20 @@ $.keyboard = function(el, options){
 	base.startup = function(){
 		base.$keyboard = base.buildKeyboard();
 		base.$allKeys = base.$keyboard.find('button.ui-keyboard-button');
-		base.$preview = (o.usePreview) ? base.$keyboard.find('.ui-keyboard-preview') : base.$el;
-		base.preview = base.$preview[0];
+		base.$preview = base.$el;
 		base.$decBtn = base.$keyboard.find('.ui-keyboard-dec');
 		base.wheel = $.isFunction( $.fn.mousewheel ); // is mousewheel plugin loaded?
 		// keyCode of keys always allowed to be typed - caps lock, page up & down, end, home, arrow, insert & delete keys
 		base.alwaysAllowed = [20,33,34,35,36,37,38,39,40,45,46];
-		if (o.enterNavigation) { base.alwaysAllowed.push(13); } // add enter to allowed keys
-		base.$preview
-			.bind('keypress.keyboard', function(e){
+
+		$(document)
+			.bind('keypress', function(e){
 				var k = String.fromCharCode(e.charCode || e.which);
-				if (base.checkCaret) { base.lastCaret = base.$preview.caret(); }
 
 				// update caps lock - can only do this while typing =(
 				base.capsLock = (((k >= 65 && k <= 90) && !e.shiftKey) || ((k >= 97 && k <= 122) && e.shiftKey)) ? true : false;
 
-				// restrict input - keyCode in keypress special keys: see http://www.asquare.net/javascript/tests/KeyCode.html
-				if (o.restrictInput) {
-					// allow navigation keys to work - Chrome doesn't fire a keypress event (8 = bksp)
-					if ( (e.which === 8 || e.which === 0) && $.inArray( e.keyCode, base.alwaysAllowed ) ) { return; }
-					if ($.inArray(k, base.acceptedKeys) === -1) { e.preventDefault(); } // quick key check
-				} else if ( (e.ctrlKey || e.metaKey) && (e.which === 97 || e.which === 99 || e.which === 118 || (e.which >= 120 && e.which <=122)) ) {
+        if ( (e.ctrlKey || e.metaKey) && (e.which === 97 || e.which === 99 || e.which === 118 || (e.which >= 120 && e.which <=122)) ) {
 					// Allow select all (ctrl-a:97), copy (ctrl-c:99), paste (ctrl-v:118) & cut (ctrl-x:120) & redo (ctrl-y:121)& undo (ctrl-z:122); meta key for mac
 					return;
 				}
@@ -242,7 +156,6 @@ $.keyboard = function(el, options){
 						e.preventDefault();
 					}
 				}
-				base.checkMaxLength();
 	
 				var pressedButton = base.$keyboard.find('.ui-keyboard-' + k.charCodeAt(0));
 				pressedButton.addClass(o.css.buttonHover);
@@ -250,52 +163,17 @@ $.keyboard = function(el, options){
 					pressedButton.removeClass(o.css.buttonHover);
 				}, 200);
 			})
-			.bind('keyup.keyboard', function(e){
+			.bind('keyup', function(e){
 				switch (e.which) {
-					// Insert tab key
-					case 9 :
-						// Added a flag to prevent from tabbing into an input, keyboard opening, then adding the tab to the keyboard preview
-						// area on keyup. Sadly it still happens if you don't release the tab key immediately because keydown event auto-repeats
-						if (base.tab && !o.lockInput) {
-							$.keyboard.keyaction.tab(base);
-							base.tab = false;
-						} else {
-							e.preventDefault();
-						}
-						break;
-
 	    			case 16:
 					    base.shiftActive = false;
 						  base.showKeySet(this);
-						break;
-						
-					// Escape will hide the keyboard
-					case 27:
-						base.close();
-						return false;
+						break;						
 				}
-
-				// throttle the check combo function because fast typers will have an incorrectly positioned caret
-				clearTimeout(base.throttled);
-				base.throttled = setTimeout(function(){
-					base.checkCombos();
-				}, 100);
-
-				base.checkMaxLength();
 				base.$el.trigger( 'change.keyboard', [ base, base.el ] );
 			})
-			.bind('keydown.keyboard', function(e){
+			.bind('keydown', function(e){
 				switch (e.which) {
-					// prevent tab key from leaving the preview window
-					case 9 :
-						if (o.tabNavigation) {
-							// allow tab to pass through - tab to next input/shift-tab for prev
-							return true;
-						} else {
-							base.tab = true; // see keyup comment above
-							return false;
-						}
-
 					case 13:
 						$.keyboard.keyaction.enter(base, null, e);
 						break;
@@ -304,41 +182,14 @@ $.keyboard = function(el, options){
 					case 16:
 					    base.shiftActive = true;
 						base.showKeySet(this);
-						break;
-						
-					case 86:
-						// prevent ctrl-v/cmd-v
-						if (e.ctrlKey || e.metaKey) {
-							if (o.preventPaste) { e.preventDefault(); return; }
-							base.checkCombos(); // check pasted content
-						}
-						break;
+						break;						
 				
 				  case 32:
+				    // TODO: ALEX: Space does some stuff
 				    //$.playAudio(base.$preview.val());
 				    $.readDocument("http://www.kommersant.ru/doc/2009152");
 				}
 			})
-			.bind('mouseup.keyboard', function(){
-				if (base.checkCaret) { base.lastCaret = base.$preview.caret(); }
-			})
-			.bind('blur.keyboard', function(e){
-				// when keyboard is always open, make sure base.close is called on blur
-				if (o.alwaysOpen && base.isCurrent) {
-					if ( e.target === base.el || $(e.target).closest('.ui-keyboard')[0] === base.$keyboard[0] ) {
-						base.close(o.autoAccept);
-					} else {
-						base.$preview.focus();
-					}
-					return false;
-				}
-			});
-
-		// If preventing paste, block context menu (right click)
-		if (o.preventPaste){
-			base.$preview.bind('contextmenu.keyboard', function(e){ e.preventDefault(); });
-			base.$el.bind('contextmenu.keyboard', function(e){ e.preventDefault(); });
-		}
 
 		if (o.appendLocally) {
 			base.$el.after( base.$keyboard );
@@ -350,9 +201,6 @@ $.keyboard = function(el, options){
 			.bind(o.keyBinding.split(' ').join('.keyboard ') + '.keyboard repeater.keyboard', function(e){
 				// 'key', { action: doAction, original: n, curTxt : n, curNum: 0 }
 				var txt, key = $.data(this, 'key'), action = key.action.split(':')[0];
-				base.$preview.focus();
-				// Start caret in IE when not focused (happens with each virtual keyboard button click
-				if (base.checkCaret) { base.$preview.caret( base.lastCaret.start, base.lastCaret.end ); }
 				if (action.match('meta')) { action = 'meta'; }
 				if ($.keyboard.keyaction.hasOwnProperty(action) && $(this).hasClass('ui-keyboard-actionkey')) {
 					// stop processing if action returns false (close & cancel)
@@ -365,10 +213,7 @@ $.keyboard = function(el, options){
 						base.showKeySet(this);
 					}
 				}
-				base.checkCombos();
-				base.checkMaxLength();
 				base.$el.trigger( 'change.keyboard', [ base, base.el ] );
-				base.$preview.focus();
 				e.preventDefault();
 			})
 			// Change hover class and tooltip
@@ -412,7 +257,6 @@ $.keyboard = function(el, options){
 			// using "kb" namespace for mouse repeat functionality to keep it separate
 			// I need to trigger a "repeater.keyboard" to make it work
 			.bind('mouseup.keyboard mouseleave.kb touchend.kb touchmove.kb touchcancel.kb', function(){
-				if (base.isVisible && base.isCurrent) { base.$preview.focus(); }
 				base.mouseRepeat = [false,''];
 				return false;
 			})
@@ -429,58 +273,6 @@ $.keyboard = function(el, options){
 				return false;
 			});
 
-	};
-
-	// Insert text at caret/selection - thanks to Derek Wickwire for fixing this up!
-	base.insertText = function(txt){
-		var bksp, t, h,
-			// use base.$preview.val() instead of base.preview.value (val.length includes carriage returns in IE).
-			val = base.$preview.val(),
-			pos = base.$preview.caret(),
-			scrL = base.$preview.scrollLeft(),
-			scrT = base.$preview.scrollTop(),
-			len = val.length; // save original content length
-
-		// silly IE caret hacks... it should work correctly, but navigating using arrow keys in a textarea is still difficult
-		if (pos.end < pos.start) { pos.end = pos.start; } // in IE, pos.end can be zero after input loses focus
-		if (pos.start > len) { pos.end = pos.start = len; }
-
-		if (base.preview.tagName === 'TEXTAREA') {
-			// This makes sure the caret moves to the next line after clicking on enter (manual typing works fine)
-			if (base.msie && val.substr(pos.start, 1) === '\n') { pos.start += 1; pos.end += 1; }
-			// Set scroll top so current text is in view - needed for virtual keyboard typing, not manual typing
-			// this doesn't appear to work correctly in Opera
-			h = (val.split('\n').length - 1);
-			base.preview.scrollTop = (h>0) ? base.lineHeight * h : scrT;
-		}
-
-		bksp = (txt === 'bksp' && pos.start === pos.end) ? true : false;
-		txt = (txt === 'bksp') ? '' : txt;
-		t = pos.start + (bksp ? -1 : txt.length);
-		scrL += parseInt(base.$preview.css('fontSize'), 10) * (txt === 'bksp' ? -1 : 1);
-
-		base.$preview
-			.val( base.$preview.val().substr(0, pos.start - (bksp ? 1 : 0)) + txt + base.$preview.val().substr(pos.end) )
-			.caret(t, t)
-			.scrollLeft(scrL);
-
-		if (base.checkCaret) { base.lastCaret = { start: t, end: t }; } // save caret in case of bksp
-
-	};
-
-	// check max length
-	base.checkMaxLength = function(){
-		var t, p = base.$preview.val();
-		if (o.maxLength !== false && p.length > o.maxLength) {
-			t = Math.min(base.$preview.caret().start, o.maxLength); 
-			base.$preview.val( p.substring(0, o.maxLength) );
-			// restore caret on change, otherwise it ends up at the end.
-			base.$preview.caret( t, t );
-			base.lastCaret = { start: t, end: t };
-		}
-		if (base.$decBtn.length) {
-			base.checkDecimal();
-		}
 	};
 
 	// mousedown repeater
@@ -536,92 +328,6 @@ $.keyboard = function(el, options){
 		base.lastKeyset = [ base.shiftActive, base.altActive, base.metaActive ];
 	};
 
-	// check for key combos (dead keys)
-	base.checkCombos = function(){
-		var i, r, t, t2,
-			// use base.$preview.val() instead of base.preview.value (val.length includes carriage returns in IE).
-			val = base.$preview.val(),
-			pos = base.$preview.caret(),
-			len = val.length; // save original content length
-
-		// silly IE caret hacks... it should work correctly, but navigating using arrow keys in a textarea is still difficult
-		if (pos.end < pos.start) { pos.end = pos.start; } // in IE, pos.end can be zero after input loses focus
-		if (pos.start > len) { pos.end = pos.start = len; }
-		// This makes sure the caret moves to the next line after clicking on enter (manual typing works fine)
-		if (base.msie && val.substr(pos.start, 1) === '\n') { pos.start += 1; pos.end += 1; }
-
-		if (o.useCombos) {
-			// keep 'a' and 'o' in the regex for ae and oe ligature (æ,œ)
-			// thanks to KennyTM: http://stackoverflow.com/questions/4275077/replace-characters-to-make-international-letters-diacritics
-			// original regex /([`\'~\^\"ao])([a-z])/mig moved to $.keyboard.comboRegex
-			val = val.replace(base.regex, function(s, accent, letter){
-				return (o.combos.hasOwnProperty(accent)) ? o.combos[accent][letter] || s : s;
-			});
-		}
-
-		// check input restrictions - in case content was pasted
-		if (o.restrictInput && val !== '') {
-			t = val;
-			r = base.acceptedKeys.length;
-			for (i=0; i < r; i++){
-				if (t === '') { continue; }
-				t2 = base.acceptedKeys[i];
-				if (val.indexOf(t2) >= 0) {
-					// escape out all special characters
-					if (/[\[|\]|\\|\^|\$|\.|\||\?|\*|\+|\(|\)|\{|\}]/g.test(t2)) { t2 = '\\' + t2; }
-					t = t.replace( (new RegExp(t2, "g")), '');
-				}
-			}
-			// what's left over are keys that aren't in the acceptedKeys array
-			if (t !== '') { val = val.replace(t, ''); }
-		}
-
-		// save changes, then reposition caret
-		pos.start += val.length - len;
-		pos.end += val.length - len;
-		base.$preview.val(val);
-
-		base.$preview.caret(pos.start, pos.end);
-
-		// calculate current cursor scroll location and set scrolltop to keep it in view
-		base.preview.scrollTop = base.lineHeight * (val.substring(0, pos.start).split('\n').length - 1); // find row, multiply by font-size
-
-		base.lastCaret = { start: pos.start, end: pos.end };
-
-		if (o.acceptValid) { base.checkValid(); }
-
-		return val; // return text, used for keyboard closing section
-	};
-
-	// Toggle accept button if validating
-	base.checkValid = function(){
-		var valid = true;
-		if (o.validate && typeof o.validate === "function") {
-			 valid = o.validate(base, base.$preview.val(), false);
-		}
-		// toggle accept button, "disabled" class defined in the css
-		base.$keyboard.find('.ui-keyboard-accept')
-			[valid ? 'removeClass' : 'addClass']('disabled')
-			[valid ? 'removeAttr' : 'attr']('disabled', 'disabled')
-			.attr('aria-disabled', !valid);
-	};
-
-	// Decimal button for num pad - only allow one (not used by default)
-	base.checkDecimal = function(){
-		// Check US "." or European "," format
-		if ( ( base.decimal && /\./g.test(base.preview.value) ) || ( !base.decimal && /\,/g.test(base.preview.value) ) ) {
-			base.$decBtn
-				.attr({ 'disabled': 'disabled', 'aria-disabled': 'true' })
-				.removeClass(o.css.buttonDefault + ' ' + o.css.buttonHover)
-				.addClass(o.css.buttonDisabled);
-		} else {
-			base.$decBtn
-				.removeAttr('disabled')
-				.attr({ 'aria-disabled': 'false' })
-				.addClass(o.css.buttonDefault)
-				.removeClass(o.css.buttonDisabled);
-		}
-	};
 
 	// get other layer values for a specific key
 	base.getLayers = function(el){
@@ -648,56 +354,6 @@ $.keyboard = function(el, options){
 			all.eq(indx).focus();
 		}
 		return false;
-	};
-
-	// Close the keyboard, if visible. Pass a status of true, if the content was accepted (for the event trigger).
-	base.close = function(accepted){
-		if (base.isVisible) {
-			clearTimeout(base.throttled);
-			var val = (accepted) ?  base.checkCombos() : base.originalContent;
-			// validate input if accepted
-			if (accepted && o.validate && typeof(o.validate) === "function" && !o.validate(base, val, true)) { return; }
-			base.isCurrent = false;
-			base.$el
-				.removeClass('ui-keyboard-input-current')
-				.trigger( (o.alwaysOpen) ? '' : 'beforeClose.keyboard', [ base, base.el, (accepted || false) ] )
-				.val( val )
-				.scrollTop( base.el.scrollHeight )
-				.blur()
-				.trigger( ((accepted || false) ? 'accepted.keyboard' : 'canceled.keyboard'), [ base, base.el ] )
-				.trigger( (o.alwaysOpen) ? 'inactive.keyboard' : 'hidden.keyboard', [ base, base.el ] );
-			if (o.openOn) {
-				// rebind input focus
-				base.$el.bind( o.openOn + '.keyboard', function(){ base.focusOn(); });
-			}
-			if (!o.alwaysOpen) {
-				base.$keyboard.hide();
-				base.isVisible = false;
-			}
-			if (!base.watermark && base.el.value === '' && base.inPlaceholder !== '') {
-				base.$el
-					.addClass('ui-keyboard-placeholder')
-					.val(base.inPlaceholder);
-			}
-		}
-		return false;
-	};
-
-	base.accept = function(){
-		base.close(true);
-	};
-
-	base.escClose = function(e){
-		if ( !base.isVisible ) { return; }
-		// ignore autoaccept if using escape - good idea?
-		if ( e.type === 'keyup' && e.which === 27 ) { base.close(); }
-		if ( e.type === 'mousedown' && ( e.target !== base.el && $(e.target).closest('.ui-keyboard')[0] !== base.$keyboard[0] ) ) {
-			// stop propogation in IE - an input getting focus doesn't open a keyboard if one is already open
-			if ( base.allie ) {
-				e.preventDefault();
-			}
-			base.close(o.autoAccept);
-		}
 	};
 
 	// Build default button
@@ -778,7 +434,7 @@ $.keyboard = function(el, options){
 			sets = 0,
 
 		container = $('<div />')
-			.addClass('ui-keyboard ' + o.css.container + (o.alwaysOpen ? ' ui-keyboard-always-open' : '') )
+			.addClass('ui-keyboard ' + o.css.container + ' ui-keyboard-always-open')
 			.attr({ 'role': 'textbox' })
 			.hide();    
 
@@ -789,13 +445,12 @@ $.keyboard = function(el, options){
 				.removeClass('ui-keyboard-placeholder ui-keyboard-input')
 				.addClass('ui-keyboard-preview ' + o.css.input)
 				.attr('tabindex', '-1')
-				.show(); // for hidden inputs
+				.hide();
 		} else {
-			// No preview display, use element and reposition the keyboard under it.
-			base.$preview = base.$el;
-			o.position.at = o.position.at2;
+		// No preview display, use element and reposition the keyboard under it.
+		base.$preview = base.$el;
+		o.position.at = o.position.at2;
 		}
-		base.$preview.attr( (o.lockInput) ? { 'readonly': 'readonly'} : {} );
 
 	  // build text sample
 	  base.buildSampleText('кстрадиции которого по обвинению в подготовке покушения на Владимира Путина и Рамзана Кадырова настаивала Ген')
@@ -896,29 +551,20 @@ $.keyboard = function(el, options){
 			.removeData('keyboard');
 	};
 
-		// Run initializer
-		base.init();
+  base.insertText = function(txt) {
+	  console.log(txt);
 	};
+
+		// Run initializer
+		base.init();		
+	};
+
 
 	// Action key function list
 	$.keyboard.keyaction = {
-		accept : function(base){
-			base.close(true); // same as base.accept();
-			return false;     // return false prevents further processing
-		},
 		alt : function(base,el){
 			base.altActive = !base.altActive;
 			base.showKeySet(el);
-		},
-		bksp : function(base){
-			base.insertText('bksp'); // the script looks for the "bksp" string and initiates a backspace
-		},
-		cancel : function(base){
-			base.close();
-			return false; // return false prevents further processing
-		},
-		clear : function(base){
-			base.$preview.val('');
 		},
 		combo : function(base){
 			var c = !base.options.useCombos;
@@ -990,15 +636,6 @@ $.keyboard = function(el, options){
 			at2: 'center bottom' // used when "usePreview" is false (centers the keyboard at the bottom of the input/textarea)
 		},
 
-		// preview added above keyboard if true, original input/textarea used if false
-		usePreview   : true,
-
-		// if true, the keyboard will always be visible
-		alwaysOpen   : true,
-
-		// if true, keyboard will remain open even if the input loses focus, but closes on escape or when another keyboard opens.
-		stayOpen     : true,
-
 		// *** change keyboard language & look ***
 		display : {
 			//'a'      : '\u2714:Accept (Shift-Enter)', // check mark - same action as accept
@@ -1037,18 +674,6 @@ $.keyboard = function(el, options){
 		// *** Useability ***
 		// Auto-accept content when clicking outside the keyboard (popup will close)
 		autoAccept   : false,
-
-		// Prevents direct input in the preview window when true
-		lockInput    : false,
-
-		// Prevent keys not in the displayed keyboard from being typed in
-		restrictInput: false,
-
-		// Check input against validate function, if valid the accept button is clickable; if invalid, the accept button is disabled.
-		acceptValid  : false,
-
-		// tab to go to next, shift-tab for previous (default behavior)
-		tabNavigation: false,
 
 		// enter for next input; shift-enter accepts content & goes to next
 		// shift + "enterMod" + enter ("enterMod" is the alt as set below) will accept content and go to previous in a textarea
@@ -1093,27 +718,6 @@ $.keyboard = function(el, options){
 			'^' : { a:"\u00e2", A:"\u00c2", e:"\u00ea", E:"\u00ca", i:"\u00ee", I:"\u00ce", o:"\u00f4", O:"\u00d4", u:"\u00fb", U:"\u00db", y:"\u0177", Y:"\u0176" }, // circumflex
 			'~' : { a:"\u00e3", A:"\u00c3", e:"\u1ebd", E:"\u1ebc", i:"\u0129", I:"\u0128", o:"\u00f5", O:"\u00d5", u:"\u0169", U:"\u0168", y:"\u1ef9", Y:"\u1ef8", n:"\u00f1", N:"\u00d1" } // tilde
 		},
-
-/*
-		// *** Methods ***
-		// commenting these out to reduce the size of the minified version
-		// Callbacks - attach a function to any of these callbacks as desired
-		initialized : function(e, keyboard, el) {},
-		visible     : function(e, keyboard, el) {},
-		change      : function(e, keyboard, el) {},
-		beforeClose : function(e, keyboard, el, accepted) {},
-		accepted    : function(e, keyboard, el) {},
-		canceled    : function(e, keyboard, el) {},
-		hidden      : function(e, keyboard, el) {},
-		switchInput : null, // called instead of base.switchInput
-*/
-
-		// this callback is called just before the "beforeClose" to check the value
-		// if the value is valid, return true and the keyboard will continue as it should (close if not always open, etc)
-		// if the value is not value, return false and the clear the keyboard value ( like this "keyboard.$preview.val('');" ), if desired
-		// The validate function is called after each input, the "isClosing" value will be false; when the accept button is clicked, "isClosing" is true
-		validate    : function(keyboard, value, isClosing) { return true; }
-
 	};
 
 	// for checking combos
@@ -1132,81 +736,3 @@ $.keyboard = function(el, options){
 	};
 
 })(jQuery);
-
-/* Copyright (c) 2010 C. F., Wong (<a href="http://cloudgen.w0ng.hk">Cloudgen Examplet Store</a>)
- * Licensed under the MIT License:
- * http://www.opensource.org/licenses/mit-license.php
- * Highly modified from the original
- */
-(function($, len, createRange, duplicate){
-$.fn.caret = function(options,opt2) {
-	if ( typeof this[0] === 'undefined' || this.is(':hidden') || this.css('visibility') === 'hidden' ) { return this; }
-	var n, s, start, e, end, selRange, range, stored_range, te, val,
-		selection = document.selection, t = this[0], sTop = t.scrollTop,
-		opera = window.opera && window.opera.toString() === '[object Opera]',
-		ss = typeof t.selectionStart !== 'undefined';
-	if (typeof options === 'number' && typeof opt2 === 'number') {
-		start = options;
-		end = opt2;
-	}
-	if (typeof start !== 'undefined') {
-		if (ss){
-			// hack around Opera bug
-			if (t.tagName === 'TEXTAREA' && opera) {
-				val = this.val();
-				n = val.substring(0,start).split('\n')[len] - 1;
-				start += (n>0) ? n : 0;
-				end += (n>0) ? n : 0;
-			}
-			t.selectionStart=start;
-			t.selectionEnd=end;
-		} else {
-			selRange = t.createTextRange();
-			selRange.collapse(true);
-			selRange.moveStart('character', start);
-			selRange.moveEnd('character', end-start);
-			selRange.select();
-		}
-		// must be visible or IE8 crashes; IE9 in compatibility mode works fine - issue #56
-		if (this.is(':visible') || this.css('visibility') !== 'hidden') { this.focus(); }
-		t.scrollTop = sTop;
-		return this;
-	} else {
-		if (ss) {
-			s = t.selectionStart;
-			e = t.selectionEnd;
-			// hack around Opera bug (reported)
-			// try this demo - http://jsfiddle.net/vwb3c/ - keep entering carriage returns
-			if (t.tagName === 'TEXTAREA' && opera) {
-				val = this.val();
-				n = val.substring(0,s).split('\n')[len] - 1;
-				s += (n>0) ? -n : 0;
-				e += (n>0) ? -n : 0;
-			}
-		} else {
-			if (t.tagName === 'TEXTAREA') {
-				val = this.val();
-				range = selection[createRange]();
-				stored_range = range[duplicate]();
-				stored_range.moveToElementText(t);
-				stored_range.setEndPoint('EndToEnd', range);
-				// thanks to the awesome comments in the rangy plugin
-				s = stored_range.text.replace(/\r\n/g, '\r')[len];
-				e = s + range.text.replace(/\r\n/g, '\r')[len];
-			} else {
-				val = this.val().replace(/\r\n/g, '\r');
-				range = selection[createRange]()[duplicate]();
-				range.moveEnd('character', val[len]);
-				s = (range.text === '' ? val[len] : val.lastIndexOf(range.text));
-				range = selection[createRange]()[duplicate]();
-				range.moveStart('character', -val[len]);
-				e = range.text[len];
-			}
-		}
-		te = t.value.substring(s,e);
-		return { start : s, end : e, text : te, replace : function(st){
-			return t.value.substring(0,s) + st + t.value.substring(e, t.value[len]);
-		}};
-	}
-};
-})(jQuery, 'length', 'createRange', 'duplicate');
