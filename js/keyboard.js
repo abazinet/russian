@@ -7,7 +7,7 @@ Modified: Rob Garrison (Mottie on github)
 Licensed under the MIT License:
 http://www.opensource.org/licenses/mit-license.php
 
-Modified from original
+Heavily modified
 -----------------------------------------
 */
 
