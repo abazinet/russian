@@ -11,6 +11,8 @@ Heavily modified
 -----------------------------------------
 */
 
+var russian = {};
+
 ;(function($){
 $.keyboard = function(el, options){
 	var base = this, o;
@@ -187,7 +189,8 @@ $.keyboard = function(el, options){
 				  case 32:
 				    // TODO: ALEX: Space does some stuff
 				    //$.playAudio(base.$preview.val());
-				    $.readDocument("http://www.kommersant.ru/doc/2009152");
+				    var content = $.readDocument("http://www.kommersant.ru/doc/2009152");
+				    $("#textContainer").html(content);
 				}
 			})
 

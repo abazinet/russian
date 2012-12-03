@@ -9,7 +9,7 @@ $.readDocument = function(url) {
       format: "html"
     },
     success: function(content) {
-      $("#textContainer").html(content);
+      return content;
     }
   });
 };
