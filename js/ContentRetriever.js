@@ -14,10 +14,11 @@ russian.ContentRetriever.prototype.download = function() {
       format: "html"
     },
     success: function(html) {
+      console.log('downloaded content from ' + this.url);
       self.fireOnNewContent(html);
     },
     error: function(xhr, textStatus, errorThrown) {
-      return 'ContentRetriever->download failed with ' + textStatus + ' ' + xhr + errorThrown;
+      console.log('ContentRetriever:download failed with ' + textStatus + ' ' + xhr + errorThrown);
     }
   });
 }
@@ -31,5 +32,5 @@ russian.ContentRetriever.prototype.extractText = function(html) {
 
 russian.ContentRetriever.prototype.fireOnNewContent = function(html) {
   var text = this.extractText(html);
-  this.onNewContent(text);
+   this.onNewContent(text);
 }
