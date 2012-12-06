@@ -188,7 +188,9 @@ $.keyboard = function(el, options){
 				
 				  case 32:
 				    // TODO: ALEX: Space does some stuff
-				    //$.playAudio(base.$preview.val());
+					var audioPlayer = new russian.AudioPlayer($.find('audio')[0]);
+					audioPlayer.play(base.$preview.val());
+
 				    var content = $.readDocument("http://www.kommersant.ru/doc/2009152");
 				    $("#textContainer").html(content);
 				}

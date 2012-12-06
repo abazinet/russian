@@ -5,16 +5,15 @@
   <title>Test runner</title>  
 </head>
 <body>
-	<link href="jquery/jquery-ui.css" rel="stylesheet">
-	<script src="jquery/jquery.min.js"></script>
-	<script src="jquery/jquery-ui.min.js"></script>
+  <link href="jquery/jquery-ui.css" rel="stylesheet">
+  <script src="jquery/jquery.min.js"></script>
+  <script src="jquery/jquery-ui.min.js"></script>
 
-	<link href="css/keyboard.css" rel="stylesheet">
-	<script src="js/keyboard.js"></script>
-	<script src="js/keyboard.mousewheel.js"></script>
+  <link href="css/keyboard.css" rel="stylesheet">
+  <script src="js/keyboard.js"></script>
+  <script src="js/keyboard.mousewheel.js"></script>
   <script src="layouts/russian.js"></script>
-  <script src="js/audio.js"></script>
-  <script src="js/reader.js"></script>
+  <script src="js/AudioPlayer.js"></script>
   <script src="js/ChunkedTextReader.js"></script>
   <script src="js/ContentRetriever.js"></script>
 
@@ -30,5 +29,10 @@
   <script src="test/keyboard-test.js"></script>
   <script src="test/ChunkedTextReader-test.js"></script>
   <script src="test/ContentRetriever-test.js"></script>
+  <script src="test/AudioPlayer-test.js"></script>
+
+  <div id="textContainer"></div>
+  <div id="audioContainer"><audio controls src="" hidden="true"></audio></div>
+  <div id="inputContainer"><input id="keyboard" type="text" hidden="true"/></div>
 </body>
 </html>

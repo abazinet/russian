@@ -16,10 +16,10 @@
   <script src="layouts/russian.js" type="text/javascript"></script>
 
   <!-- audio -->
-  <script src="js/audio.js" type="text/javascript"></script>
+  <script src="js/AudioPlayer.js" type="text/javascript"></script>
 
   <!-- read external source -->
-  <script src="js/reader.js" type="text/javascript"></script>
+  <script src="js/AudioPlayer.js" type="text/javascript"></script>
 
 	<script>
 		$(function(){
@@ -28,8 +28,8 @@
 	</script>
 </head>
 <body>
-    <div id="textContainer"></div>
-    <div id="audioContainer"><audio autoplay controls src="" hidden="true"></audio></div>
-    <div id="inputContainer"><input id="keyboard" type="text"/></div>
+  <div id="textContainer"></div>
+  <div id="audioContainer"><audio controls src="" hidden="true"></audio></div>
+  <div id="inputContainer"><input id="keyboard" type="text" hidden="true"/></div>
 </body>
 </html>
