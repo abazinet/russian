@@ -1,3 +1,5 @@
-test("keyboard exists", function() {
-  ok($.keyboard, "Expecting a keyboard to exist" );
+describe("a russian keyboard", function() {
+  it("exists", function() {
+    expect($.keyboard).toBeDefined();
+  });
 });

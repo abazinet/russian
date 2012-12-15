@@ -1,36 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
   <title>Test runner</title>  
-</head>
-<body>
-  <link href="jquery/jquery-ui.css" rel="stylesheet">
-  <script src="jquery/jquery.min.js"></script>
-  <script src="jquery/jquery-ui.min.js"></script>
+  <!-- jquery -->
+  <link href="lib/jquery/jquery-ui.css" rel="stylesheet">
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/jquery/jquery-ui.min.js"></script>
+  <!-- jasmine -->
+  <link rel="shortcut icon" type="image/png" href="lib/jasmine/jasmine_favicon.png">
+  <link rel="stylesheet" type="text/css" href="lib/jasmine/jasmine.css">
+  <script type="text/javascript" src="lib/jasmine/jasmine.js"></script>
+  <script type="text/javascript" src="lib/jasmine/jasmine-html.js"></script>
+  <!-- sinon -->
+  <script type="text/javascript" src="lib/sinon/sinon.js"></script>
 
-  <link href="css/keyboard.css" rel="stylesheet">
-  <script src="js/keyboard.js"></script>
-  <script src="js/keyboard.mousewheel.js"></script>
-  <script src="layouts/russian.js"></script>
-  <script src="js/AudioPlayer.js"></script>
-  <script src="js/ChunkedTextReader.js"></script>
-  <script src="js/ContentRetriever.js"></script>
+  <!-- code -->
+  <link rel="stylesheet" type="text/css" href="css/keyboard.css">
+  <script type="text/javascript" src="js/keyboard.js"></script>
+  <script type="text/javascript" src="js/keyboard.mousewheel.js"></script>
+  <script type="text/javascript" src="js/russian.js"></script>
+  <script type="text/javascript" src="js/AudioPlayer.js"></script>
+  <script type="text/javascript" src="js/ChunkedTextReader.js"></script>
+  <script type="text/javascript" src="js/ContentRetriever.js"></script>
 
   <!-- tests -->
-  <div id="qunit"></div>
-  <div id="qunit-fixture"></div>
-  <link rel="stylesheet" href="test/qunit.css">
-  <script src="test/qunit.js"></script>
-  
-  <script type="text/javascript" src="test/sinon.js"></script>
-  <script type="text/javascript" src="test/sinon-qunit.js"></script>
-  
-  <script src="test/keyboard-test.js"></script>
-  <script src="test/ChunkedTextReader-test.js"></script>
-  <script src="test/ContentRetriever-test.js"></script>
-  <script src="test/AudioPlayer-test.js"></script>
+  <script type="text/javascript" src="test/keyboard-test.js"></script>
+  <script type="text/javascript" src="test/ChunkedTextReader-test.js"></script>
+  <script type="text/javascript" src="test/ContentRetriever-test.js"></script>
+  <script type="text/javascript" src="test/AudioPlayer-test.js"></script>
 
+  <script type="text/javascript">
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+
+    })();
+  </script>
+</head>
+<body>
+  <!-- TODO: ALEX: Remove this, create what is needed from inside tests -->
   <div id="textContainer"></div>
   <div id="audioContainer"><audio controls src="" hidden="true"></audio></div>
   <div id="inputContainer"><input id="keyboard" type="text" hidden="true"/></div>
