@@ -11,21 +11,21 @@
 
 	<!-- keyboard  -->
 	<link rel="stylesheet" type="text/css" href="css/keyboard.css">
-	<script type="text/javascript" src="js/keyboard.js"></script>
-	<script type="text/javascript" src="js/keyboard.mousewheel.js"></script>
-  <script type="text/javascript" src="js/russian.js"></script>
-  <script type="text/javascript" src="js/AudioPlayer.js" type="text/javascript"></script>
-  <script type="text/javascript" src="js/AudioPlayer.js" type="text/javascript"></script>
+	<script type="text/javascript" src="src/keyboard.js"></script>
+	<script type="text/javascript" src="src/keyboard.mousewheel.js"></script>
+  <script type="text/javascript" src="src/russian.js"></script>
+  <script type="text/javascript" src="src/AudioPlayer.js"></script>
+  <script type="text/javascript" src="src/AudioPlayer.js"></script>
 
 	<script>
 		$(function(){
-			$('#keyboard').keyboard();
+			$('#inputContainer').keyboard();
 		});
 	</script>
 </head>
 <body>
-  <div id="textContainer"></div>
+  <div id="inputContainer"></div>
   <div id="audioContainer"><audio controls src="" hidden="true"></audio></div>
-  <div id="inputContainer"><input id="keyboard" type="text" hidden="true"/></div>
+  <div id="source">This is the source</div>
 </body>
 </html>

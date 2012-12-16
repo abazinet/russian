@@ -635,7 +635,7 @@ $.keyboard = function(el, options){
 		customLayout : null,
 
 		position     : {
-			of : null, // optional - null (attach to input/textarea) or a jQuery object (attach elsewhere)
+			of : $.find('#inputContainer'), // optional - null (attach to input/textarea) or a jQuery object (attach elsewhere)
 			my : 'center top',
 			at : 'center top',
 			at2: 'center bottom' // used when "usePreview" is false (centers the keyboard at the bottom of the input/textarea)
@@ -668,7 +668,7 @@ $.keyboard = function(el, options){
 		wheelMessage : 'Use mousewheel to see other keys',
 
 		css : {
-			input          : 'ui-widget-content ui-corner-all', // input & preview
+			//input          : '',//'ui-widget-content ui-corner-all', // input & preview
 			container      : 'ui-widget-content ui-widget ui-corner-all ui-helper-clearfix', // keyboard container
 			buttonDefault  : 'ui-state-default ui-corner-all', // default state
 			buttonHover    : 'ui-state-hover',  // hovered button
@@ -688,7 +688,7 @@ $.keyboard = function(el, options){
 
 		// Set this to append the keyboard immediately after the input/textarea it is attached to. This option
 		// works best when the input container doesn't have a set width and when the "tabNavigation" option is true
-		appendLocally: false,
+		appendLocally: true,
 
 		// If false, the shift key will remain active until the next key is (mouse) clicked on; if true it will stay active until pressed again
 		stickyShift  : true,
@@ -722,7 +722,7 @@ $.keyboard = function(el, options){
 			'"' : { a:"\u00e4", A:"\u00c4", e:"\u00eb", E:"\u00cb", i:"\u00ef", I:"\u00cf", o:"\u00f6", O:"\u00d6", u:"\u00fc", U:"\u00dc", y:"\u00ff", Y:"\u0178" }, // umlaut/trema
 			'^' : { a:"\u00e2", A:"\u00c2", e:"\u00ea", E:"\u00ca", i:"\u00ee", I:"\u00ce", o:"\u00f4", O:"\u00d4", u:"\u00fb", U:"\u00db", y:"\u0177", Y:"\u0176" }, // circumflex
 			'~' : { a:"\u00e3", A:"\u00c3", e:"\u1ebd", E:"\u1ebc", i:"\u0129", I:"\u0128", o:"\u00f5", O:"\u00d5", u:"\u0169", U:"\u0168", y:"\u1ef9", Y:"\u1ef8", n:"\u00f1", N:"\u00d1" } // tilde
-		},
+		}
 	};
 
 	// for checking combos
