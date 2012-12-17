@@ -316,36 +316,9 @@ $.keyboard = function(el, options){
     };
 
     // Build default button
-    base.keyBtn = $('<button />')
+    base.keyBtn = $('<button></button>')
       .attr({ 'role': 'button', 'aria-disabled': 'false', 'tabindex' : '-1' })
       .addClass('ui-keyboard-button');
-
-    base.buildSampleText = function(sampleText) {
-      var position = 0;
-      var divSelector = '<div />';
-      var toReturn = $(divSelector);
-      for(var rows=0; rows<3 && position<sampleText.length; rows++) {
-        var row = $(divSelector).addClass('ui-keyboard-sample-wrapper');
-        for (var columns=0; columns<20 && position<sampleText.length; columns++) {
-          var letter = sampleText[position];
-          if(letter === ' ') {
-            row.append($('<span>&nbsp;</span>')
-              .width('1em')
-              .addClass('ui-keyboard-button ui-keyboard-spacer'));
-          } else {
-            row.append(base.keyBtn
-              .clone()
-              .removeClass('ui-keyboard-button')
-              .css('margin', '0em')
-              .attr({'disabled': 'disabled', 'aria-disabled': 'false'})
-              .html('<span>' + letter + '</span>'));
-          }
-          toReturn.append(row);
-          position++;
-        }
-      }
-      return toReturn;
-    };
 
     // keyName = the name of the function called in $.keyboard.keyaction when the button is clicked
     // name = name added to key, or cross-referenced in the display options
@@ -398,13 +371,13 @@ $.keyboard = function(el, options){
         .attr({ 'role': 'textbox' })
         .hide();
 
-        // No preview display, use element and reposition the keyboard under it.
-        base.$preview = base.$el;
-        o.position.at = o.position.at2;
+      // No preview display, use element and reposition the keyboard under it.
+      base.$preview = base.$el;
+      o.position.at = o.position.at2;
 
-        // build text sample
-        base.buildSampleText('кстрадиции которого по обвинению в подготовке покушения на Владимира Путина и Рамзана Кадырова настаивала Ген')
-          .appendTo(container);
+      // build text sample
+      var sampleText = new russian.SampleText('кстрадиции которого по обвинению в подготовке покушения на Владимира Путина и Рамзана Кадырова настаивала Ген');
+      sampleText.toHtml().appendTo(container);
 
       // verify layout or setup custom keyboard
       if (o.layout === 'custom' || !$.keyboard.layouts.hasOwnProperty(o.layout)) {

@@ -1,8 +1,8 @@
 russian.ChunkedTextReader = function(chunkSize, text) {
-  this.chunkSize = chunkSize
-  this.text = text
-  this.position = 0
-}
+  this.chunkSize = chunkSize;
+  this.text = text;
+  this.position = 0;
+};
 
 russian.ChunkedTextReader.prototype.nextChunk = function() {
   var chunk = '';
@@ -11,4 +11,4 @@ russian.ChunkedTextReader.prototype.nextChunk = function() {
     this.position = (++this.position) % this.text.length;
   }
   return chunk;
-}
+};

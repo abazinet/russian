@@ -1,6 +1,6 @@
 russian.AudioPlayer = function(audioElement) {
   this.audioElement = audioElement;
-}
+};
 
 russian.AudioPlayer.prototype.play = function(word) {
   console.log('playing ' + word);
@@ -10,4 +10,4 @@ russian.AudioPlayer.prototype.play = function(word) {
     this.audioElement.load();
     this.audioElement.play();
   }
-}
+};
