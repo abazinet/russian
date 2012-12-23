@@ -3,30 +3,32 @@ russian.SampleLetter = function(letter) {
 };
 
 russian.SampleLetter.prototype.blink = function(enabled) {
-  if(enabled === undefined) enabled = true;
   this.toHtml();
-  var blinking = enabled;
+  if(enabled === undefined) {
+    enabled = true;
+  }
+  if(this.blinking === undefined) {
+    this.blinking = false;
+  }
   var blinker = function() {
-    blinking ? this.html.addClass('ui-state-hover') :
-               this.html.removeClass('ui-state-hover');
-    blinking = !blinking;
+    this.blinking ? this.html.removeClass('ui-state-hover') :
+                    this.html.addClass('ui-state-hover');
+    this.blinking = !this.blinking;
 
-    if(enabled || blinking) {
+    if(enabled || this.blinking) {
       window.setTimeout(blinker.bind(this), 500);
     }
-  };
-  blinker.bind(this)();
+  }.bind(this);
+  blinker();
 };
 
 russian.SampleLetter.prototype.toHtml = function() {
-  return function() {
-    if(this.html === undefined) {
-       this.html = this._isSpace() ?
-                   this._toSpaceHtml() :
-                   this._toLetterHtml();
-    }
-    return this.html;
-  }.bind(this);
+  if(this.html === undefined) {
+     this.html = this._isSpace() ?
+                 this._toSpaceHtml() :
+                 this._toLetterHtml();
+  }
+  return this.html;
 };
 
 russian.SampleLetter.prototype._isSpace = function() {
@@ -34,7 +36,7 @@ russian.SampleLetter.prototype._isSpace = function() {
 };
 
 russian.SampleLetter.prototype._toSpaceHtml = function() {
-  return $('<span>&nbsp;</span>')
+  return $('<span></span>')
       .width('1em')
       .addClass('ui-keyboard-button ui-keyboard-spacer');
 };
