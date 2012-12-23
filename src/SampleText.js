@@ -1,31 +1,38 @@
 russian.SampleText = function(sampleText) {
   this.sampleText = sampleText;
-  this.rows = 3;
-  this.columns = 20;
-  this.currentPosition = 0;
+  this.rowsSize = 3;
+  this.columnsSize = 20;
+  this.position = 0;
+  this.letters = new Array(this.columnsSize * this.rowsSize);
+  this._buildLetters();
+};
+
+russian.SampleText.prototype._buildLetters = function() {
+  for(var i=0; i<this.letters.length; i++) {
+    var textPosition = i + this.position;
+    var letter = textPosition < this.sampleText.length ?
+                 this.sampleText[textPosition] :
+                 ' ';
+    this.letters[i] = new russian.SampleLetter(letter);
+  }
+  this.position += this.letters.length;
 };
 
 russian.SampleText.prototype.toHtml = function() {
-    var position = 0;
-    var divSelector = '<div />';
-    var toReturn = $(divSelector);
+  var self = this;
+  var div = $('<div />');
+  var row = div.clone();
+  var html = div.clone();
 
-    for(var rows=0; rows<this.rows && position<this.sampleText.length; rows++) {
-      var row = $(divSelector).addClass('ui-keyboard-sample-wrapper');
-      for (var columns=0; columns<this.columns && position<this.sampleText.length; columns++) {
-        var letter = new russian.SampleLetter(this.sampleText[position]);
-        row.append(letter.toHtml());
-        position++;
-      }
-      toReturn.append(row);
+  self.letters.forEach(function(letter, position) {
+    if((position % self.columnsSize) == (self.columnsSize - 1)) {
+      html.append(row.addClass('ui-keyboard-sample-wrapper'));
+      row = div.clone();
     }
-    return toReturn;
+    row.append(letter.toHtml());
+  });
+
+  self.letters[0].blink(true);
+
+  return html;
 };
-//
-//russian.SampleText.prototype.displayCursor = function() {
-//  var pressedButton = base.$keyboard.find('.ui-keyboard-' + k.charCodeAt(0));
-//  pressedButton.addClass(o.css.buttonHover);
-//  setTimeout(function() {
-//    pressedButton.removeClass(o.css.buttonHover);
-//  }, 200);
-// };

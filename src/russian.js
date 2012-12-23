@@ -29,7 +29,7 @@ $.keyboard.layouts['russian-qwerty'] = {
 		"{tab} \u0439(q) \u0446(w) \u0443(e) \u043a(r) \u0435(t) \u043d(y) \u0433(u) \u0448(i) \u0449(o) \u0437(p) \u0445([) \u044a(]) \\",
 		"\u0444(a) \u044b(s) \u0432(d) \u0430(f) \u043f(g) \u0440(h) \u043e(j) \u043b(k) \u0434(l) \u0436(;) \u044d(') {enter}",	
 		"{shift} \u044f(z) \u0447(x) \u0441(c) \u043c(v) \u0438(b) \u0442(n) \u044c(m) \u0431(,) \u044e(.) .(\/) {shift}",
-		"{alt} {space} {alt}",
+		"{alt} {space} {alt}"
 	],
 	'shift' : [
 		'\u0401(~) ! " \u2116(\#) ;($) \u20ac(%) :(^) ?(&) * ( ) _ + {bksp}',
