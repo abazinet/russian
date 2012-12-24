@@ -15,28 +15,24 @@ describe("a sample letter", function() {
   it("blinks", function() {
     jasmine.Clock.useMock();
     var letter = new russian.SampleLetter('a');
-    var html = letter.toHtml();
 
-    expect(html).not.toHaveClass('ui-state-hover');
+    expect(letter._isBlinking()).toBeFalsy();
     letter.blink(true);
-    expect(html).toHaveClass('ui-state-hover');
+    expect(letter._isBlinking()).toBeTruthy();
     jasmine.Clock.tick(501);
-    expect(html).not.toHaveClass('ui-state-hover');
+    expect(letter._isBlinking()).toBeFalsy();
   });
 
   it("stops blinking", function() {
     jasmine.Clock.useMock();
     var letter = new russian.SampleLetter('a');
-    var html = letter.toHtml();
 
-    expect(html).not.toHaveClass('ui-state-hover');
+    expect(letter._isBlinking()).toBeFalsy();
     letter.blink(true);
-    expect(html).toHaveClass('ui-state-hover');
+    expect(letter._isBlinking()).toBeTruthy();
     letter.blink(false);
     jasmine.Clock.tick(501);
-    expect(html).toHaveClass('ui-state-hover');
-    jasmine.Clock.tick(501);
-    expect(html).not.toHaveClass('ui-state-hover');
+    expect(letter._isBlinking()).toBeFalsy();
   });
 
   var aLetterHtml = function(letter) {

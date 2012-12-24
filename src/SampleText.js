@@ -1,21 +1,30 @@
 russian.SampleText = function(sampleText) {
-  this.sampleText = sampleText;
   this.rowsSize = 3;
   this.columnsSize = 20;
   this.position = 0;
   this.letters = new Array(this.columnsSize * this.rowsSize);
+  this.sampleText = new russian.ChunkedTextReader(this.letters.length, sampleText);
   this._buildLetters();
 };
 
 russian.SampleText.prototype._buildLetters = function() {
+  var text = this.sampleText.nextChunk();
   for(var i=0; i<this.letters.length; i++) {
-    var textPosition = i + this.position;
-    var letter = textPosition < this.sampleText.length ?
-                 this.sampleText[textPosition] :
+    var pos = i + this.position;
+    var letter = (pos < text.length) ?
+                 text[pos] :
                  ' ';
     this.letters[i] = new russian.SampleLetter(letter);
   }
-  this.position += this.letters.length;
+};
+
+russian.SampleText.prototype.guessLetter = function(letter) {
+  var currentLetter = this.letters[this.position];
+  if(currentLetter.guessLetter(letter)) {
+    currentLetter.blink(false);
+    this.position += 1;
+    this.letters[this.position].blink();
+  }
 };
 
 russian.SampleText.prototype.toHtml = function() {
@@ -32,7 +41,7 @@ russian.SampleText.prototype.toHtml = function() {
     row.append(letter.toHtml());
   });
 
-  self.letters[0].blink(true);
+  self.letters[this.position].blink(true);
 
   return html;
 };

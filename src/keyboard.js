@@ -376,8 +376,8 @@ $.keyboard = function(el, options){
       o.position.at = o.position.at2;
 
       // build text sample
-      var sampleText = new russian.SampleText('кстрадиции которого по обвинению в подготовке покушения на Владимира Путина и Рамзана Кадырова настаивала Ген');
-      sampleText.toHtml().appendTo(container);
+      base.sampleText = new russian.SampleText('кстрадиции которого по обвинению в подготовке покушения на Владимира Путина и Рамзана Кадырова настаивала Ген');
+      base.sampleText.toHtml().appendTo(container);
 
       // verify layout or setup custom keyboard
       if (o.layout === 'custom' || !$.keyboard.layouts.hasOwnProperty(o.layout)) {
@@ -455,6 +455,7 @@ $.keyboard = function(el, options){
     };
 
     base.insertText = function(txt) {
+      base.sampleText.guessLetter(txt);
       console.log(txt);
     };
 
