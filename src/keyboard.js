@@ -10,8 +10,8 @@ http://www.opensource.org/licenses/mit-license.php
 Heavily modified
 -----------------------------------------
 */
-;var russian = {};
-(function($){
+;(function(russian, $){
+"use strict";
 $.keyboard = function(el, options){
 	var base = this, o;
 
@@ -576,4 +576,4 @@ $.keyboard = function(el, options){
 		return this.data("keyboard");
 	};
 
-})(jQuery);
+})(window.russian = window.russian || {}, jQuery);
