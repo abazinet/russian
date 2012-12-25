@@ -23,18 +23,6 @@ describe("a sample letter", function() {
     expect(letter._isBlinking()).toBeFalsy();
   });
 
-  it("stops blinking", function() {
-    jasmine.Clock.useMock();
-    var letter = new russian.SampleLetter('a');
-
-    expect(letter._isBlinking()).toBeFalsy();
-    letter.blink(true);
-    expect(letter._isBlinking()).toBeTruthy();
-    letter.blink(false);
-    jasmine.Clock.tick(501);
-    expect(letter._isBlinking()).toBeFalsy();
-  });
-
   var aLetterHtml = function(letter) {
     return new russian.SampleLetter(letter).toHtml();
   }.bind(this);

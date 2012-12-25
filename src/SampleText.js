@@ -23,25 +23,29 @@ russian.SampleText.prototype.guessLetter = function(letter) {
   if(currentLetter.guessLetter(letter)) {
     currentLetter.blink(false);
     this.position += 1;
-    this.letters[this.position].blink();
+    this.letters[this.position].blink(true);
   }
 };
 
 russian.SampleText.prototype.toHtml = function() {
   var self = this;
-  var div = $('<div />');
+  var div = $('<div></div>');
   var row = div.clone();
   var html = div.clone();
 
   self.letters.forEach(function(letter, position) {
+    row.append(letter.toHtml());
+
     if((position % self.columnsSize) == (self.columnsSize - 1)) {
       html.append(row.addClass('ui-keyboard-sample-wrapper'));
       row = div.clone();
     }
-    row.append(letter.toHtml());
   });
 
   self.letters[this.position].blink(true);
-
   return html;
+};
+
+russian.SampleText.prototype.getLetters = function() {
+  return this.letters;
 };

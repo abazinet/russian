@@ -5,13 +5,12 @@ russian.SampleLetter = function(letter) {
 russian.SampleLetter.prototype.blink = function(enabled) {
   this.toHtml();
   this.blinking = enabled === undefined ? true : enabled;
-  // TODO: ALEX: refactor this mess...
+
   var blinker = function() {
-    this.html.hasClass('ui-state-hover') ? this.html.removeClass('ui-state-hover') :
-                                           this.html.addClass('ui-state-hover');
+    this._toggleBlinking();
     if(this.blinking) {
       window.setTimeout(blinker.bind(this), 500);
-    } else if (this.html.hasClass('ui-state-hover')){
+    } else {
       this.html.removeClass('ui-state-hover');
     }
   }.bind(this);
@@ -48,7 +47,12 @@ russian.SampleLetter.prototype._toLetterHtml = function() {
       .html('<span>' + this.letter + '</span>');
 };
 
+russian.SampleLetter.prototype._toggleBlinking = function() {
+  this.html.hasClass('ui-state-hover') ? this.html.removeClass('ui-state-hover') :
+                                         this.html.addClass('ui-state-hover');
+};
+
 russian.SampleLetter.prototype._isBlinking = function() {
-  return this.blinking &&
-         this.html.hasClass('ui-state-hover');
+  return (this.blinking &&
+          this.html.hasClass('ui-state-hover')) === true;
 };
