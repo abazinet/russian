@@ -25,31 +25,44 @@
     var currentLetter = this.letters[this.position];
     if(currentLetter.guessLetter(letter)) {
       currentLetter.blink(false);
-      this.position += 1;
+      if(this._isLastLetter(this.position)) {
+        // TODO: ALEX: Refresh screen with new letters
+        this.position = 0;
+        this._buildLetters();
+      } else {
+        this.position += 1;
+      }
       this.letters[this.position].blink(true);
     }
   };
 
   russian.SampleText.prototype.toHtml = function() {
-    var self = this;
     var div = $('<div></div>');
     var row = div.clone();
     var html = div.clone();
 
-    self.letters.forEach(function(letter, position) {
+    this.letters.forEach(function(letter, position) {
       row.append(letter.toHtml());
 
-      if((position % self.columnsSize) == (self.columnsSize - 1)) {
+      if(this._isEndOfLine(position)) {
         html.append(row.addClass('ui-keyboard-sample-wrapper'));
         row = div.clone();
       }
-    });
+    }.bind(this));
 
-    self.letters[this.position].blink(true);
+    this.letters[this.position].blink(true);
     return html;
   };
 
   russian.SampleText.prototype.getLetters = function() {
     return this.letters;
+  };
+
+  russian.SampleText.prototype._isEndOfLine = function(pos) {
+    return (pos % this.columnsSize) === (this.columnsSize - 1);
+  };
+
+  russian.SampleText.prototype._isLastLetter = function(pos) {
+    return pos === this.letters.length - 1;
   };
 })(window.russian = window.russian || {}, jQuery);

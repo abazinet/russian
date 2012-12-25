@@ -38,7 +38,7 @@
   };
 
   russian.SampleLetter.prototype._toSpaceHtml = function() {
-    return $('<span></span>')
+    return $('<span>&nbsp;</span>')
         .width('1em')
         .addClass('ui-keyboard-button ui-keyboard-spacer');
   };

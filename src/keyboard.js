@@ -376,7 +376,7 @@ $.keyboard = function(el, options){
       o.position.at = o.position.at2;
 
       // build text sample
-      base.sampleText = new russian.SampleText('кстрадиции которого по обвинению в подготовке покушения на Владимира Путина и Рамзана Кадырова настаивала Ген');
+      base.sampleText = new russian.SampleText('кккккккккккккккккккккккккккккккккккккккккккккккккккккккккккксссссссссссссссссссссссссссссссссссссссссссссссссссссссссссс');
       base.sampleText.toHtml().appendTo(container);
 
       // verify layout or setup custom keyboard
@@ -456,6 +456,7 @@ $.keyboard = function(el, options){
 
     base.insertText = function(txt) {
       base.sampleText.guessLetter(txt);
+      // TODO: ALEX: add support for spacebar (works with mouse click on space)
       console.log(txt);
     };
 
