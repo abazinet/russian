@@ -26,32 +26,33 @@
     if(currentLetter.guessLetter(letter)) {
       currentLetter.blink(false);
       if(this._isLastLetter(this.position)) {
-        // TODO: ALEX: Refresh screen with new letters
         this.position = 0;
         this._buildLetters();
+        this.toHtml();
       } else {
         this.position += 1;
+        this.letters[this.position].blink(true);
       }
-      this.letters[this.position].blink(true);
     }
   };
 
   russian.SampleText.prototype.toHtml = function() {
+    this._clearPreviousHtml();
+
     var div = $('<div></div>');
     var row = div.clone();
-    var html = div.clone();
-
     this.letters.forEach(function(letter, position) {
       row.append(letter.toHtml());
 
       if(this._isEndOfLine(position)) {
-        html.append(row.addClass('ui-keyboard-sample-wrapper'));
+        this.position = 0;
+        this.html.append(row.addClass('ui-keyboard-sample-wrapper'));
         row = div.clone();
       }
     }.bind(this));
 
     this.letters[this.position].blink(true);
-    return html;
+    return this.html;
   };
 
   russian.SampleText.prototype.getLetters = function() {
@@ -64,5 +65,13 @@
 
   russian.SampleText.prototype._isLastLetter = function(pos) {
     return pos === this.letters.length - 1;
+  };
+
+  russian.SampleText.prototype._clearPreviousHtml = function() {
+    if(this.html === undefined) {
+      this.html = $('<div></div>').addClass('ui-keyboard-sample');
+    } else {
+      $('.ui-keyboard-sample-wrapper', this.html).remove();
+    }
   };
 })(window.russian = window.russian || {}, jQuery);
