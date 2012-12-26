@@ -7,7 +7,7 @@
 
   russian.SampleLetter.prototype.blink = function(enabled) {
     this.toHtml();
-    this.blinking = enabled === undefined ? true : enabled;
+    this.blinking = (enabled === undefined ? true : enabled);
 
     var blinker = function() {
       this._toggleBlinking();
