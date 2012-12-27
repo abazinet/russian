@@ -18,7 +18,7 @@
       expect(firstLetter._isBlinking()).toBeTruthy();
     });
 
-    it("scrolls the sample text when reaching the end", function() {
+    it("scrolls when reaching the end", function() {
       var source = '123456789 123456789 123456789 123456789 123456789 123456789 abcdefghi abcdefghi ';
       var sampleText = new russian.SampleText(source);
       var html = sampleText.toHtml();

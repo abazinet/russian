@@ -27,17 +27,15 @@ $.keyboard = function(el, options){
 		base.options = $.extend(true, {}, $.keyboard.defaultOptions, options);
 
 		// Shift and Alt key toggles, sets is true if a layout has more than one keyset - used for mousewheel message
-		base.shiftActive = base.altActive = base.metaActive = base.sets = base.capsLock = false;
+		base.shiftActive = base.altActive = base.metaActive = base.sets;
 		base.lastKeyset = [false, false, false]; // [shift, alt, meta]
 		// Class names of the basic key set - meta keysets are handled by the keyname
 		base.rows = [ '', '-shift', '-alt', '-alt-shift' ];
-//		base.mappedKeys = {}; // for remapping manually typed in keys
-//		base.temp = [ '', 0, 0 ]; // used when building the keyboard - [keyset element, row, index]
 
 		base.reveal();
 	};
 
-	base.reveal = function(){
+	base.reveal = function() {
 		// build keyboard if it doesn't exist
 		if (typeof(base.$keyboard) === 'undefined') { base.startup(); }
 
@@ -58,8 +56,12 @@ $.keyboard = function(el, options){
 
 	base.startup = function(){
 		base.$keyboard = base.buildKeyboard();
-		base.$allKeys = base.$keyboard.find('button.ui-keyboard-button');
-		//base.$preview = base.$el;
+
+    // kick download of sample text
+    var text = new russian.ContentRetriever(base.onSampleSourceChanged, 'kommersant.ru/doc/2009152', 'divLetterBranding');
+    text.download();
+
+    base.$allKeys = base.$keyboard.find('button.ui-keyboard-button');
 		base.wheel = $.isFunction( $.fn.mousewheel ); // is mousewheel plugin loaded?
 		// keyCode of keys always allowed to be typed - caps lock, page up & down, end, home, arrow, insert & delete keys
 		base.alwaysAllowed = [20,33,34,35,36,37,38,39,40,45,46];
@@ -67,9 +69,6 @@ $.keyboard = function(el, options){
 		$(document)
 			.bind('keypress', function(e) {
 				var k = String.fromCharCode(e.charCode || e.which);
-
-				// update caps lock - can only do this while typing =(
-				base.capsLock = (((k >= 65 && k <= 90) && !e.shiftKey) || ((k >= 97 && k <= 122) && e.shiftKey));
 
         if ( (e.ctrlKey || e.metaKey) && (e.which === 97 || e.which === 99 || e.which === 118 || (e.which >= 120 && e.which <=122)) ) {
 					// Allow select all (ctrl-a:97), copy (ctrl-c:99), paste (ctrl-v:118) & cut (ctrl-x:120) & redo (ctrl-y:121)& undo (ctrl-z:122); meta key for mac
@@ -135,7 +134,7 @@ $.keyboard = function(el, options){
 				} else if (typeof key.action !== 'undefined') {
 					txt = (base.wheel && !$(this).hasClass('ui-keyboard-actionkey')) ? key.curTxt : key.action;
 					base.insertText(txt);
-					if (!base.capsLock && !base.options.stickyShift && !e.shiftKey) {
+					if (!base.options.stickyShift && !e.shiftKey) {
 						base.shiftActive = false;
 						base.showKeySet(this);
 					}
@@ -197,13 +196,12 @@ $.keyboard = function(el, options){
 				base.mouseRepeat = [true, key]; // save the key, make sure we are repeating the right one (fast typers)
 				return false;
 			});
-
-    };
+  };
 
     base.showKeySet = function(el){
       var key = '',
       toShow = (base.shiftActive ? 1 : 0) + (base.altActive ? 2 : 0);
-      if (!base.shiftActive) { base.capsLock = false; }
+
       // check meta key set
       if (base.metaActive) {
         // the name attribute contains the meta set # "meta99"
@@ -236,13 +234,11 @@ $.keyboard = function(el, options){
         .find('.ui-keyboard-alt, .ui-keyboard-shift, .ui-keyboard-actionkey[class*=meta]').removeClass(base.options.css.buttonAction).end()
         .find('.ui-keyboard-alt')[(base.altActive) ? 'addClass' : 'removeClass'](base.options.css.buttonAction).end()
         .find('.ui-keyboard-shift')[(base.shiftActive) ? 'addClass' : 'removeClass'](base.options.css.buttonAction).end()
-        .find('.ui-keyboard-lock')[(base.capsLock) ? 'addClass' : 'removeClass'](base.options.css.buttonAction).end()
         .find('.ui-keyboard-keyset').hide().end()
         .find('.ui-keyboard-keyset' + key + base.rows[toShow]).show().end()
         .find('.ui-keyboard-actionkey.ui-keyboard' + key).addClass(base.options.css.buttonAction);
       base.lastKeyset = [ base.shiftActive, base.altActive, base.metaActive ];
     };
-
 
     // get other layer values for a specific key
     base.getLayers = function(el){
@@ -256,8 +252,8 @@ $.keyboard = function(el, options){
     };
 
     base.buildKeyboard = function(){
-      var action, row, newSet,
-        currentSet, key, keys, margin,
+      var row, newSet,
+        currentSet, key, keys,
         sets = 0,
 
       container = $('<div></div>')
@@ -268,14 +264,10 @@ $.keyboard = function(el, options){
       // No preview display, use element and reposition the keyboard under it.
       base.options.position.at = base.options.position.at2;
 
-      // build text sample
-      base.sampleText = new russian.SampleText('кк ккккккккккккккккккккккккккккккккккккккккккккккккккккккккксссссссссссссссссссссссссссссссссссссссссссссссссссссссссссс');
-      base.sampleText.toHtml().appendTo(container);
-
       // verify layout or setup custom keyboard
       if (base.options.layout === 'custom' || !$.keyboard.layouts.hasOwnProperty(base.options.layout)) {
         base.options.layout = 'custom';
-        $.keyboard.layouts.custom = base.options.customLayout || { 'default' : ['{cancel}'] };
+        $.keyboard.layouts.custom = { 'default' : ['{cancel}'] };
       }
 
       // Main keyboard building loop
@@ -302,7 +294,19 @@ $.keyboard = function(el, options){
         }
       });
 
+      var content = new russian.ContentUrlInput();
+      container.append(content.toHtml());
+
       return container;
+    };
+
+    base.onSampleSourceChanged = function(text) {
+      if(base.sampleText === undefined) {
+        base.sampleText = new russian.SampleText(text);
+        base.$keyboard.prepend(base.sampleText.toHtml());
+      } else {
+        base.sampleText.changeText(text);
+      }
     };
 
     base.insertText = function(txt) {
@@ -325,15 +329,6 @@ $.keyboard = function(el, options){
 		enter : function(base, el, e) {
       base.insertText('\n');
 		},
-		// caps lock key
-		lock : function(base,el){
-			base.lastKeyset[0] = base.shiftActive = base.capsLock = !base.capsLock;
-			base.showKeySet(el);
-		},
-		meta : function(base,el){
-			base.metaActive = ($(el).hasClass(base.options.css.buttonAction));
-			base.showKeySet(el);
-		},
 		shift : function(base,el){
 			base.lastKeyset[0] = base.shiftActive = !base.shiftActive;
 			base.showKeySet(el);
@@ -342,9 +337,7 @@ $.keyboard = function(el, options){
 			base.insertText(' ');
 		},
 		tab : function(base) {
-			if (base.el.tagName === 'INPUT') { return false; } // ignore tab key in input
 			base.insertText('\t');
-      return true;
 		}
 	};
 
@@ -353,7 +346,6 @@ $.keyboard = function(el, options){
 
 		// *** choose layout & positioning ***
 		layout       : 'russian-qwerty',
-		customLayout : null,
 
 		position     : {
 			of : $.find('#inputContainer'), // optional - null (attach to input/textarea) or a jQuery object (attach elsewhere)

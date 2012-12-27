@@ -7,7 +7,16 @@
     this.position = 0;
     this.letters = new Array(this.columnsSize * this.rowsSize);
     this.sampleText = new russian.ChunkedTextReader(this.letters.length, sampleText);
+    this.lastWord = '';
+    this.audioPlayer = new russian.AudioPlayer($.find('audio')[0]);
     this._buildLetters();
+  };
+
+  russian.SampleText.prototype.changeText = function(newText) {
+    this.sampleText = new russian.ChunkedTextReader(this.letters.length, newText);
+    this._clearPreviousHtml();
+    this._buildLetters();
+    this.toHtml();
   };
 
   russian.SampleText.prototype._buildLetters = function() {
@@ -25,11 +34,19 @@
     var currentLetter = this.letters[this.position];
     if(currentLetter.guessLetter(letter)) {
       currentLetter.blink(false);
+      if(currentLetter.isSpace()) {
+        this.audioPlayer.play(this.lastWord);
+        this.lastWord = '';
+      } else {
+        this.lastWord += currentLetter.getLetter();
+      }
+
       if(this._isLastLetter(this.position)) {
         this.position = 0;
         this._buildLetters();
         this.toHtml();
       } else {
+        this.audioPlayer.play(currentLetter.getLetter());
         this.position += 1;
         this.letters[this.position].blink(true);
       }

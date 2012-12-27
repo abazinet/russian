@@ -5,6 +5,10 @@
     this.letter = letter;
   };
 
+  russian.SampleLetter.prototype.getLetter = function() {
+    return this.letter;
+  };
+
   russian.SampleLetter.prototype.blink = function(enabled) {
     this.toHtml();
     this.blinking = (enabled === undefined ? true : enabled);
@@ -26,14 +30,14 @@
 
   russian.SampleLetter.prototype.toHtml = function() {
     if(this.html === undefined) {
-       this.html = this._isSpace() ?
+       this.html = this.isSpace() ?
                    this._toSpaceHtml() :
                    this._toLetterHtml();
     }
     return this.html;
   };
 
-  russian.SampleLetter.prototype._isSpace = function() {
+  russian.SampleLetter.prototype.isSpace = function() {
     return this.letter === ' ';
   };
 

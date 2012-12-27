@@ -26,10 +26,10 @@
   };
 
   russian.ContentRetriever.prototype.extractText = function(html) {
-    if(!(typeof this.divId === "undefined")) {
+    if(typeof this.divId !== "undefined") {
       html = $(html).find('#' + this.divId);
     }
-    return jQuery(html).text();
+    return $.trim(jQuery(html).text());
   };
 
   russian.ContentRetriever.prototype.fireOnNewContent = function(html) {
