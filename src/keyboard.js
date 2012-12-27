@@ -57,7 +57,7 @@ $.keyboard = function(el, options){
 	base.startup = function(){
 		base.$keyboard = base.buildKeyboard();
 
-    base.onSourceContentChanged('kommersant.ru/doc/2009152', 'divLetterBranding');
+    base.onSourceContentChanged('kommersant.ru/doc/2099157', 'divLetterBranding');
 
     base.$allKeys = base.$keyboard.find('button.ui-keyboard-button');
 		base.wheel = $.isFunction( $.fn.mousewheel ); // is mousewheel plugin loaded?

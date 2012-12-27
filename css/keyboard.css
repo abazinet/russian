@@ -15,3 +15,8 @@
 .ui-keyboard-button.disabled { opacity: 0.5; filter: alpha(opacity=50); } /* used by the acceptValid option to make the accept button appear faded */
 .ui-keyboard-spacer { display: inline-block; width: 1px; height: 0; }
 .ui-keyboard-button.ui-keyboard-combo.ui-state-default { border-color: #ffaf0f; }
+
+.ui-keyboard-sample-source {width: 33em; border: 2px #ddd solid; border-radius: 10px; position: absolute; margin-top: 5px}
+.ui-keyboard-sample-source input {font-size: 0.8em; width: 18em; border: none;}
+.ui-keyboard-sample-source button {position: absolute; right:0; top: 10px;}
+.ui-keyboard-sample-source input:not(:last-child) {border-bottom: 1px #ddd solid;}

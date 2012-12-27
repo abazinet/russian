@@ -6,29 +6,17 @@
   };
 
   russian.ContentUrlInput.prototype.toHtml = function() {
-    var div = $('<div></div>');
+    var sampleSource = $('<div></div>').addClass('ui-keyboard-sample-source');
     var input = $('<input />');
     var button = $('<button>Go</button>');
-    var label = $('<label></label>');
-
-    div.append(label.clone()
-        .css({'margin' : '0em'})
-        .attr({'for' : 'url'})
-        .text('url: '));
 
     var url = input.clone();
-    div.append(url
+    sampleSource.append(url
         .css('margin', '1em')
-        .attr({'name' : 'url', 'placeholder' : 'www.kommersant.ru/doc/2099157', 'class' : 'ui-keyboard-source-url'}));
-
-    div.append($('<br>'));
-    div.append(label.clone()
-        .css('margin', '0em')
-        .attr({'for' : 'class'})
-        .text('html id: '));
+        .attr({'name' : 'url', 'placeholder' : 'kommersant.ru/doc/2099157', 'class' : 'ui-keyboard-source-url'}));
 
     var divId = input.clone();
-    div.append(divId
+    sampleSource.append(divId
         .css('margin', '0em')
         .attr({'name' : 'class', 'placeholder' : "divLetterBranding", 'class' : 'ui-keyboard-source-divid'}));
 
@@ -37,8 +25,8 @@
       this.onNewUrl(url.val(), divId.val());
     }.bind(this));
 
-    div.append(go);
-    return div;
+    sampleSource.append(go);
+    return sampleSource;
   };
 
 })(window.russian = window.russian || {}, jQuery);
