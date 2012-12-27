@@ -2,6 +2,7 @@
   "use strict";
 
   russian.ContentRetriever = function(onNewContent, url, divId) {
+    console.log('downloading content from ' + url);
     this.url = url;
     this.divId = divId;
     this.onNewContent = onNewContent;
@@ -34,6 +35,6 @@
 
   russian.ContentRetriever.prototype.fireOnNewContent = function(html) {
     var text = this.extractText(html);
-     this.onNewContent(text);
+    this.onNewContent(text);
   };
 })(window.russian = window.russian || {}, jQuery);

@@ -57,9 +57,7 @@ $.keyboard = function(el, options){
 	base.startup = function(){
 		base.$keyboard = base.buildKeyboard();
 
-    // kick download of sample text
-    var text = new russian.ContentRetriever(base.onSampleSourceChanged, 'kommersant.ru/doc/2009152', 'divLetterBranding');
-    text.download();
+    base.onSourceContentChanged('kommersant.ru/doc/2009152', 'divLetterBranding');
 
     base.$allKeys = base.$keyboard.find('button.ui-keyboard-button');
 		base.wheel = $.isFunction( $.fn.mousewheel ); // is mousewheel plugin loaded?
@@ -109,17 +107,18 @@ $.keyboard = function(el, options){
 					case 16:
             base.shiftActive = true;
 						base.showKeySet(this);
-						break;						
-				
-          case 32:
-          // TODO: ALEX: Space does some stuff
-					//var audioPlayer = new russian.AudioPlayer($.find('audio')[0]);
-					//audioPlayer.play(base.$preview.val());
-
-          //var content = $.readDocument("http://www.kommersant.ru/doc/2009152");
-          //$("#textContainer").html(content);
+						break;
 				}
+
+        $('.ui-keyboard-source-url').bind('keypress', function(e) {
+          e.stopPropagation();
+        });
+
+        $('.ui-keyboard-source-divid').bind('keypress', function(e) {
+          e.stopPropagation();
+        });
 			});
+
 
     base.$el.after( base.$keyboard );
 
@@ -294,10 +293,15 @@ $.keyboard = function(el, options){
         }
       });
 
-      var content = new russian.ContentUrlInput();
-      container.append(content.toHtml());
+      base.content = new russian.ContentUrlInput(base.onSourceContentChanged);
+      container.append(base.content.toHtml());
 
       return container;
+    };
+
+    base.onSourceContentChanged = function(url, divId) {
+      var text = new russian.ContentRetriever(base.onSampleSourceChanged, url, divId);
+      text.download();
     };
 
     base.onSampleSourceChanged = function(text) {
