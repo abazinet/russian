@@ -19,7 +19,7 @@
     var url = input.clone();
     div.append(url
         .css('margin', '1em')
-        .attr({'name' : 'url', 'placeholder' : 'www.kommersant.ru', 'class' : 'ui-keyboard-source-url'}));
+        .attr({'name' : 'url', 'placeholder' : 'www.kommersant.ru/doc/2099157', 'class' : 'ui-keyboard-source-url'}));
 
     div.append($('<br>'));
     div.append(label.clone()
@@ -30,7 +30,7 @@
     var divId = input.clone();
     div.append(divId
         .css('margin', '0em')
-        .attr({'name' : 'class', 'placeholder' : "leave empty if unknown", 'class' : 'ui-keyboard-source-divid'}));
+        .attr({'name' : 'class', 'placeholder' : "divLetterBranding", 'class' : 'ui-keyboard-source-divid'}));
 
     var go = button.clone();
     go.click(function() {

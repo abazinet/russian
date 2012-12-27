@@ -8,6 +8,8 @@
     this.letters = new Array(this.columnsSize * this.rowsSize);
     this.sampleText = new russian.ChunkedTextReader(this.letters.length, sampleText);
     this.lastWord = '';
+    this.replayLastWord = '';
+    this.replayLanguage = 'ru';
     this.audioPlayer = new russian.AudioPlayer($.find('audio')[0]);
     this._buildLetters();
   };
@@ -36,6 +38,7 @@
       currentLetter.blink(false);
       if(currentLetter.isSpace()) {
         this.audioPlayer.play(this.lastWord);
+        this.replayLastWord = this.lastWord;
         this.lastWord = '';
       } else {
         this.lastWord += currentLetter.getLetter();
@@ -50,6 +53,8 @@
         this.position += 1;
         this.letters[this.position].blink(true);
       }
+    } else if(letter === ' ') {
+      this.audioPlayer.play(this.replayLastWord, this.replayLanguage);
     }
   };
 
