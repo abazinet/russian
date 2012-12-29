@@ -24,7 +24,7 @@
       expectBlinkingPosition(sample.getLetters(), 1);
     });
 
-    it("keeps the original blinking letter when guessed incorrectly", function() {
+    it("keeps the original letter blinking when guessed incorrectly", function() {
       var sample = new ru.SampleText('abcdefghij0123456789');
       sample.toHtml();
       sample.guessLetter('b');
@@ -45,6 +45,7 @@
       var lastLetter = $('#ui-keyboard-sample-wrapper,span:last', html);
       expect(firstLetter).toHaveText('a');
       expect(lastLetter).toHaveClass('ui-keyboard-spacer');
+      expectBlinkingPosition(sample.getLetters(), 0);
     });
 
     var expectBlinkingPosition = function(letters, expectedPosition) {
@@ -56,5 +57,36 @@
         }
       });
     };
+
+    it("says the letter out loud when guessed correctly", function() {
+      var sample = new ru.SampleText('abcdefghij0123456789');
+      sample.toHtml();
+      var playSpy = spyOn(sample.audioPlayer, 'play');
+      sample.guessLetter('a');
+      expect(playSpy.calls.length).toEqual(1);
+      expect(playSpy).toHaveBeenCalledWith('a');
+    });
+
+    it("keeps quiet when a letter is guessed incorrectly", function() {
+      var sample = new ru.SampleText('abcdefghij0123456789');
+      sample.toHtml();
+      var playSpy = spyOn(sample.audioPlayer, 'play');
+      sample.guessLetter('b');
+      sample.guessLetter('9');
+      expect(playSpy).not.toHaveBeenCalled();
+    });
+
+    it("says the last word when the space key is pressed", function() {
+      var source = 'this is a word in the middle';
+      var sample = new ru.SampleText(source);
+      sample.toHtml();
+      for(var i=0; i<'this is a word'.length; i++) {
+        sample.guessLetter(source[i]);
+      }
+      var playSpy = spyOn(sample.audioPlayer, 'play');
+      sample.guessLetter(' ');
+      expect(playSpy.calls.length).toEqual(1);
+      expect(playSpy).toHaveBeenCalledWith('word');
+    });
   });
 })(window.ru = window.ru || {}, jQuery);

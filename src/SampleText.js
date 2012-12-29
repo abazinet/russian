@@ -51,7 +51,9 @@
         this._buildLetters();
         this.toHtml();
       } else {
-        this.audioPlayer.play(currentLetter.getLetter());
+        if(!currentLetter.isSpace()) {
+          this.audioPlayer.play(currentLetter.getLetter());
+        }
         this.position += 1;
         this.letters[this.position].blink(true);
       }

@@ -15,17 +15,20 @@
       server.respondWith([200, {}, '']);
 
       var audioElement = $.find('audio')[0];
-      var loadStub = sinon.stub(audioElement, 'load');
-      var playStub = sinon.stub(audioElement, 'play');
+      var loadSpy = spyOn(audioElement, 'load');
+      var playSpy = spyOn(audioElement, 'play');
 
       var player = new ru.AudioPlayer(audioElement);
       player.play('alex');
       server.respond();
 
       expect(audioElement.src).not.toBe(undefined);
-      expect(loadStub.called).toBe(true);
-      expect(playStub.called).toBe(true);
-      expect(loadStub.calledBefore(playStub)).toBe(true);
+
+      expect(playSpy.calls.length).toEqual(1);
+      expect(loadSpy).toHaveBeenCalled();
+
+      expect(loadSpy.calls.length).toEqual(1);
+      expect(playSpy).toHaveBeenCalled();
     });
   });
 })(window.ru = window.ru || {}, jQuery);
