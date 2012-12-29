@@ -10,7 +10,7 @@
  * Requires: 1.2.2+
  */
 
-(function(russian, $){
+(function(ru, $) {
 
   var types = ['DOMMouseScroll', 'mousewheel'];
 
@@ -81,4 +81,4 @@
       return ($.event.dispatch || $.event.handle).apply(this, args);
   }
 
-})(window.russian = window.russian || {}, jQuery);
+})(window.ru = window.ru || {}, jQuery);

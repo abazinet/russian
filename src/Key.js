@@ -1,10 +1,10 @@
-(function(russian, $){
+(function(ru, $) {
   "use strict";
 
-  russian.Key = function() {
+  ru.Key = function() {
   };
 
-  russian.Key.prototype.toHtml = function(keys, newSet, row, key) {
+  ru.Key.prototype.toHtml = function(keys, newSet, row, key) {
     var action,
         margin,
         rv;
@@ -49,7 +49,7 @@
     return rv;
   };
 
-  russian.Key.prototype.addKey = function(keyName, name, regKey) {
+  ru.Key.prototype.addKey = function(keyName, name, regKey) {
     // keyName = the name of the function called in $.keyboard.keyaction when the button is clicked
     // name = name added to key, or cross-referenced in the display options
     // newSet = keyset to attach the new button
@@ -90,16 +90,16 @@
         .appendTo(this.temp[0]);
     };
 
-  russian.Key.prototype.mappedKeys = {}; // for remapping manually typed in keys
+  ru.Key.prototype.mappedKeys = {}; // for remapping manually typed in keys
 
-  russian.Key.prototype.temp = [ '', 0, 0 ]; // used when building the keyboard - [keyset element, row, index]
+  ru.Key.prototype.temp = [ '', 0, 0 ]; // used when building the keyboard - [keyset element, row, index]
 
-  russian.Key.prototype.defaultButton =
+  ru.Key.prototype.defaultButton =
       $('<button></button>')
           .attr({ 'role': 'button', 'aria-disabled': 'false', 'tabindex' : '-1' })
           .addClass('ui-keyboard-button');
 
-  russian.Key.prototype.display = {
+  ru.Key.prototype.display = {
     'alt'    : 'AltGr:Alternate Graphemes',
     'b'      : '\u2190:Backspace',    // Left arrow (same as &larr;)
     'bksp'   : 'Bksp:Backspace',
@@ -117,4 +117,4 @@
     'tab'    : '\u21e5 Tab:Tab'       // \u21b9 is the true tab symbol (left & right arrows)
   };
 
-})(window.russian = window.russian || {}, jQuery);
+})(window.ru = window.ru || {}, jQuery);

@@ -2,7 +2,7 @@
  * contains layout: 'russian-qwerty'
  * license for this file: WTFPL, unless the source layout site has a problem with me using them as a reference
  */
-(function(russian, $){
+(function(ru, $) {
   "use strict";
 
   /* Thanks to Yury Kotlyarov (https://github.com/yura) */
@@ -37,4 +37,4 @@
     ]
   };
 
-})(window.russian = window.russian || {}, jQuery);
+})(window.ru = window.ru || {}, jQuery);

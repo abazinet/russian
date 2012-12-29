@@ -1,4 +1,4 @@
-(function(russian, $){
+(function(ru, $) {
   "use strict";
 
   describe("audio player goes to network", function() {
@@ -18,7 +18,7 @@
       var loadStub = sinon.stub(audioElement, 'load');
       var playStub = sinon.stub(audioElement, 'play');
 
-      var player = new russian.AudioPlayer(audioElement);
+      var player = new ru.AudioPlayer(audioElement);
       player.play('alex');
       server.respond();
 
@@ -28,4 +28,4 @@
       expect(loadStub.calledBefore(playStub)).toBe(true);
     });
   });
-})(window.russian = window.russian || {}, jQuery);
+})(window.ru = window.ru || {}, jQuery);

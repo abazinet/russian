@@ -1,4 +1,4 @@
-(function(russian){
+(function(ru) {
   "use strict";
 
   describe("content is extracted from an external html source", function() {
@@ -18,11 +18,11 @@
       ]);
 
       var callback = sinon.spy();
-      var contentRetriever = new russian.ContentRetriever(callback, 'http://www.example.com', 'divId');
+      var contentRetriever = new ru.ContentRetriever(callback, 'http://www.example.com', 'divId');
       contentRetriever.download();
       server.respond();
 
       expect(callback.calledWithExactly('The text goes here')).toBe(true);
     });
   });
-})(window.russian = window.russian || {});
+})(window.ru = window.ru || {});

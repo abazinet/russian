@@ -1,15 +1,15 @@
-(function(russian, $){
+(function(ru, $) {
   "use strict";
 
-  russian.SampleLetter = function(letter) {
+  ru.SampleLetter = function(letter) {
     this.letter = letter;
   };
 
-  russian.SampleLetter.prototype.getLetter = function() {
+  ru.SampleLetter.prototype.getLetter = function() {
     return this.letter;
   };
 
-  russian.SampleLetter.prototype.blink = function(enabled) {
+  ru.SampleLetter.prototype.blink = function(enabled) {
     this.toHtml();
     this.blinking = (enabled === undefined ? true : enabled);
 
@@ -24,11 +24,11 @@
     blinker();
   };
 
-  russian.SampleLetter.prototype.guessLetter = function(letter) {
+  ru.SampleLetter.prototype.guessLetter = function(letter) {
     return this.letter === letter;
   };
 
-  russian.SampleLetter.prototype.toHtml = function() {
+  ru.SampleLetter.prototype.toHtml = function() {
     if(this.html === undefined) {
        this.html = this.isSpace() ?
                    this._toSpaceHtml() :
@@ -37,24 +37,24 @@
     return this.html;
   };
 
-  russian.SampleLetter.prototype.isSpace = function() {
+  ru.SampleLetter.prototype.isSpace = function() {
     return this.letter === ' ';
   };
 
-  russian.SampleLetter.prototype._toSpaceHtml = function() {
+  ru.SampleLetter.prototype._toSpaceHtml = function() {
     return $('<span>&nbsp;</span>')
         .width('1em')
         .addClass('ui-keyboard-button ui-keyboard-spacer');
   };
 
-  russian.SampleLetter.prototype._toLetterHtml = function() {
+  ru.SampleLetter.prototype._toLetterHtml = function() {
     return $('<button></button>')
         .css('margin', '0em')
         .attr({'disabled': 'disabled', 'aria-disabled': 'false'})
         .html('<span>' + this.letter + '</span>');
   };
 
-  russian.SampleLetter.prototype._toggleBlinking = function() {
+  ru.SampleLetter.prototype._toggleBlinking = function() {
     if(this.html.hasClass('ui-state-hover')) {
       this.html.removeClass('ui-state-hover');
     } else {
@@ -62,9 +62,9 @@
     }
   };
 
-  russian.SampleLetter.prototype._isBlinking = function() {
+  ru.SampleLetter.prototype._isBlinking = function() {
     return (this.blinking &&
             this.html.hasClass('ui-state-hover')) === true;
   };
 
-})(window.russian = window.russian || {}, jQuery);
+})(window.ru = window.ru || {}, jQuery);

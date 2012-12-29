@@ -1,4 +1,4 @@
-(function(russian, $){
+(function(ru, $) {
   "use strict";
 
   describe("a russian keyboard", function() {
@@ -6,4 +6,4 @@
       expect($.keyboard).toBeDefined();
     });
   });
-})(window.russian = window.russian || {}, jQuery);
+})(window.ru = window.ru || {}, jQuery);

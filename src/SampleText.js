@@ -1,38 +1,40 @@
-(function(russian, $){
+(function(ru, $) {
   "use strict";
 
-  russian.SampleText = function(sampleText) {
+  ru.SampleText = function(sampleText) {
     this.rowsSize = 3;
     this.columnsSize = 20;
+    this.Count =  this.columnsSize * this.rowsSize;
     this.position = 0;
-    this.letters = new Array(this.columnsSize * this.rowsSize);
-    this.sampleText = new russian.ChunkedTextReader(this.letters.length, sampleText);
+    this.letters = [];
     this.lastWord = '';
     this.replayLastWord = '';
     this.replayLanguage = 'ru';
-    this.audioPlayer = new russian.AudioPlayer($.find('audio')[0]);
+
+    this.sampleText = new ru.ChunkedTextReader(this.Count, sampleText);
+    this.audioPlayer = new ru.AudioPlayer($.find('audio')[0]);
     this._buildLetters();
   };
 
-  russian.SampleText.prototype.changeText = function(newText) {
-    this.sampleText = new russian.ChunkedTextReader(this.letters.length, newText);
+  ru.SampleText.prototype.updateText = function(newText) {
+    this.sampleText = new ru.ChunkedTextReader(this.Count, newText);
     this._clearPreviousHtml();
     this._buildLetters();
     this.toHtml();
   };
 
-  russian.SampleText.prototype._buildLetters = function() {
+  ru.SampleText.prototype._buildLetters = function() {
     var text = this.sampleText.nextChunk();
-    for(var i=0; i<this.letters.length; i++) {
+    for(var i=0; i<this.Count; i++) {
       var pos = i + this.position;
       var letter = (pos < text.length) ?
                    text[pos] :
                    ' ';
-      this.letters[i] = new russian.SampleLetter(letter);
+      this.letters[i] = new ru.SampleLetter(letter);
     }
   };
 
-  russian.SampleText.prototype.guessLetter = function(letter) {
+  ru.SampleText.prototype.guessLetter = function(letter) {
     var currentLetter = this.letters[this.position];
     if(currentLetter.guessLetter(letter)) {
       currentLetter.blink(false);
@@ -58,7 +60,7 @@
     }
   };
 
-  russian.SampleText.prototype.toHtml = function() {
+  ru.SampleText.prototype.toHtml = function() {
     this._clearPreviousHtml();
 
     var div = $('<div></div>');
@@ -77,23 +79,23 @@
     return this.html;
   };
 
-  russian.SampleText.prototype.getLetters = function() {
+  ru.SampleText.prototype.getLetters = function() {
     return this.letters;
   };
 
-  russian.SampleText.prototype._isEndOfLine = function(pos) {
+  ru.SampleText.prototype._isEndOfLine = function(pos) {
     return (pos % this.columnsSize) === (this.columnsSize - 1);
   };
 
-  russian.SampleText.prototype._isLastLetter = function(pos) {
-    return pos === this.letters.length - 1;
+  ru.SampleText.prototype._isLastLetter = function(pos) {
+    return pos === this.Count - 1;
   };
 
-  russian.SampleText.prototype._clearPreviousHtml = function() {
+  ru.SampleText.prototype._clearPreviousHtml = function() {
     if(this.html === undefined) {
       this.html = $('<div></div>').addClass('ui-keyboard-sample');
     } else {
       $('.ui-keyboard-sample-wrapper', this.html).remove();
     }
   };
-})(window.russian = window.russian || {}, jQuery);
+})(window.ru = window.ru || {}, jQuery);

@@ -1,14 +1,14 @@
-(function(russian, $){
+(function(ru, $) {
   "use strict";
 
-  russian.ContentRetriever = function(onNewContent, url, divId) {
+  ru.ContentRetriever = function(onNewContent, url, divId) {
     console.log('downloading content from ' + url);
     this.url = url;
     this.divId = divId;
     this.onNewContent = onNewContent;
   };
 
-  russian.ContentRetriever.prototype.download = function() {
+  ru.ContentRetriever.prototype.download = function() {
     var self = this;
     $.ajax({
       url: "http://query.yahooapis.com/v1/public/yql",
@@ -26,15 +26,15 @@
     });
   };
 
-  russian.ContentRetriever.prototype.extractText = function(html) {
-    if(typeof this.divId !== "undefined") {
+  ru.ContentRetriever.prototype.extractText = function(html) {
+    if(typeof this.divId !== 'undefined') {
       html = $(html).find('#' + this.divId);
     }
     return $.trim(jQuery(html).text());
   };
 
-  russian.ContentRetriever.prototype.fireOnNewContent = function(html) {
+  ru.ContentRetriever.prototype.fireOnNewContent = function(html) {
     var text = this.extractText(html);
     this.onNewContent(text);
   };
-})(window.russian = window.russian || {}, jQuery);
+})(window.ru = window.ru || {}, jQuery);

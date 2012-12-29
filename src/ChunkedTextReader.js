@@ -1,13 +1,13 @@
-(function(russian){
+(function(ru) {
   "use strict";
 
-  russian.ChunkedTextReader = function(chunkSize, text) {
+  ru.ChunkedTextReader = function(chunkSize, text) {
     this.chunkSize = chunkSize;
     this.text = text;
     this.position = 0;
   };
 
-  russian.ChunkedTextReader.prototype.nextChunk = function() {
+  ru.ChunkedTextReader.prototype.nextChunk = function() {
     var chunk = '';
     for (var i=0; i<this.chunkSize; i++) {
       chunk += this.text.charAt(this.position);
@@ -15,4 +15,4 @@
     }
     return chunk;
   };
-})(window.russian = window.russian || {});
+})(window.ru = window.ru || {});

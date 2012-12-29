@@ -1,4 +1,4 @@
-(function(russian){
+(function(ru) {
   "use strict";
 
   describe("a sample letter", function() {
@@ -17,7 +17,7 @@
 
     it("blinks", function() {
       jasmine.Clock.useMock();
-      var letter = new russian.SampleLetter('a');
+      var letter = new ru.SampleLetter('a');
 
       expect(letter._isBlinking()).toBeFalsy();
       letter.blink(true);
@@ -27,7 +27,7 @@
     });
 
     var aLetterHtml = function(letter) {
-      return new russian.SampleLetter(letter).toHtml();
+      return new ru.SampleLetter(letter).toHtml();
     }.bind(this);
   });
-})(window.russian = window.russian || {});
+})(window.ru = window.ru || {});

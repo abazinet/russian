@@ -1,11 +1,11 @@
-(function(russian, $){
+(function(ru, $) {
   "use strict";
 
-  russian.AudioPlayer = function(audioElement) {
+  ru.AudioPlayer = function(audioElement) {
     this.audioElement = audioElement;
   };
 
-  russian.AudioPlayer.prototype.play = function(word, lang) {
+  ru.AudioPlayer.prototype.play = function(word, lang) {
     console.log('playing ' + word);
     if(typeof lang === 'undefined') {
       lang = 'ru';
@@ -17,4 +17,4 @@
       this.audioElement.play();
     }
   };
-})(window.russian = window.russian || {}, jQuery);
+})(window.ru = window.ru || {}, jQuery);

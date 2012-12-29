@@ -1,11 +1,11 @@
-(function(russian, $){
+(function(ru, $) {
   "use strict";
 
-  russian.ContentUrlInput = function(onNewUrl) {
+  ru.ContentUrlInput = function(onNewUrl) {
     this.onNewUrl = onNewUrl;
   };
 
-  russian.ContentUrlInput.prototype.toHtml = function() {
+  ru.ContentUrlInput.prototype.toHtml = function() {
     var sampleSource = $('<div></div>').addClass('ui-keyboard-sample-source');
     var input = $('<input />');
     var button = $('<button>Go</button>');
@@ -29,4 +29,4 @@
     return sampleSource;
   };
 
-})(window.russian = window.russian || {}, jQuery);
+})(window.ru = window.ru || {}, jQuery);

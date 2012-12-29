@@ -10,7 +10,7 @@ http://www.opensource.org/licenses/mit-license.php
 Heavily modified
 -----------------------------------------
 */
-;(function(russian, $){
+;(function(ru, $) {
 "use strict";
 
 $.keyboard = function(el, options){
@@ -75,7 +75,7 @@ $.keyboard = function(el, options){
 				// Mapped Keys - allows typing on a regular keyboard and the mapped key is entered
 				// Set up a key in the layout as follows: "m(a):label"; m = key to map, (a) = actual keyboard key to map to (optional), ":label" = title/tooltip (optional)
 				// example: \u0391 or \u0391(A) or \u0391:alpha or \u0391(A):alpha
-        var mappedKeys = new russian.Key().mappedKeys;
+        var mappedKeys = new ru.Key().mappedKeys;
         if (!($.isEmptyObject(mappedKeys))) {
           if (mappedKeys.hasOwnProperty(k)){
             k = mappedKeys[k];
@@ -285,7 +285,7 @@ $.keyboard = function(el, options){
             keys = currentSet.split(/\s+/);
 
             for ( key = 0; key < keys.length; key++ ) {
-              var keyHtml = new russian.Key();
+              var keyHtml = new ru.Key();
               keyHtml.toHtml(keys, newSet, row, key);
             }
             newSet.find('.ui-keyboard-button:last').after('<br class="ui-keyboard-button-endrow">');
@@ -293,23 +293,23 @@ $.keyboard = function(el, options){
         }
       });
 
-      base.content = new russian.ContentUrlInput(base.onSourceContentChanged);
+      base.content = new ru.ContentUrlInput(base.onSourceContentChanged);
       container.append(base.content.toHtml());
 
       return container;
     };
 
     base.onSourceContentChanged = function(url, divId) {
-      var text = new russian.ContentRetriever(base.onSampleSourceChanged, url, divId);
+      var text = new ru.ContentRetriever(base.onSampleSourceChanged, url, divId);
       text.download();
     };
 
     base.onSampleSourceChanged = function(text) {
       if(base.sampleText === undefined) {
-        base.sampleText = new russian.SampleText(text);
+        base.sampleText = new ru.SampleText(text);
         base.$keyboard.prepend(base.sampleText.toHtml());
       } else {
-        base.sampleText.changeText(text);
+        base.sampleText.updateText(text);
       }
     };
 
@@ -398,4 +398,4 @@ $.keyboard = function(el, options){
 		return this.data("keyboard");
 	};
 
-})(window.russian = window.russian || {}, jQuery);
+})(window.ru = window.ru || {}, jQuery);
