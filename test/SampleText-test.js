@@ -88,5 +88,8 @@
       expect(playSpy.calls.length).toEqual(1);
       expect(playSpy).toHaveBeenCalledWith('word');
     });
+
+    xit("does not truncate the last word", function() {
+    });
   });
 })(window.ru = window.ru || {}, jQuery);

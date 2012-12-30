@@ -1,58 +1,38 @@
 (function(ru, $) {
   "use strict";
 
-  ru.Key = function() {
+  ru.Key = function(key, rowId, colId) {
+    this.key = key;
+    this.rowId = rowId;
+    this.colId = colId;
   };
 
-  ru.Key.prototype.toHtml = function(keys, newSet, row, key) {
-    var action,
-        margin,
-        rv;
+  ru.Key.prototype.toHtml = function() {
+    var action;
+    var html = $('<div></div>');
 
-    this.temp = [ newSet, row, key ];
+    if (this.key.length !== 0) {
+      if( /^\{\S+\}$/.test(this.key)) {
+        // action key
+        action = this.key.match(/^\{(\S+)\}$/)[1].toLowerCase();
 
-    // ignore empty keys
-    if (keys[key].length === 0) { return $('<div></div>'); }
-
-    // process here if it's an action key
-    if( /^\{\S+\}$/.test(keys[key])){
-      action = keys[key].match(/^\{(\S+)\}$/)[1].toLowerCase();
-
-      // add empty space
-      if (/^sp:((\d+)?([\.|,]\d+)?)(em|px)?$/.test(action)) {
-        // not perfect globalization, but allows you to use {sp:1,1em}, {sp:1.2em} or {sp:15px}
-        margin = parseFloat( action.replace(/,/,'.').match(/^sp:((\d+)?([\.|,]\d+)?)(em|px)?$/)[1] || 0 );
-        $('<span>&nbsp;</span>')
-          // previously {sp:1} would add 1em margin to each side of a 0 width span
-          // now Firefox doesn't seem to render 0px dimensions, so now we set the
-          // 1em margin x 2 for the width
-            .width( (action.match('px') ? margin + 'px' : (margin * 2) + 'em') )
-            .addClass('ui-keyboard-button ui-keyboard-spacer')
-            .appendTo(newSet);
+        // meta keys
+        if (/^meta\d+\:?(\w+)?/.test(action) ||
+            $.keyboard.keyaction.hasOwnProperty(action)) {
+          html = this._buildKey(action, action, false, this.rowId, this.colId);
+        }
+      } else {
+        // regular key
+        html = this._buildKey(this.key, this.key, true, this.rowId, this.colId);
       }
-
-      // meta keys
-      if (/^meta\d+\:?(\w+)?/.test(action)){
-        rv = this.addKey(action, action);
-      }
-
-      // switch needed for action keys with multiple names/shortcuts or
-      // default will catch all others
-      if ($.keyboard.keyaction.hasOwnProperty(action)){
-        rv = this.addKey(action, action);
-      }
-    } else {
-      // regular button (not an action key)
-      rv = this.addKey(keys[key], keys[key], true);
     }
 
-    return rv;
+    return html;
   };
 
-  ru.Key.prototype.addKey = function(keyName, name, regKey) {
+  ru.Key.prototype._buildKey = function(keyName, name, regKey) {
     // keyName = the name of the function called in $.keyboard.keyaction when the button is clicked
     // name = name added to key, or cross-referenced in the display options
-    // newSet = keyset to attach the new button
     // regKey = true when it is not an action key
       var t, keyType, m, map, nm,
         n = (regKey === true) ? keyName : this.display[name] || keyName,
@@ -81,18 +61,15 @@
       keyType += (regKey) ? '' : ' ui-keyboard-actionkey';
       return this.defaultButton
         .clone()
-        .attr({ 'data-value' : n, 'name': kn, 'data-pos': this.temp[1] + ',' + this.temp[2], 'title' : t })
+        .attr({ 'data-value' : n, 'name': kn, 'data-pos': this.rowId + ',' + this.colId, 'title' : t })
         .data('key', { action: keyName, original: n, curTxt : n, curNum: 0 })
         // add "ui-keyboard-" + keyName, if this is an action key (e.g. "Bksp" will have 'ui-keyboard-bskp' class)
         // add "ui-keyboard-" + unicode of 1st character (e.g. "~" is a regular key, class = 'ui-keyboard-126' (126 is the unicode value - same as typing &#126;)
         .addClass('ui-keyboard-' + kn + keyType + ' ' + 'ui-state-default ui-corner-all') // buttonDefault
-        .html('<span>' + n + '</span>')
-        .appendTo(this.temp[0]);
+        .html('<span>' + n + '</span>');
     };
 
   ru.Key.prototype.mappedKeys = {}; // for remapping manually typed in keys
-
-  ru.Key.prototype.temp = [ '', 0, 0 ]; // used when building the keyboard - [keyset element, row, index]
 
   ru.Key.prototype.defaultButton =
       $('<button></button>')

@@ -61,17 +61,10 @@ $.keyboard = function(el, options){
 
     base.$allKeys = base.$keyboard.find('button.ui-keyboard-button');
 		base.wheel = $.isFunction( $.fn.mousewheel ); // is mousewheel plugin loaded?
-		// keyCode of keys always allowed to be typed - caps lock, page up & down, end, home, arrow, insert & delete keys
-		base.alwaysAllowed = [20,33,34,35,36,37,38,39,40,45,46];
 
 		$(document)
 			.bind('keypress', function(e) {
 				var k = String.fromCharCode(e.charCode || e.which);
-
-        if ( (e.ctrlKey || e.metaKey) && (e.which === 97 || e.which === 99 || e.which === 118 || (e.which >= 120 && e.which <=122)) ) {
-					// Allow select all (ctrl-a:97), copy (ctrl-c:99), paste (ctrl-v:118) & cut (ctrl-x:120) & redo (ctrl-y:121)& undo (ctrl-z:122); meta key for mac
-					return;
-				}
 				// Mapped Keys - allows typing on a regular keyboard and the mapped key is entered
 				// Set up a key in the layout as follows: "m(a):label"; m = key to map, (a) = actual keyboard key to map to (optional), ":label" = title/tooltip (optional)
 				// example: \u0391 or \u0391(A) or \u0391:alpha or \u0391(A):alpha
@@ -251,47 +244,37 @@ $.keyboard = function(el, options){
     };
 
     base.buildKeyboard = function(){
-      var row, newSet,
-        currentSet, key, keys,
-        sets = 0,
+      var newSet, currentSet, keys;
 
-      container = $('<div></div>')
+      var container = $('<div></div>')
         .addClass('ui-keyboard ' + base.options.css.container + ' ui-keyboard-always-open')
         .attr({ 'role': 'textbox' })
         .hide();
 
-      // No preview display, use element and reposition the keyboard under it.
+      // Position keyboard
       base.options.position.at = base.options.position.at2;
 
-      // verify layout or setup custom keyboard
-      if (base.options.layout === 'custom' || !$.keyboard.layouts.hasOwnProperty(base.options.layout)) {
-        base.options.layout = 'custom';
-        $.keyboard.layouts.custom = { 'default' : ['{cancel}'] };
-      }
-
       // Main keyboard building loop
-      $.each($.keyboard.layouts[base.options.layout], function(set, keySet){
-        if (set !== "") {
-          sets++;
-          newSet = $('<div></div>')
-            .attr('name', set) // added for typing extension
-            .addClass('ui-keyboard-keyset ui-keyboard-keyset-' + set)
-            .appendTo(container)[(set === 'default') ? 'show' : 'hide']();
+      var layout = $.keyboard.layouts[base.options.layout];
+      $.each(layout, function(set, keySet) {
+        newSet = $('<div></div>')
+          .attr('name', set) // added for typing extension
+          .addClass('ui-keyboard-keyset ui-keyboard-keyset-' + set)
+          .appendTo(container)[(set === 'default') ? 'show' : 'hide']();
 
-          for ( row = 0; row < keySet.length; row++ ){
+        keySet.forEach(function(row, rowId) {
+          // remove extra spaces before spliting (regex probably could be improved)
+          currentSet = $.trim(row).replace(/\{(\.?)[\s+]?:[\s+]?(\.?)\}/g,'{$1:$2}');
+          keys = currentSet.split(/\s+/);
 
-            // remove extra spaces before spliting (regex probably could be improved)
-            currentSet = $.trim(keySet[row]).replace(/\{(\.?)[\s+]?:[\s+]?(\.?)\}/g,'{$1:$2}');
-            keys = currentSet.split(/\s+/);
+          keys.forEach(function(key, keyId) {
+            var keyHtml = new ru.Key(key, rowId, keyId);
+            newSet.append(keyHtml.toHtml());
+          }.bind(this));
 
-            for ( key = 0; key < keys.length; key++ ) {
-              var keyHtml = new ru.Key();
-              keyHtml.toHtml(keys, newSet, row, key);
-            }
-            newSet.find('.ui-keyboard-button:last').after('<br class="ui-keyboard-button-endrow">');
-          }
-        }
+          newSet.find('.ui-keyboard-button:last').after('<br class="ui-keyboard-button-endrow">');
       });
+    });
 
       base.content = new ru.ContentUrlInput(base.onSourceContentChanged);
       container.append(base.content.toHtml());
