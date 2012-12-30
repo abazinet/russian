@@ -1,6 +1,4 @@
-/*!
-Version 1.9.15
-
+/*
 Author: Jeremy Satterfield
 Modified: Rob Garrison (Mottie on github)
 -----------------------------------------
