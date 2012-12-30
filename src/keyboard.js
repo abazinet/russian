@@ -65,18 +65,9 @@ $.keyboard = function(el, options){
 		$(document)
 			.bind('keypress', function(e) {
 				var k = String.fromCharCode(e.charCode || e.which);
-				// Mapped Keys - allows typing on a regular keyboard and the mapped key is entered
-				// Set up a key in the layout as follows: "m(a):label"; m = key to map, (a) = actual keyboard key to map to (optional), ":label" = title/tooltip (optional)
-				// example: \u0391 or \u0391(A) or \u0391:alpha or \u0391(A):alpha
-        var mappedKeys = new ru.Key().mappedKeys;
-        if (!($.isEmptyObject(mappedKeys))) {
-          if (mappedKeys.hasOwnProperty(k)){
-            k = mappedKeys[k];
-					}
-          base.insertText( k );
-          e.preventDefault();
-        }
-	
+        k = base.ooLayout.getMappedKey(k);
+        base.insertText(k);
+
 				var pressedButton = base.$keyboard.find('.ui-keyboard-' + k.charCodeAt(0));
 				pressedButton.addClass(base.options.css.buttonHover);
 				setTimeout(function() {
@@ -244,37 +235,32 @@ $.keyboard = function(el, options){
     };
 
     base.buildKeyboard = function(){
-      var newSet, currentSet, keys;
+      var currentSet, keys;
 
       var container = $('<div></div>')
         .addClass('ui-keyboard ' + base.options.css.container + ' ui-keyboard-always-open')
         .attr({ 'role': 'textbox' })
         .hide();
 
-      // Position keyboard
-      base.options.position.at = base.options.position.at2;
-
       // Main keyboard building loop
       var layout = $.keyboard.layouts[base.options.layout];
       $.each(layout, function(set, keySet) {
-        newSet = $('<div></div>')
-          .attr('name', set) // added for typing extension
-          .addClass('ui-keyboard-keyset ui-keyboard-keyset-' + set)
-          .appendTo(container)[(set === 'default') ? 'show' : 'hide']();
-
+        var newLayout = new ru.Layout(set);
         keySet.forEach(function(row, rowId) {
           // remove extra spaces before spliting (regex probably could be improved)
           currentSet = $.trim(row).replace(/\{(\.?)[\s+]?:[\s+]?(\.?)\}/g,'{$1:$2}');
           keys = currentSet.split(/\s+/);
 
           keys.forEach(function(key, keyId) {
-            var keyHtml = new ru.Key(key, rowId, keyId);
-            newSet.append(keyHtml.toHtml());
+            var myKey = new ru.Key(key, rowId, keyId);
+            newLayout.addKey(rowId, myKey);
           }.bind(this));
-
-          newSet.find('.ui-keyboard-button:last').after('<br class="ui-keyboard-button-endrow">');
+        }.bind(this));
+        newLayout.toHtml().appendTo(container)[(set === 'default') ? 'show' : 'hide']();
+        if(set === 'default') {
+          base.ooLayout = newLayout;
+        }
       });
-    });
 
       base.content = new ru.ContentUrlInput(base.onSourceContentChanged);
       container.append(base.content.toHtml());
@@ -380,5 +366,45 @@ $.keyboard = function(el, options){
 	$.fn.getkeyboard = function(){
 		return this.data("keyboard");
 	};
+
+  ru.Layout = function(name) {
+    this.name = name;
+    this.rows = [];
+  };
+
+  ru.Layout.prototype.getMappedKey = function(key) {
+    // Mapped Keys - allows typing on a regular keyboard and the mapped key is entered
+    // Set up a key in the layout as follows: "m(a):label"; m = key to map, (a) = actual keyboard key to map to (optional), ":label" = title/tooltip (optional)
+    // example: \u0391 or \u0391(A) or \u0391:alpha or \u0391(A):alpha
+    var mappedKeys = new ru.Key().mappedKeys;
+    if (!($.isEmptyObject(mappedKeys))) {
+      if (mappedKeys.hasOwnProperty(key)){
+        return mappedKeys[key];
+      }
+    }
+    return key;
+  };
+
+  ru.Layout.prototype.addKey = function(row, key) {
+    if(this.rows[row] === undefined) {
+      this.rows[row] = [];
+    }
+    this.rows[row].push(key);
+  };
+
+  ru.Layout.prototype.toHtml = function() {
+    var html = $('<div></div>')
+        .attr('name', this.name)
+        .addClass('ui-keyboard-keyset ui-keyboard-keyset-' + this.name);
+
+    this.rows.forEach(function(row) {
+      row.forEach(function(key) {
+        html.append(key.toHtml());
+      }.bind(this));
+      html.append('<br class="ui-keyboard-button-endrow">');
+    }.bind(this));
+
+    return html;
+  };
 
 })(window.ru = window.ru || {}, jQuery);
