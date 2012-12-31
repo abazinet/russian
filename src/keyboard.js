@@ -1,17 +1,16 @@
 /*
 Author: Jeremy Satterfield
 Modified: Rob Garrison (Mottie on github)
+Heavily modified: Alex Deschamps
 -----------------------------------------
 Licensed under the MIT License:
 http://www.opensource.org/licenses/mit-license.php
-
-Heavily modified
 -----------------------------------------
 */
 ;(function(ru, $) {
 "use strict";
 
-$.keyboard = function(el, options){
+$.keyboard = function(el, options) {
 	var base = this;
 
 	// Access to jQuery and DOM versions of element
@@ -27,12 +26,10 @@ $.keyboard = function(el, options){
 		// Class names of the basic key set - meta keysets are handled by the keyname
 		base.rows = [ '', '-shift', '-alt', '-alt-shift' ];
 
-		base.reveal();
-	};
-
-	base.reveal = function() {
 		// build keyboard if it doesn't exist
-		if (typeof(base.$keyboard) === 'undefined') { base.startup(); }
+		if (typeof(base.$keyboard) === 'undefined') {
+      base.startup();
+    }
 
 		// show & position keyboard
 		base.$keyboard
@@ -312,14 +309,16 @@ $.keyboard = function(el, options){
   };
 
   ru.Keyboard.prototype.keyPressed = function(key) {
-    key = this._defaultLayout().getMappedKey(key);
+    //key = this._defaultLayout().getMappedKey(key);
     console.log(key);
+    var keyPressed;
     this.layouts.forEach(function(layout) {
-      layout.keyPressed(key);
+      keyPressed = layout.keyPressed(key);
+      if(keyPressed !== undefined) {
+        this.sampleText.guessLetter(keyPressed.getValue());
+      }
     }.bind(this));
-    this.sampleText.guessLetter(key);
   };
-
 
   ru.Keyboard.prototype.onSourceContentChanged = function(url, divId) {
     var text = new ru.ContentRetriever(this.onSampleSourceChanged.bind(this), url, divId);

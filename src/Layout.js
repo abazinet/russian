@@ -4,26 +4,20 @@
   ru.Layout = function(name) {
     this.name = name;
     this.rows = [];
+    this.keyHash = {};
   };
 
   ru.Layout.prototype.keyPressed = function(k) {
-    this.rows.forEach(function(row) {
-      row.forEach(function(key) {
-        key.keyPressed(k);
-      });
-    });
-  };
-
-  ru.Layout.prototype.getMappedKey = function(key) {
-    // To up a mapped key "m(a):label"; m = key to map, (a) = actual keyboard key to map to (optional), ":label" = title/tooltip (optional)
-    // example: \u0391 or \u0391(A) or \u0391:alpha or \u0391(A):alpha
-    var mappedKeys = new ru.Key().mappedKeys;
-    if (!($.isEmptyObject(mappedKeys))) {
-      if (mappedKeys.hasOwnProperty(key)){
-        return mappedKeys[key];
-      }
+    var key = this.keyHash[k];
+    if(typeof key !== 'undefined') {
+      key.keyPressed(k);
     }
     return key;
+//    this.rows.forEach(function(row) {
+//      row.forEach(function(key) {
+//        key.keyPressed(k);
+//      });
+//    });
   };
 
   ru.Layout.prototype.addKey = function(row, key) {
@@ -31,6 +25,7 @@
       this.rows[row] = [];
     }
     this.rows[row].push(key);
+    this.keyHash[key.charKey] = key;
   };
 
   ru.Layout.prototype.toHtml = function() {
