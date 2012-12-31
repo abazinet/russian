@@ -105,5 +105,22 @@
 
     xit("does not truncate the last word", function() {
     });
+
+    xit("says the english translation when ctrl-space is pressed", function() {
+    });
+
+    xit("scrolls to the right when the right arrow is pressed", function() {
+    });
+
+    xit("scrolls to the left when the left arrow is pressed", function() {
+    });
+
+    xit("disables a letter once it has been guessed successfully", function() {
+    });
+
+    xit("highlights the key to press when too much time has elapsed", function() {
+    });
+
+
   });
 })(window.ru = window.ru || {}, jQuery);
