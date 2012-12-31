@@ -7,10 +7,10 @@
     this.keyHash = {};
   };
 
-  ru.Layout.prototype.keyPressed = function(k) {
-    var key = this.keyHash[k];
+  ru.Layout.prototype.keyPressed = function(keyPressed) {
+    var key = this.keyHash[keyPressed];
     if(typeof key !== 'undefined') {
-      key.keyPressed(k);
+      key.keyPressed(keyPressed);
     }
     return key;
   };

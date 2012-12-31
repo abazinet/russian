@@ -97,7 +97,9 @@
 
   ru.SampleText.prototype._clearPreviousHtml = function() {
     if(this.html === undefined) {
-      this.html = $('<div></div>').addClass('ui-keyboard-sample');
+      this.html = $('<div></div>')
+        .addClass('ui-keyboard-sample')
+        .css({'margin-bottom' : '1em'});
     } else {
       $('.ui-keyboard-sample-wrapper', this.html).remove();
     }

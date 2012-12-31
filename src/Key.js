@@ -48,12 +48,16 @@
   };
 
   ru.Key.prototype._htmlKey = function(keyName) {
-      return this.defaultButton
-        .clone()
-        .attr({ 'data-value' : this.charKey, 'name': this.name, 'data-pos': this.rowId + ',' + this.colId, 'title' : this.title })
-        .data('key', { action: keyName, original: this.charKey, curTxt : this.charKey, curNum: 0 })
-        .addClass('ui-keyboard-' + this.name + this.keyType + ' ' + 'ui-state-default ui-corner-all')
-        .html('<span>' + this.getDisplay() + '</span>');
+    var displayChar = this.getDisplay();
+    if(displayChar === ' ') {
+      displayChar = '&nbsp;';
+    }
+    return this.defaultButton
+      .clone()
+      .attr({ 'data-value' : this.charKey, 'name': this.keyName, 'data-pos': this.rowId + ',' + this.colId, 'title' : this.title })
+      .data('key', { action: keyName, original: this.charKey, curTxt : this.charKey, curNum: 0 })
+      .addClass('ui-keyboard-' + this.keyName + this.keyType + ' ' + 'ui-state-default ui-corner-all')
+      .html('<span>' + displayChar + '</span>');
   };
 
   ru.Key.prototype._buildKey = function(keyName, name, regKey) {
@@ -87,6 +91,7 @@
     this.keyType = (n.length > 1) ? ' ui-keyboard-widekey' : '';
     this.keyType += (regKey) ? '' : ' ui-keyboard-actionkey';
     this.charKey = this.charKey || n;
+
     if(this.charKey === '&nbsp;') {
       this.charKey = ' ';
     }
