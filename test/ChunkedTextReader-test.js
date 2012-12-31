@@ -1,7 +1,7 @@
 (function(ru) {
   "use strict";
 
-  describe("the reader wraps around", function() {
+  describe("a text reader", function() {
     it("wraps around flush", function() {
       var reader = new ru.ChunkedTextReader(10, '0123456789abcdefghij');
       expect(reader.nextChunk()).toBe('0123456789');

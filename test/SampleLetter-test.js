@@ -15,7 +15,7 @@
       expect(html).toHaveClass('ui-keyboard-spacer');
     });
 
-    it("blinks", function() {
+    it("can blink", function() {
       jasmine.Clock.useMock();
       var letter = new ru.SampleLetter('a');
 

@@ -1,7 +1,7 @@
 (function(ru) {
   "use strict";
 
-  describe("content is extracted from an external html source", function() {
+  describe("the content", function() {
     var server;
     beforeEach(function() {
       server = sinon.fakeServer.create();
@@ -11,7 +11,7 @@
       server.restore();
     });
 
-    it("downloads content", function() {
+    it("is extracted from an external html source", function() {
       server.respondWith([200,
                          {'Content-Type':'text/html'},
                          '<div><div id="divId">The text goes here</div></div>'

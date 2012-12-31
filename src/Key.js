@@ -3,31 +3,43 @@
 
   ru.Key = function(key, rowId, colId) {
     this.key = key;
+    this.charKey = '';
     this.rowId = rowId;
     this.colId = colId;
   };
 
+  ru.Key.prototype.keyPressed = function(key) {
+    if(this.charKey === key) {
+      var pressedButton = this.html;
+      pressedButton.addClass('ui-state-hover');
+      setTimeout(function() {
+        pressedButton.removeClass('ui-state-hover');
+      }, 200);
+    }
+  };
+
   ru.Key.prototype.toHtml = function() {
-    var action;
-    var html = $('<div></div>');
+    if(this.html === undefined) {
+      var action;
+      this.html = $('<div></div>');
 
-    if (this.key.length !== 0) {
-      if( /^\{\S+\}$/.test(this.key)) {
-        // action key
-        action = this.key.match(/^\{(\S+)\}$/)[1].toLowerCase();
+      if (this.key.length !== 0) {
+        if( /^\{\S+\}$/.test(this.key)) {
+          // action key
+          action = this.key.match(/^\{(\S+)\}$/)[1].toLowerCase();
 
-        // meta keys
-        if (/^meta\d+\:?(\w+)?/.test(action) ||
-            $.keyboard.keyaction.hasOwnProperty(action)) {
-          html = this._buildKey(action, action, false, this.rowId, this.colId);
+          // meta keys
+          if (/^meta\d+\:?(\w+)?/.test(action) ||
+              $.keyboard.keyaction.hasOwnProperty(action)) {
+            this.html = this._buildKey(action, action, false);
+          }
+        } else {
+          // regular key
+          this.html = this._buildKey(this.key, this.key, true);
         }
-      } else {
-        // regular key
-        html = this._buildKey(this.key, this.key, true, this.rowId, this.colId);
       }
     }
-
-    return html;
+    return this.html;
   };
 
   ru.Key.prototype._buildKey = function(keyName, name, regKey) {
@@ -59,6 +71,8 @@
       // '\u2190'.length = 1 because the unicode is converted, so if more than one character, add the wide class
       keyType = (n.length > 1) ? ' ui-keyboard-widekey' : '';
       keyType += (regKey) ? '' : ' ui-keyboard-actionkey';
+      this.charKey = n;
+
       return this.defaultButton
         .clone()
         .attr({ 'data-value' : n, 'name': kn, 'data-pos': this.rowId + ',' + this.colId, 'title' : t })

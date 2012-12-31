@@ -1,7 +1,7 @@
 (function(ru, $) {
   "use strict";
 
-  describe("audio player goes to network", function() {
+  describe("an audio player", function() {
     var server;
     beforeEach(function() {
       server = sinon.fakeServer.create();
@@ -11,7 +11,7 @@
       server.restore();
     });
 
-    it("html 5 audio plays", function() {
+    it("plays a word", function() {
       server.respondWith([200, {}, '']);
 
       var audioElement = $.find('audio')[0];

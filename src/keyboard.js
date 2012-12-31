@@ -18,9 +18,6 @@ $.keyboard = function(el, options){
 	base.$el = $(el);
 	base.el = el;
 
-	// Add a reverse reference to the DOM object
-	base.$el.data("document", base);
-
 	base.init = function(){
 		base.options = $.extend(true, {}, $.keyboard.defaultOptions, options);
 
@@ -37,11 +34,6 @@ $.keyboard = function(el, options){
 		// build keyboard if it doesn't exist
 		if (typeof(base.$keyboard) === 'undefined') { base.startup(); }
 
-		// get single target position || target stored in element data (multiple targets) || default, at the element
-		var position = base.options.position;
-    position.of = position.of || base.$el.data('keyboardPosition') || base.$el;
-		position.collision = position.collision || 'fit fit';
-
 		// show & position keyboard
 		base.$keyboard
 			// basic positioning before it is set by position utility
@@ -53,9 +45,9 @@ $.keyboard = function(el, options){
 	};
 
 	base.startup = function(){
-		base.$keyboard = base.buildKeyboard();
-
-    base.onSourceContentChanged('kommersant.ru/doc/2099157', 'divLetterBranding');
+    base.ooKeyboard = new ru.Keyboard($.keyboard.layouts['russian-qwerty']);
+    base.$keyboard = this.ooKeyboard.toHtml();
+    base.ooKeyboard.onSourceContentChanged('kommersant.ru/doc/2099157', 'divLetterBranding');
 
     base.$allKeys = base.$keyboard.find('button.ui-keyboard-button');
 		base.wheel = $.isFunction( $.fn.mousewheel ); // is mousewheel plugin loaded?
@@ -63,14 +55,7 @@ $.keyboard = function(el, options){
 		$(document)
 			.bind('keypress', function(e) {
 				var k = String.fromCharCode(e.charCode || e.which);
-        k = base.ooLayout.getMappedKey(k);
-        base.insertText(k);
-
-				var pressedButton = base.$keyboard.find('.ui-keyboard-' + k.charCodeAt(0));
-				pressedButton.addClass(base.options.css.buttonHover);
-				setTimeout(function() {
-					pressedButton.removeClass(base.options.css.buttonHover);
-				}, 200);
+        base.ooKeyboard.keyPressed(k);
 			})
 			.bind('keyup', function(e) {
 				if(e.which === 16) {
@@ -114,7 +99,7 @@ $.keyboard = function(el, options){
 					if ($.keyboard.keyaction[action](base,this,e) === false) { return; }
 				} else if (typeof key.action !== 'undefined') {
 					txt = (base.wheel && !$(this).hasClass('ui-keyboard-actionkey')) ? key.curTxt : key.action;
-					base.insertText(txt);
+          base.ooKeyboard.insertText(txt);
 					if (!base.options.stickyShift && !e.shiftKey) {
 						base.shiftActive = false;
 						base.showKeySet(this);
@@ -130,7 +115,7 @@ $.keyboard = function(el, options){
 					key = $.data(el, 'key');
 				if (e.type === 'mouseenter' && base.el.type !== 'password' ){
 					$this
-						.addClass(base.options.css.buttonHover)
+						.addClass('ui-state-hover')
 						.attr('title', function(i,t){
 							// show mouse wheel message
 							return (base.wheel && t === '' && base.sets) ? base.options.wheelMessage : t;
@@ -141,7 +126,7 @@ $.keyboard = function(el, options){
 					key.curNum = 0;
 					$.data(el, 'key', key);
 					$this
-						.removeClass( (base.el.type === 'password') ? '' : base.options.css.buttonHover) // needed or IE flickers really bad
+						.removeClass( (base.el.type === 'password') ? '' : 'ui-state-hover') // needed or IE flickers really bad
 						.attr('title', function(i,t){ return (t === base.options.wheelMessage) ? '' : t; })
 						.find('span').text( key.original ); // restore original button text
 				}
@@ -161,21 +146,6 @@ $.keyboard = function(el, options){
 					return false;
 				}
         return true;
-			})
-			// using "kb" namespace for mouse repeat functionality to keep it separate
-			// I need to trigger a "repeater.keyboard" to make it work
-			.bind('mouseup.keyboard mouseleave.kb touchend.kb touchmove.kb touchcancel.kb', function(){
-				base.mouseRepeat = [false,''];
-				return false;
-			})
-			// no mouse repeat for action keys (shift, ctrl, alt, meta, etc)
-			.filter(':not(.ui-keyboard-actionkey)')
-			// mouse repeated action key exceptions
-			.add('.ui-keyboard-tab, .ui-keyboard-bksp, .ui-keyboard-space, .ui-keyboard-enter', base.$keyboard)
-			.bind('mousedown.kb touchstart.kb', function(){
-				var key = $(this);
-				base.mouseRepeat = [true, key]; // save the key, make sure we are repeating the right one (fast typers)
-				return false;
 			});
   };
 
@@ -212,12 +182,12 @@ $.keyboard = function(el, options){
         return;
       }
       base.$keyboard
-        .find('.ui-keyboard-alt, .ui-keyboard-shift, .ui-keyboard-actionkey[class*=meta]').removeClass(base.options.css.buttonAction).end()
-        .find('.ui-keyboard-alt')[(base.altActive) ? 'addClass' : 'removeClass'](base.options.css.buttonAction).end()
-        .find('.ui-keyboard-shift')[(base.shiftActive) ? 'addClass' : 'removeClass'](base.options.css.buttonAction).end()
+        .find('.ui-keyboard-alt, .ui-keyboard-shift, .ui-keyboard-actionkey[class*=meta]').removeClass('ui-state-active').end()
+        .find('.ui-keyboard-alt')[(base.altActive) ? 'addClass' : 'removeClass']('ui-state-active').end()
+        .find('.ui-keyboard-shift')[(base.shiftActive) ? 'addClass' : 'removeClass']('ui-state-active').end()
         .find('.ui-keyboard-keyset').hide().end()
         .find('.ui-keyboard-keyset' + key + base.rows[toShow]).show().end()
-        .find('.ui-keyboard-actionkey.ui-keyboard' + key).addClass(base.options.css.buttonAction);
+        .find('.ui-keyboard-actionkey.ui-keyboard' + key).addClass('ui-state-active');
       base.lastKeyset = [ base.shiftActive, base.altActive, base.metaActive ];
     };
 
@@ -230,59 +200,6 @@ $.keyboard = function(el, options){
         return $(this).find('> span').text();
       }).get();
       return keys;
-    };
-
-    base.buildKeyboard = function(){
-      var currentSet, keys;
-
-      var container = $('<div></div>')
-        .addClass('ui-keyboard ' + base.options.css.container + ' ui-keyboard-always-open')
-        .attr({ 'role': 'textbox' })
-        .hide();
-
-      // Main keyboard building loop
-      var layout = $.keyboard.layouts[base.options.layout];
-      $.each(layout, function(set, keySet) {
-        var newLayout = new ru.Layout(set);
-        keySet.forEach(function(row, rowId) {
-          // remove extra spaces before spliting (regex probably could be improved)
-          currentSet = $.trim(row).replace(/\{(\.?)[\s+]?:[\s+]?(\.?)\}/g,'{$1:$2}');
-          keys = currentSet.split(/\s+/);
-
-          keys.forEach(function(key, keyId) {
-            var myKey = new ru.Key(key, rowId, keyId);
-            newLayout.addKey(rowId, myKey);
-          }.bind(this));
-        }.bind(this));
-        newLayout.toHtml().appendTo(container)[(set === 'default') ? 'show' : 'hide']();
-        if(set === 'default') {
-          base.ooLayout = newLayout;
-        }
-      });
-
-      base.content = new ru.ContentUrlInput(base.onSourceContentChanged);
-      container.append(base.content.toHtml());
-
-      return container;
-    };
-
-    base.onSourceContentChanged = function(url, divId) {
-      var text = new ru.ContentRetriever(base.onSampleSourceChanged, url, divId);
-      text.download();
-    };
-
-    base.onSampleSourceChanged = function(text) {
-      if(base.sampleText === undefined) {
-        base.sampleText = new ru.SampleText(text);
-        base.$keyboard.prepend(base.sampleText.toHtml());
-      } else {
-        base.sampleText.updateText(text);
-      }
-    };
-
-    base.insertText = function(txt) {
-      base.sampleText.guessLetter(txt);
-      console.log(txt);
     };
 
 		// Run initializer
@@ -298,25 +215,22 @@ $.keyboard = function(el, options){
 		},
 		// el is the pressed key (button) object; it is null when the real keyboard enter is pressed
 		enter : function(base, el, e) {
-      base.insertText('\n');
+      base.ooKeyboard.insertText('\n');
 		},
 		shift : function(base,el){
 			base.lastKeyset[0] = base.shiftActive = !base.shiftActive;
 			base.showKeySet(el);
 		},
 		space : function(base){
-			base.insertText(' ');
+      base.ooKeyboard.insertText(' ');
 		},
 		tab : function(base) {
-			base.insertText('\t');
+      base.ooKeyboard.insertText('\t');
 		}
 	};
 
 	$.keyboard.layouts = {};
 	$.keyboard.defaultOptions = {
-
-		// *** choose layout & positioning ***
-		layout       : 'russian-qwerty',
 
 		position     : {
 			of : $.find('#inputContainer'), // optional - null (attach to input/textarea) or a jQuery object (attach elsewhere)
@@ -327,12 +241,6 @@ $.keyboard = function(el, options){
 
 		// Message added to the key title while hovering, if the mousewheel plugin exists
 		wheelMessage : 'Use mousewheel to see other keys',
-
-		css : {
-			container      : 'ui-widget-content ui-widget ui-corner-all ui-helper-clearfix', // keyboard container
-			buttonHover    : 'ui-state-hover',  // hovered button
-			buttonAction   : 'ui-state-active' // Action keys (e.g. Accept, Cancel, Tab, etc); this replaces "actionClass" option
-		},
 
 		// *** Useability ***
 		// mod key options: 'ctrlKey', 'shiftKey', 'altKey', 'metaKey' (MAC only)
@@ -365,44 +273,82 @@ $.keyboard = function(el, options){
 		return this.data("keyboard");
 	};
 
-  ru.Layout = function(name) {
-    this.name = name;
-    this.rows = [];
+  ru.Keyboard = function(multiLayout) {
+    this.layouts = [];
+    this._buildKeys(multiLayout);
   };
 
-  ru.Layout.prototype.getMappedKey = function(key) {
-    // Mapped Keys - allows typing on a regular keyboard and the mapped key is entered
-    // Set up a key in the layout as follows: "m(a):label"; m = key to map, (a) = actual keyboard key to map to (optional), ":label" = title/tooltip (optional)
-    // example: \u0391 or \u0391(A) or \u0391:alpha or \u0391(A):alpha
-    var mappedKeys = new ru.Key().mappedKeys;
-    if (!($.isEmptyObject(mappedKeys))) {
-      if (mappedKeys.hasOwnProperty(key)){
-        return mappedKeys[key];
-      }
-    }
-    return key;
-  };
+  ru.Keyboard.prototype._buildKeys = function(multiLayout) {
+    $.each(multiLayout, function(set, keySet) {
+      var layout = new ru.Layout(set);
+      keySet.forEach(function(row, rowId) {
+        // remove extra spaces before spliting (regex probably could be improved)
+        var currentSet = $.trim(row).replace(/\{(\.?)[\s+]?:[\s+]?(\.?)\}/g,'{$1:$2}');
+        var keys = currentSet.split(/\s+/);
 
-  ru.Layout.prototype.addKey = function(row, key) {
-    if(this.rows[row] === undefined) {
-      this.rows[row] = [];
-    }
-    this.rows[row].push(key);
-  };
-
-  ru.Layout.prototype.toHtml = function() {
-    var html = $('<div></div>')
-        .attr('name', this.name)
-        .addClass('ui-keyboard-keyset ui-keyboard-keyset-' + this.name);
-
-    this.rows.forEach(function(row) {
-      row.forEach(function(key) {
-        html.append(key.toHtml());
-      }.bind(this));
-      html.append('<br class="ui-keyboard-button-endrow">');
+        keys.forEach(function(key, keyId) {
+          layout.addKey(rowId, new ru.Key(key, rowId, keyId));
+        });
+      });
+      this.layouts.push(layout);
     }.bind(this));
+  };
 
-    return html;
+  ru.Keyboard.prototype.toHtml = function() {
+    if(this.html === undefined) {
+      this.html = $('<div></div>')
+          .addClass('ui-keyboard ui-widget-content ui-widget ui-corner-all ui-helper-clearfix ui-keyboard-always-open')
+          .attr({ 'role': 'textbox' })
+          .hide();
+
+      this.layouts.forEach(function(layout){
+        layout.toHtml().appendTo(this.html)[layout.isDefault() ? 'show' : 'hide']();
+      }.bind(this));
+
+      var content = new ru.ContentUrlInput(this.onSourceContentChanged);
+      this.html.append(content.toHtml());
+    }
+    return this.html;
+  };
+
+  ru.Keyboard.prototype.keyPressed = function(key) {
+    key = this._defaultLayout().getMappedKey(key);
+    console.log(key);
+    this.layouts.forEach(function(layout) {
+      layout.keyPressed(key);
+    }.bind(this));
+    this.sampleText.guessLetter(key);
+  };
+
+
+  ru.Keyboard.prototype.onSourceContentChanged = function(url, divId) {
+    var text = new ru.ContentRetriever(this.onSampleSourceChanged.bind(this), url, divId);
+    text.download();
+  };
+
+  ru.Keyboard.prototype.onSampleSourceChanged = function(text) {
+    if(this.sampleText === undefined) {
+      this.sampleText = new ru.SampleText(text);
+      this.toHtml().prepend(this.sampleText.toHtml());
+    } else {
+      this.sampleText.updateText(text);
+    }
+  };
+
+  ru.Keyboard.prototype.insertText = function(txt) {
+    this.sampleText.guessLetter(txt);
+    console.log(txt);
+  };
+
+  ru.Keyboard.prototype._defaultLayout = function() {
+    if(this.defaultLayout === undefined) {
+      this.layouts.forEach(function(layout) {
+        if(layout.isDefault()) {
+          this.defaultLayout = layout;
+        }
+      }.bind(this));
+    }
+    return this.defaultLayout;
   };
 
 })(window.ru = window.ru || {}, jQuery);
