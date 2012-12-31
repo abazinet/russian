@@ -13,11 +13,6 @@
       key.keyPressed(k);
     }
     return key;
-//    this.rows.forEach(function(row) {
-//      row.forEach(function(key) {
-//        key.keyPressed(k);
-//      });
-//    });
   };
 
   ru.Layout.prototype.addKey = function(row, key) {

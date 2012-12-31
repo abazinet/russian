@@ -309,14 +309,15 @@ $.keyboard = function(el, options) {
   };
 
   ru.Keyboard.prototype.keyPressed = function(key) {
-    //key = this._defaultLayout().getMappedKey(key);
     console.log(key);
     var keyPressed;
     this.layouts.forEach(function(layout) {
       keyPressed = layout.keyPressed(key);
       if(keyPressed !== undefined) {
-        this.sampleText.guessLetter(keyPressed.getValue());
+        this.sampleText.guessLetter(keyPressed.getDisplay());
+        return false;
       }
+      return true;
     }.bind(this));
   };
 
@@ -337,17 +338,6 @@ $.keyboard = function(el, options) {
   ru.Keyboard.prototype.insertText = function(txt) {
     this.sampleText.guessLetter(txt);
     console.log(txt);
-  };
-
-  ru.Keyboard.prototype._defaultLayout = function() {
-    if(this.defaultLayout === undefined) {
-      this.layouts.forEach(function(layout) {
-        if(layout.isDefault()) {
-          this.defaultLayout = layout;
-        }
-      }.bind(this));
-    }
-    return this.defaultLayout;
   };
 
 })(window.ru = window.ru || {}, jQuery);

@@ -39,7 +39,9 @@
     if(currentLetter.guessLetter(letter)) {
       currentLetter.blink(false);
       if(currentLetter.isSpace()) {
-        this.audioPlayer.play(this.lastWord);
+        if(this.lastWord.length > 1) {
+          this.audioPlayer.play(this.lastWord);
+        }
         this.replayLastWord = this.lastWord;
         this.lastWord = '';
       } else {
@@ -57,7 +59,7 @@
         this.position += 1;
         this.letters[this.position].blink(true);
       }
-    } else if(letter === ' ') {
+    } else if(letter === ' ' && this.replayLastWord.length > 1) {
       this.audioPlayer.play(this.replayLastWord, this.replayLanguage);
     }
   };

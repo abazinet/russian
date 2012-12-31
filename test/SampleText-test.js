@@ -89,6 +89,20 @@
       expect(playSpy).toHaveBeenCalledWith('word');
     });
 
+    it("does not say words shorter than two characters long", function() {
+      var source = 'long long s long long';
+      var sample = new ru.SampleText(source);
+      sample.toHtml();
+      for(var i=0; i<'long long s'.length; i++) {
+        sample.guessLetter(source[i]);
+      }
+      var playSpy = spyOn(sample.audioPlayer, 'play');
+      sample.guessLetter(' ');
+      sample.guessLetter(' ');
+      sample.guessLetter('s');
+      expect(playSpy).not.toHaveBeenCalled();
+    });
+
     xit("does not truncate the last word", function() {
     });
   });

@@ -6,7 +6,7 @@
       var russianLetter = '\u0444';
       var englishLetter = 'a';
       var key = new ru.Key(russianLetter + '(' + englishLetter +')', 0, 0);
-      expect(key.getValue()).toBe('\u0444');
+      expect(key.getDisplay()).toBe('\u0444');
     });
   });
 })(window.ru = window.ru || {});
