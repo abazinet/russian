@@ -306,7 +306,7 @@ $.keyboard = function(el, options) {
         layout.toHtml().appendTo(this.html)[layout.isDefault() ? 'show' : 'hide']();
       }.bind(this));
 
-      var content = new ru.ContentUrlInput(this.onSourceContentChanged);
+      var content = new ru.ContentUrlInput(this.onSourceContentChanged.bind(this));
       this.html.append(content.toHtml());
     }
     return this.html;
@@ -329,11 +329,6 @@ $.keyboard = function(el, options) {
     }.bind(this));
   };
 
-  ru.Keyboard.prototype.onSourceContentChanged = function(url, divId) {
-    var text = new ru.ContentRetriever(this.onSampleSourceChanged.bind(this), url, divId);
-    text.download();
-  };
-
   ru.Keyboard.prototype.onSampleSourceChanged = function(text) {
     if(this.sampleText === undefined) {
       this.sampleText = new ru.SampleText(text);
@@ -341,6 +336,11 @@ $.keyboard = function(el, options) {
     } else {
       this.sampleText.updateText(text);
     }
+  };
+
+  ru.Keyboard.prototype.onSourceContentChanged = function(url, divId) {
+    var text = new ru.ContentRetriever(this.onSampleSourceChanged.bind(this), url, divId);
+    text.download();
   };
 
   ru.Keyboard.prototype.insertText = function(txt) {
