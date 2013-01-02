@@ -16,7 +16,7 @@
 .ui-keyboard-spacer { display: inline-block; width: 1px; height: 0; }
 .ui-keyboard-button.ui-keyboard-combo.ui-state-default { border-color: #ffaf0f; }
 
-.ui-keyboard-sample {background-color: #ffffff; border: 5px #ffffff solid; border-radius: 10px}
+.ui-keyboard-sample {background-color: #ffffff; border: 5px #ffffff solid; border-radius: 10px; margin: 5px}
 
 .ui-keyboard-sample-source input {font-size: 0.8em; width: 18em; border: none;}
 .ui-keyboard-sample-source button {position: absolute; right:4px; bottom: 17px;}

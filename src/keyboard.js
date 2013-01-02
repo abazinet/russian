@@ -52,7 +52,11 @@ $.keyboard = function(el, options) {
 		$(document)
 			.bind('keypress', function(e) {
 				var k = String.fromCharCode(e.charCode || e.which);
-        base.ooKeyboard.keyPressed(k);
+        if(e.ctrlKey && k === ' ') {
+          base.ooKeyboard.sayTranslation();
+        } else {
+          base.ooKeyboard.keyPressed(k);
+        }
 			})
 			.bind('keyup', function(e) {
 				if(e.which === 16) {
@@ -306,6 +310,10 @@ $.keyboard = function(el, options) {
       this.html.append(content.toHtml());
     }
     return this.html;
+  };
+
+  ru.Keyboard.prototype.sayTranslation = function() {
+    this.sampleText.sayTranslation();
   };
 
   ru.Keyboard.prototype.keyPressed = function(key) {

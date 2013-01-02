@@ -89,7 +89,7 @@
       expect(playSpy).toHaveBeenCalledWith('word');
     });
 
-    it("does not say words shorter than two characters long", function() {
+    it("only says words longer than two characters", function() {
       var source = 'long long s long long';
       var sample = new ru.SampleText(source);
       sample.toHtml();
@@ -103,10 +103,12 @@
       expect(playSpy).not.toHaveBeenCalled();
     });
 
-    xit("does not truncate the last word", function() {
+    it("says the english translation when ctrl-space is pressed", function() {
+//
     });
 
-    xit("says the english translation when ctrl-space is pressed", function() {
+
+      xit("does not truncate the last word", function() {
     });
 
     xit("scrolls to the right when the right arrow is pressed", function() {
@@ -120,7 +122,6 @@
 
     xit("highlights the key to press when too much time has elapsed", function() {
     });
-
 
   });
 })(window.ru = window.ru || {}, jQuery);

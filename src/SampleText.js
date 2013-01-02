@@ -34,6 +34,25 @@
     }
   };
 
+  ru.SampleText.prototype.sayTranslation = function() {
+    if(this.replayLastWord.length > 1) {
+      if(this.translatedHasChanged) {
+        var translator = new ru.Translator();
+        translator.translate(function(translatedText) {
+            this.translatedReplay = translatedText;
+            this.translatedHasChanged = false;
+            this.audioPlayer.play(this.translatedReplay, 'en');
+          }.bind(this),
+          this.replayLastWord,
+          this.replayLanguage,
+          'en'
+        );
+      } else {
+        this.audioPlayer.play(this.translatedReplay, 'en');
+      }
+    }
+  };
+
   ru.SampleText.prototype.guessLetter = function(letter) {
     var currentLetter = this.letters[this.position];
     if(currentLetter.guessLetter(letter)) {
@@ -43,6 +62,7 @@
           this.audioPlayer.play(this.lastWord);
         }
         this.replayLastWord = this.lastWord;
+        this.translatedHasChanged = true;
         this.lastWord = '';
       } else {
         this.lastWord += currentLetter.getLetter();
