@@ -31,7 +31,13 @@
     if(typeof this.divId !== 'undefined') {
       html = $(html).find('#' + this.divId);
     }
-    return $.trim(jQuery(html).text());
+
+    var text = $.trim(jQuery(html).text());
+    return this._removeNonBreakingSpace(text);
+  };
+
+  ru.ContentRetriever.prototype._removeNonBreakingSpace = function(text) {
+    return text.replace(/[\s\xA0]+/g, ' ');
   };
 
   ru.ContentRetriever.prototype._fireOnNewContent = function(html) {
