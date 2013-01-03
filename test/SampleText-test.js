@@ -103,12 +103,13 @@
       expect(playSpy).not.toHaveBeenCalled();
     });
 
-    it("says the english translation when ctrl-space is pressed", function() {
-//
+    xit("says the english translation when ctrl-space is pressed", function() {
     });
 
+    xit("keeps track of most often english translated words and displays them as a learning exercise", function() {
+    });
 
-      xit("does not truncate the last word", function() {
+    xit("does not truncate the last word", function() {
     });
 
     xit("scrolls to the right when the right arrow is pressed", function() {

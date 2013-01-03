@@ -49,7 +49,7 @@
 
   ru.SampleLetter.prototype._toLetterHtml = function() {
     return $('<button></button>')
-        .css('margin', '0em')
+        .css({'margin' : '0em', 'border' : '0em'})
         .attr({'disabled': 'disabled', 'aria-disabled': 'true'})
         .html('<span>' + this.letter + '</span>');
   };

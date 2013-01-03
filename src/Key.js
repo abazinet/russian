@@ -15,7 +15,7 @@
 
         // meta keys
         if (/^meta\d+\:?(\w+)?/.test(this.keyName) ||
-            $.keyboard.keyaction.hasOwnProperty(this.keyName)) {
+            this.keyaction.hasOwnProperty(this.keyName)) {
           this.html = this._buildKey(this.keyName, this.keyName, false);
         }
       } else {
@@ -47,7 +47,7 @@
     return this.html;
   };
 
-  ru.Key.prototype._htmlKey = function(keyName) {
+  ru.Key.prototype._htmlKey = function() {
     var displayChar = this.getDisplay();
     if(displayChar === ' ') {
       displayChar = '&nbsp;';
@@ -55,7 +55,7 @@
     return this.defaultButton
       .clone()
       .attr({ 'data-value' : this.charKey, 'name': this.keyName, 'data-pos': this.rowId + ',' + this.colId, 'title' : this.title })
-      .data('key', { action: keyName, original: this.charKey, curTxt : this.charKey, curNum: 0 })
+      .data('key', this)
       .addClass('ui-keyboard-' + this.keyName + this.keyType + ' ' + 'ui-state-default ui-corner-all')
       .html('<span>' + displayChar + '</span>');
   };
@@ -110,6 +110,28 @@
     'space'  : '&nbsp;:Space',
     't'      : '\u21e5:Tab',          // right arrow to bar (used since this virtual keyboard works with one directional tabs)
     'tab'    : '\u21e5 Tab:Tab'       // \u21b9 is the true tab symbol (left & right arrows)
+  };
+
+  // Action key function list
+  ru.Key.prototype.keyaction = {
+    alt : function(base,el){
+      base.altActive = !base.altActive;
+      base.showKeySet(el);
+    },
+    // el is the pressed key (button) object; it is null when the real keyboard enter is pressed
+    enter : function(base, el, e) {
+      base.ooKeyboard.insertText('\n');
+    },
+    shift : function(base,el){
+      base.lastKeyset[0] = base.shiftActive = !base.shiftActive;
+      base.showKeySet(el);
+    },
+    space : function(base){
+      base.ooKeyboard.insertText(' ');
+    },
+    tab : function(base) {
+      base.ooKeyboard.insertText('\t');
+    }
   };
 
 })(window.ru = window.ru || {}, jQuery);

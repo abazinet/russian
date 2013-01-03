@@ -20,8 +20,8 @@ $.keyboard = function(el, options) {
 	base.init = function(){
 		base.options = $.extend(true, {}, $.keyboard.defaultOptions, options);
 
-		// Shift and Alt key toggles, sets is true if a layout has more than one keyset - used for mousewheel message
-		base.shiftActive = base.altActive = base.metaActive = base.sets;
+		// Shift and Alt key toggles
+		base.shiftActive = base.altActive = base.metaActive;
 		base.lastKeyset = [false, false, false]; // [shift, alt, meta]
 		// Class names of the basic key set - meta keysets are handled by the keyname
 		base.rows = [ '', '-shift', '-alt', '-alt-shift' ];
@@ -47,7 +47,6 @@ $.keyboard = function(el, options) {
     base.ooKeyboard.onSourceContentChanged('kommersant.ru/doc/2099157', 'divLetterBranding');
 
     base.$allKeys = base.$keyboard.find('button.ui-keyboard-button');
-		base.wheel = $.isFunction( $.fn.mousewheel ); // is mousewheel plugin loaded?
 
 		$(document)
 			.bind('keypress', function(e) {
@@ -66,16 +65,9 @@ $.keyboard = function(el, options) {
 				base.$el.trigger( 'change.keyboard', [ base, base.el ] );
 			})
 			.bind('keydown', function(e) {
-				switch (e.which) {
-					case 13:
-						$.keyboard.keyaction.enter(base, null, e);
-						break;
-
-					// Show shift keyboard
-					case 16:
-            base.shiftActive = true;
-						base.showKeySet(this);
-						break;
+				if(e.which === 16) {
+          base.shiftActive = true;
+          base.showKeySet(this);
 				}
 
         $('.ui-keyboard-source-url').bind('keypress', function(e) {
@@ -87,19 +79,17 @@ $.keyboard = function(el, options) {
         });
 			});
 
-
-    base.$el.after( base.$keyboard );
-
+    base.$el.after(base.$keyboard);
 		base.$allKeys
-			.bind(base.options.keyBinding.split(' ').join('.keyboard ') + '.keyboard repeater.keyboard', function(e){
-				// 'key', { action: doAction, original: n, curTxt : n, curNum: 0 }
-				var txt, key = $.data(this, 'key'), action = key.action.split(':')[0];
-				if (action.match('meta')) { action = 'meta'; }
-				if ($.keyboard.keyaction.hasOwnProperty(action) && $(this).hasClass('ui-keyboard-actionkey')) {
-					// stop processing if action returns false (close & cancel)
-					if ($.keyboard.keyaction[action](base,this,e) === false) { return; }
-				} else if (typeof key.action !== 'undefined') {
-					txt = (base.wheel && !$(this).hasClass('ui-keyboard-actionkey')) ? key.curTxt : key.action;
+			.bind('mousedown.keyboard .keyboard', function(e) {
+				var txt,
+            key = $.data(this, 'key');
+
+        if (key.keyaction.hasOwnProperty(key.keyName) &&
+            $(this).hasClass('ui-keyboard-actionkey')) {
+					key.keyaction[key.keyName](base, this, e);
+				} else if (typeof key.key !== 'undefined') {
+					txt = key.getDisplay();
           base.ooKeyboard.insertText(txt);
 					if (!base.options.stickyShift && !e.shiftKey) {
 						base.shiftActive = false;
@@ -110,44 +100,12 @@ $.keyboard = function(el, options) {
 				e.preventDefault();
 			})
 			// Change hover class and tooltip
-			.bind('mouseenter.keyboard mouseleave.keyboard', function(e){
-				var el = this, $this = $(this),
-					// 'key' = { action: doAction, original: n, curTxt : n, curNum: 0 }
-					key = $.data(el, 'key');
-				if (e.type === 'mouseenter' && base.el.type !== 'password' ){
-					$this
-						.addClass('ui-state-hover')
-						.attr('title', function(i,t){
-							// show mouse wheel message
-							return (base.wheel && t === '' && base.sets) ? base.options.wheelMessage : t;
-						});
-				}
-				if (e.type === 'mouseleave'){
-					key.curTxt = key.original;
-					key.curNum = 0;
-					$.data(el, 'key', key);
-					$this
-						.removeClass( (base.el.type === 'password') ? '' : 'ui-state-hover') // needed or IE flickers really bad
-						.attr('title', function(i,t){ return (t === base.options.wheelMessage) ? '' : t; })
-						.find('span').text( key.original ); // restore original button text
-				}
+			.bind('mouseenter.keyboard', function() {
+        $(this).addClass('ui-state-hover');
 			})
-			// Allow mousewheel to scroll through other key sets of the same key
-			.bind('mousewheel.keyboard', function(e, delta){
-				if (base.wheel) {
-					var txt, $this = $(this), key = $.data(this, 'key');
-					txt = key.layers || base.getLayers( $this );
-					key.curNum += (delta > 0) ? -1 : 1;
-					if (key.curNum > txt.length-1) { key.curNum = 0; }
-					if (key.curNum < 0) { key.curNum = txt.length-1; }
-					key.layers = txt;
-					key.curTxt = txt[key.curNum];
-					$.data(this, 'key', key);
-					$this.find('span').text( txt[key.curNum] );
-					return false;
-				}
-        return true;
-			});
+      .bind('mouseleave.keyboard', function() {
+        $(this).removeClass('ui-state-hover');
+      });
   };
 
     base.showKeySet = function(el){
@@ -208,27 +166,6 @@ $.keyboard = function(el, options) {
 	};
 
 
-	// Action key function list
-	$.keyboard.keyaction = {
-		alt : function(base,el){
-			base.altActive = !base.altActive;
-			base.showKeySet(el);
-		},
-		// el is the pressed key (button) object; it is null when the real keyboard enter is pressed
-		enter : function(base, el, e) {
-      base.ooKeyboard.insertText('\n');
-		},
-		shift : function(base,el){
-			base.lastKeyset[0] = base.shiftActive = !base.shiftActive;
-			base.showKeySet(el);
-		},
-		space : function(base){
-      base.ooKeyboard.insertText(' ');
-		},
-		tab : function(base) {
-      base.ooKeyboard.insertText('\t');
-		}
-	};
 
 	$.keyboard.layouts = {};
 	$.keyboard.defaultOptions = {
@@ -239,9 +176,6 @@ $.keyboard = function(el, options) {
 			at : 'center top',
 			at2: 'center bottom' // centers the keyboard at the bottom of the input/textarea
 		},
-
-		// Message added to the key title while hovering, if the mousewheel plugin exists
-		wheelMessage : 'Use mousewheel to see other keys',
 
 		// *** Useability ***
 		// mod key options: 'ctrlKey', 'shiftKey', 'altKey', 'metaKey' (MAC only)
@@ -317,7 +251,6 @@ $.keyboard = function(el, options) {
   };
 
   ru.Keyboard.prototype.keyPressed = function(key) {
-    console.log(key);
     var keyPressed;
     this.layouts.forEach(function(layout) {
       keyPressed = layout.keyPressed(key);
