@@ -20,12 +20,6 @@ $.keyboard = function(el, options) {
 	base.init = function(){
 		base.options = $.extend(true, {}, $.keyboard.defaultOptions, options);
 
-		// Shift and Alt key toggles
-		base.shiftActive = base.altActive = base.metaActive;
-		base.lastKeyset = [false, false, false]; // [shift, alt, meta]
-		// Class names of the basic key set - meta keysets are handled by the keyname
-		base.rows = [ '', '-shift', '-alt', '-alt-shift' ];
-
 		// build keyboard if it doesn't exist
 		if (typeof(base.$keyboard) === 'undefined') {
       base.startup();
@@ -42,42 +36,12 @@ $.keyboard = function(el, options) {
 	};
 
 	base.startup = function(){
-    base.ooKeyboard = new ru.Keyboard($.keyboard.layouts['russian-qwerty']);
+    base.ooKeyboard = new ru.Keyboard(ru.RussianLayout);
     base.$keyboard = this.ooKeyboard.toHtml();
     base.ooKeyboard.onSourceContentChanged('kommersant.ru/doc/2099157', 'divLetterBranding');
 
     base.$allKeys = base.$keyboard.find('button.ui-keyboard-button');
 
-		$(document)
-			.bind('keypress', function(e) {
-				var k = String.fromCharCode(e.charCode || e.which);
-        if(e.ctrlKey && k === ' ') {
-          base.ooKeyboard.sayTranslation();
-        } else {
-          base.ooKeyboard.keyPressed(k);
-        }
-			})
-			.bind('keyup', function(e) {
-				if(e.which === 16) {
-          base.shiftActive = false;
-          base.showKeySet(this);
-				}
-				base.$el.trigger( 'change.keyboard', [ base, base.el ] );
-			})
-			.bind('keydown', function(e) {
-				if(e.which === 16) {
-          base.shiftActive = true;
-          base.showKeySet(this);
-				}
-
-        $('.ui-keyboard-source-url').bind('keypress', function(e) {
-          e.stopPropagation();
-        });
-
-        $('.ui-keyboard-source-divid').bind('keypress', function(e) {
-          e.stopPropagation();
-        });
-			});
 
     base.$el.after(base.$keyboard);
 		base.$allKeys
@@ -91,12 +55,8 @@ $.keyboard = function(el, options) {
 				} else if (typeof key.key !== 'undefined') {
 					txt = key.getDisplay();
           base.ooKeyboard.insertText(txt);
-					if (!base.options.stickyShift && !e.shiftKey) {
-						base.shiftActive = false;
-						base.showKeySet(this);
-					}
 				}
-				base.$el.trigger( 'change.keyboard', [ base, base.el ] );
+//				base.$el.trigger( 'change.keyboard', [ base, base.el ] );
 				e.preventDefault();
 			})
 			// Change hover class and tooltip
@@ -108,47 +68,6 @@ $.keyboard = function(el, options) {
       });
   };
 
-    base.showKeySet = function(el){
-      var key = '',
-      toShow = (base.shiftActive ? 1 : 0) + (base.altActive ? 2 : 0);
-
-      // check meta key set
-      if (base.metaActive) {
-        // the name attribute contains the meta set # "meta99"
-        key = (el && el.name && /meta/.test(el.name)) ? el.name : '';
-        // save active meta keyset name
-        if (key === '') {
-          key = (base.metaActive === true) ? '' : base.metaActive;
-        } else {
-          base.metaActive = key;
-        }
-        // if meta keyset doesn't have a shift or alt keyset, then show just the meta key set
-        if ( (!base.options.stickyShift && base.lastKeyset[2] !== base.metaActive) ||
-          ( (base.shiftActive || base.altActive) && !base.$keyboard.find('.ui-keyboard-keyset-' + key + base.rows[toShow]).length) ) {
-          base.shiftActive = base.altActive = false;
-        }
-      } else if (!base.options.stickyShift && base.lastKeyset[2] !== base.metaActive && base.shiftActive) {
-        // switching from meta key set back to default, reset shift & alt if using stickyShift
-        base.shiftActive = base.altActive = false;
-      }
-      toShow = (base.shiftActive ? 1 : 0) + (base.altActive ? 2 : 0);
-      key = (toShow === 0 && !base.metaActive) ? '-default' : (key === '') ? '' : '-' + key;
-      if (!base.$keyboard.find('.ui-keyboard-keyset' + key + base.rows[toShow]).length) {
-        // keyset doesn't exist, so restore last keyset settings
-        base.shiftActive = base.lastKeyset[0];
-        base.altActive = base.lastKeyset[1];
-        base.metaActive = base.lastKeyset[2];
-        return;
-      }
-      base.$keyboard
-        .find('.ui-keyboard-alt, .ui-keyboard-shift, .ui-keyboard-actionkey[class*=meta]').removeClass('ui-state-active').end()
-        .find('.ui-keyboard-alt')[(base.altActive) ? 'addClass' : 'removeClass']('ui-state-active').end()
-        .find('.ui-keyboard-shift')[(base.shiftActive) ? 'addClass' : 'removeClass']('ui-state-active').end()
-        .find('.ui-keyboard-keyset').hide().end()
-        .find('.ui-keyboard-keyset' + key + base.rows[toShow]).show().end()
-        .find('.ui-keyboard-actionkey.ui-keyboard' + key).addClass('ui-state-active');
-      base.lastKeyset = [ base.shiftActive, base.altActive, base.metaActive ];
-    };
 
     // get other layer values for a specific key
     base.getLayers = function(el){
@@ -211,6 +130,45 @@ $.keyboard = function(el, options) {
   ru.Keyboard = function(multiLayout) {
     this.layouts = [];
     this._buildKeys(multiLayout);
+    this.shiftActive = this.altActive = false;
+    this.rows = [ '', '-shift', '-alt', '-alt-shift' ];
+
+    $('body')
+      .bind('keypress', function(e) {
+        var k = String.fromCharCode(e.charCode || e.which);
+        if(e.ctrlKey && k === ' ') {
+          this.sayTranslation();
+        } else {
+          var layoutPos = (this.shiftActive ? 1 : 0) + (this.altActive ? 2 : 0);
+          this.keyPressed(layoutPos, k);
+        }
+      }.bind(this))
+      .bind('keyup', function(e) {
+        if(e.which === 16) {
+          this.shiftActive = false;
+          this.refreshKeyset();
+        } else if(e.which === 18) {
+          this.altActive = false;
+          this.refreshKeyset();
+        }
+      }.bind(this))
+      .bind('keydown', function(e) {
+        if(e.which === 16) {
+          this.shiftActive = true;
+          this.refreshKeyset();
+        } else if(e.which === 18) {
+          this.altActive = true;
+          this.refreshKeyset();
+        }
+      }.bind(this));
+
+      $('.ui-keyboard-source-url').bind('keypress', function(e) {
+        e.stopPropagation();
+      });
+
+      $('.ui-keyboard-source-divid').bind('keypress', function(e) {
+        e.stopPropagation();
+      });
   };
 
   ru.Keyboard.prototype._buildKeys = function(multiLayout) {
@@ -247,19 +205,17 @@ $.keyboard = function(el, options) {
   };
 
   ru.Keyboard.prototype.sayTranslation = function() {
-    this.sampleText.sayTranslation();
+    if(this.sampleText !== undefined) {
+      this.sampleText.sayTranslation();
+    }
   };
 
-  ru.Keyboard.prototype.keyPressed = function(key) {
-    var keyPressed;
-    this.layouts.forEach(function(layout) {
-      keyPressed = layout.keyPressed(key);
-      if(keyPressed !== undefined) {
-        this.sampleText.guessLetter(keyPressed.getDisplay());
-        return false;
-      }
-      return true;
-    }.bind(this));
+  ru.Keyboard.prototype.keyPressed = function(layoutPos, key) {
+    var k = this.layouts[layoutPos].keyPressed(key);
+    if(k !== undefined) {
+      console.log('playing');
+      this.sampleText.guessLetter(k.getDisplay());
+    }
   };
 
   ru.Keyboard.prototype.onSampleSourceChanged = function(text) {
@@ -279,6 +235,19 @@ $.keyboard = function(el, options) {
   ru.Keyboard.prototype.insertText = function(txt) {
     this.sampleText.guessLetter(txt);
     console.log(txt);
+  };
+
+  ru.Keyboard.prototype.refreshKeyset = function() {
+    var key = '';
+    var toShow = (this.shiftActive ? 1 : 0) + (this.altActive ? 2 : 0);
+    key = (toShow === 0) ? '-default' : (key === '') ? '' : '-' + key;
+    this.toHtml()
+        .find('.ui-keyboard-alt, .ui-keyboard-shift').removeClass('ui-state-active').end()
+        .find('.ui-keyboard-alt')[(this.altActive) ? 'addClass' : 'removeClass']('ui-state-active').end()
+        .find('.ui-keyboard-shift')[(this.shiftActive) ? 'addClass' : 'removeClass']('ui-state-active').end()
+        .find('.ui-keyboard-keyset').hide().end()
+        .find('.ui-keyboard-keyset' + key + this.rows[toShow]).show().end()
+        .find('.ui-keyboard-actionkey.ui-keyboard' + key).addClass('ui-state-active');
   };
 
 })(window.ru = window.ru || {}, jQuery);

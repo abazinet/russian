@@ -29,15 +29,23 @@
 
   ru.ContentRetriever.prototype._extractText = function(html) {
     if(typeof this.divId !== 'undefined') {
-      html = $(html).find('#' + this.divId);
+      html = $(html).find('#' + this.divId + ',.' + this.divId);
     }
 
     var text = $.trim(jQuery(html).text());
-    return this._removeNonBreakingSpace(text);
+
+    // TODO: ALEX: Reverse the logic to remove anything that is not part of the keyboard
+    text = this._removeNonBreakingSpace(text);
+    text = this._removeInvalidQuotes(text);
+    return text;
   };
 
   ru.ContentRetriever.prototype._removeNonBreakingSpace = function(text) {
     return text.replace(/[\s\xA0]+/g, ' ');
+  };
+
+  ru.ContentRetriever.prototype._removeInvalidQuotes = function(text) {
+    return text.replace(/[\u2018\u2019\u201C\u201D]/g, '"');
   };
 
   ru.ContentRetriever.prototype._fireOnNewContent = function(html) {
