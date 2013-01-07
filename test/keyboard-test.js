@@ -2,38 +2,20 @@
   "use strict";
 
   describe("a russian keyboard", function() {
-    it("displays russian letters", function() {
+    it("displays lowercase russian letters", function() {
       var keyboard = new ru.Keyboard(ru.RussianLayout);
       var html = keyboard.toHtml();
-      var firstKey = $('.ui-keyboard-keyset', html).filter(function() {
-        return $(this).css('display') !== 'none';
-      }).find('span:first');
+      var firstKey = firstVisibleKey(html);
       expect(firstKey).toHaveText('\u0451');
     });
 
     it("displays uppercase russian letters when shift is pressed", function() {
-      var keyboard = new ru.Keyboard(ru.RussianLayout);
-      var html = keyboard.toHtml();
-      var pressShift = $.Event( 'keydown', {
-        which : 16,
-        shiftKey : true
-      });
-      var body = $('body');
-      body.trigger(pressShift);
-      var firstKey = $('.ui-keyboard-keyset', html).filter(function() {
-        return $(this).css('display') !== 'none';
-      }).find('span:first');
-      expect(firstKey).toHaveText('\u0401');
+      var html = new ru.Keyboard(ru.RussianLayout).toHtml();
+      pressShift();
+      expect(firstVisibleKey(html)).toHaveText('\u0401');
 
-      var unpressShift = $.Event( 'keyup', {
-        which : 16,
-        shiftKey : false
-      });
-      body.trigger(unpressShift);
-      firstKey = $('.ui-keyboard-keyset', html).filter(function() {
-        return $(this).css('display') !== 'none';
-      }).find('span:first');
-      expect(firstKey).toHaveText('\u0451');
+      unpressShift();
+      expect(firstVisibleKey(html)).toHaveText('\u0451');
     });
 
     it("says the english translation when ctrl-space is pressed", function() {
@@ -47,6 +29,28 @@
       $('body').trigger(e);
       expect(saySpy).toHaveBeenCalled();
     });
+
+    var firstVisibleKey = function(html) {
+      return $('.ui-keyboard-keyset', html).filter(function() {
+        return $(this).css('display') !== 'none';
+      }).find('span:first');
+    };
+
+    var pressShift = function() {
+      var e = $.Event( 'keydown', {
+        which : 16,
+        shiftKey : true
+      });
+      $('body').trigger(e);
+    };
+
+    var unpressShift = function() {
+      var e = $.Event( 'keyup', {
+        which : 16,
+        shiftKey : false
+      });
+      $('body').trigger(e);
+    };
 
   });
 })(window.ru = window.ru || {}, jQuery);

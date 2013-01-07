@@ -39,10 +39,7 @@ $.keyboard = function(el, options) {
     base.ooKeyboard = new ru.Keyboard(ru.RussianLayout);
     base.$keyboard = this.ooKeyboard.toHtml();
     base.ooKeyboard.onSourceContentChanged('kommersant.ru/doc/2099157', 'divLetterBranding');
-
     base.$allKeys = base.$keyboard.find('button.ui-keyboard-button');
-
-
     base.$el.after(base.$keyboard);
 		base.$allKeys
 			.bind('mousedown.keyboard .keyboard', function(e) {
@@ -84,35 +81,14 @@ $.keyboard = function(el, options) {
 		base.init();
 	};
 
-
-
 	$.keyboard.layouts = {};
 	$.keyboard.defaultOptions = {
-
 		position     : {
 			of : $.find('#inputContainer'), // optional - null (attach to input/textarea) or a jQuery object (attach elsewhere)
 			my : 'center top',
 			at : 'center top',
 			at2: 'center bottom' // centers the keyboard at the bottom of the input/textarea
-		},
-
-		// *** Useability ***
-		// mod key options: 'ctrlKey', 'shiftKey', 'altKey', 'metaKey' (MAC only)
-		enterMod : 'altKey', // alt-enter to go to previous; shift-alt-enter to accept & go to previous
-
-		// If false, the shift key will remain active until the next key is (mouse) clicked on; if true it will stay active until pressed again
-		stickyShift  : true,
-
-		// Mouse repeat delay - when clicking/touching a virtual keyboard key, after this delay the key will start repeating
-		repeatDelay  : 500,
-
-		// Mouse repeat rate - after the repeatDelay, this is the rate (characters per second) at which the key is repeated
-		// Added to simulate holding down a real keyboard key and having it repeat. I haven't calculated the upper limit of
-		// this rate, but it is limited to how fast the javascript can process the keys. And for me, in Firefox, it's around 20.
-		repeatRate   : 20,
-
-		// Event (namepaced) for when the character is added to the input (clicking on the keyboard)
-		keyBinding   : 'mousedown'
+		}
 	};
 
 	$.fn.keyboard = function(options){
@@ -213,7 +189,6 @@ $.keyboard = function(el, options) {
   ru.Keyboard.prototype.keyPressed = function(layoutPos, key) {
     var k = this.layouts[layoutPos].keyPressed(key);
     if(k !== undefined) {
-      console.log('playing');
       this.sampleText.guessLetter(k.getDisplay());
     }
   };
