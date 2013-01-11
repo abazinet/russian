@@ -115,22 +115,22 @@
   // Action key function list
   ru.Key.prototype.keyaction = {
     alt : function(base,el){
-      base.altActive = !base.altActive;
-      base.showKeySet(el);
+      //base.altActive = !base.altActive;
+      //base.showKeySet(el);
     },
     // el is the pressed key (button) object; it is null when the real keyboard enter is pressed
     enter : function(base, el, e) {
-      base.ooKeyboard.insertText('\n');
+      //base.ooKeyboard.insertText('\n');
     },
     shift : function(base,el){
-      base.lastKeyset[0] = base.shiftActive = !base.shiftActive;
-      base.showKeySet(el);
+      //base.lastKeyset[0] = base.shiftActive = !base.shiftActive;
+      //base.showKeySet(el);
     },
     space : function(base){
-      base.ooKeyboard.insertText(' ');
+      //base.ooKeyboard.insertText(' ');
     },
     tab : function(base) {
-      base.ooKeyboard.insertText('\t');
+      //base.ooKeyboard.insertText('\t');
     }
   };
 

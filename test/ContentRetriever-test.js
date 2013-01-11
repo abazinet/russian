@@ -1,7 +1,7 @@
 (function(ru) {
   "use strict";
 
-  describe("the content", function() {
+  describe("the content retriever", function() {
     var server;
     beforeEach(function() {
       server = sinon.fakeServer.create();
@@ -12,17 +12,45 @@
     });
 
     it("is extracted from an external html source", function() {
+      expectContent('<div><div id="divId">The text goes here</div></div>',
+                    'The text goes here');
+    });
+
+    it("has non breaking spaces replaced with regular spaces", function() {
+      expectContent('<div><div id="divId">The text&nbsp;goes here</div></div>',
+                    'The text goes here');
+    });
+
+    it("has curly quotes replaced with regular quote", function() {
+      expectContent('<div><div id="divId">`The\' \'text\' "goes" \u201Chere\u201D</div></div>',
+                    '\'The\' \'text\' "goes" "here"');
+    });
+
+    it("has any other invalid character replaced by '_'", function() {
+      expectContent('<div><div id="divId">âll the invalid châraçtàrs (including multibyte \uD834\uDF06) are gönë</div></div>',
+                    '_ll the invalid ch_ra_t_rs (including multibyte _) are g_n_');
+    });
+
+    var expectContent = function(sourceHtml, expectedText) {
       server.respondWith([200,
-                         {'Content-Type':'text/html'},
-                         '<div><div id="divId">The text goes here</div></div>'
+        {'Content-Type':'text/html'},
+        sourceHtml
       ]);
 
-      var callback = sinon.spy();
-      var contentRetriever = new ru.ContentRetriever(callback, 'http://www.example.com', 'divId');
+      var charFilterStub = function(c) {
+        var invalid = /[\uD800-\uDFFF]/.test(c);
+        var match = 'âçàöë'.indexOf(c);
+        return (!invalid && match === -1);
+      };
+      var spy = jasmine.createSpy('contentRetrieverSpy');
+      var contentRetriever = new ru.ContentRetriever(spy,
+                                                     'http://www.example.com',
+                                                     'divId',
+                                                     charFilterStub);
       contentRetriever.download();
       server.respond();
 
-      expect(callback.calledWithExactly('The text goes here')).toBe(true);
-    });
+      expect(spy).toHaveBeenCalledWith(expectedText);
+    };
   });
 })(window.ru = window.ru || {});

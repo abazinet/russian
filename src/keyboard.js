@@ -10,98 +10,48 @@ http://www.opensource.org/licenses/mit-license.php
 ;(function(ru, $) {
 "use strict";
 
-$.keyboard = function(el, options) {
-	var base = this;
+  $.fn.keyboard = function() {
+    $.keyboard(this);
+  };
 
-	// Access to jQuery and DOM versions of element
-	base.$el = $(el);
-	base.el = el;
+  $.keyboard = function(el) {
+    var base = this;
+    base.$el = $(el);
+    base.el = el;
 
-	base.init = function(){
-		base.options = $.extend(true, {}, $.keyboard.defaultOptions, options);
-
-		// build keyboard if it doesn't exist
-		if (typeof(base.$keyboard) === 'undefined') {
-      base.startup();
-    }
-
-		// show & position keyboard
-		base.$keyboard
-			// basic positioning before it is set by position utility
-			.css({ position: 'absolute', left: 0, top: 0 })
-			.addClass('ui-keyboard-has-focus')
-			.show();
-
-		return base;
-	};
-
-	base.startup = function(){
     base.ooKeyboard = new ru.Keyboard(ru.RussianLayout);
     base.$keyboard = this.ooKeyboard.toHtml();
     base.ooKeyboard.onSourceContentChanged('kommersant.ru/doc/2099157', 'divLetterBranding');
+
     base.$allKeys = base.$keyboard.find('button.ui-keyboard-button');
-    base.$el.after(base.$keyboard);
-		base.$allKeys
-			.bind('mousedown.keyboard .keyboard', function(e) {
-				var txt,
+    base.$allKeys
+      .bind('mousedown.keyboard .keyboard', function(e) {
+        var txt,
             key = $.data(this, 'key');
 
         if (key.keyaction.hasOwnProperty(key.keyName) &&
             $(this).hasClass('ui-keyboard-actionkey')) {
-					key.keyaction[key.keyName](base, this, e);
-				} else if (typeof key.key !== 'undefined') {
-					txt = key.getDisplay();
+          key.keyaction[key.keyName](base, this, e);
+        } else if (typeof key.key !== 'undefined') {
+          txt = key.getDisplay();
           base.ooKeyboard.insertText(txt);
-				}
-//				base.$el.trigger( 'change.keyboard', [ base, base.el ] );
-				e.preventDefault();
-			})
-			// Change hover class and tooltip
-			.bind('mouseenter.keyboard', function() {
+        }
+        e.preventDefault();
+      })
+      // Change hover class and tooltip
+      .bind('mouseenter.keyboard', function() {
         $(this).addClass('ui-state-hover');
-			})
+      })
       .bind('mouseleave.keyboard', function() {
         $(this).removeClass('ui-state-hover');
       });
+
+    base.$el.after(base.$keyboard);
+    base.$keyboard
+      .css({ position: 'absolute', left: 0, top: 0 })
+      .addClass('ui-keyboard-has-focus')
+      .show();
   };
-
-
-    // get other layer values for a specific key
-    base.getLayers = function(el){
-      var key, keys;
-      key = el.attr('data-pos');
-      keys = el.closest('.ui-keyboard').find('button[data-pos="' + key + '"]').map(function(){
-        // added '> span' because jQuery mobile adds multiple spans inside the button
-        return $(this).find('> span').text();
-      }).get();
-      return keys;
-    };
-
-		// Run initializer
-		base.init();
-	};
-
-	$.keyboard.layouts = {};
-	$.keyboard.defaultOptions = {
-		position     : {
-			of : $.find('#inputContainer'), // optional - null (attach to input/textarea) or a jQuery object (attach elsewhere)
-			my : 'center top',
-			at : 'center top',
-			at2: 'center bottom' // centers the keyboard at the bottom of the input/textarea
-		}
-	};
-
-	$.fn.keyboard = function(options){
-		return this.each(function(){
-			if (!$(this).data('keyboard')) {
-				(new $.keyboard(this, options));
-			}
-		});
-	};
-
-	$.fn.getkeyboard = function(){
-		return this.data("keyboard");
-	};
 
   ru.Keyboard = function(multiLayout) {
     this.layouts = [];
@@ -203,8 +153,20 @@ $.keyboard = function(el, options) {
   };
 
   ru.Keyboard.prototype.onSourceContentChanged = function(url, divId) {
-    var text = new ru.ContentRetriever(this.onSampleSourceChanged.bind(this), url, divId);
+    var text = new ru.ContentRetriever(this.onSampleSourceChanged.bind(this),
+                                       url,
+                                       divId,
+                                       this.isValidCharacter.bind(this));
     text.download();
+  };
+
+  ru.Keyboard.prototype.isValidCharacter = function(character) {
+    return true; // TODO: ALEX: Implement
+//    var valid = false;
+//    this.layouts.forEach(function(layout) {
+//      valid = valid || layout.isValidCharacter(character);
+//    }.bind(this));
+//    return !valid;
   };
 
   ru.Keyboard.prototype.insertText = function(txt) {

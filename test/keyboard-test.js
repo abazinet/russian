@@ -11,10 +11,10 @@
 
     it("displays uppercase russian letters when shift is pressed", function() {
       var html = new ru.Keyboard(ru.RussianLayout).toHtml();
-      pressShift();
+      expect(firstVisibleKey(html)).toHaveText('\u0451');
+      shiftDown();
       expect(firstVisibleKey(html)).toHaveText('\u0401');
-
-      unpressShift();
+      shiftUp();
       expect(firstVisibleKey(html)).toHaveText('\u0451');
     });
 
@@ -22,11 +22,7 @@
       var keyboard = new ru.Keyboard(ru.RussianLayout);
       keyboard.toHtml();
       var saySpy = spyOn(keyboard, 'sayTranslation');
-      var e = $.Event( 'keypress', {
-        which : $.ui.keyCode.SPACE,
-        ctrlKey : true
-      });
-      $('body').trigger(e);
+      ctrlSpacePressed();
       expect(saySpy).toHaveBeenCalled();
     });
 
@@ -36,21 +32,30 @@
       }).find('span:first');
     };
 
-    var pressShift = function() {
-      var e = $.Event( 'keydown', {
+    var ctrlSpacePressed = function() {
+      keyEvent('keypress', {
+        which : $.ui.keyCode.SPACE,
+        ctrlKey : true
+      });
+    };
+
+    var shiftDown = function() {
+      keyEvent('keydown', {
         which : 16,
         shiftKey : true
       });
-      $('body').trigger(e);
     };
 
-    var unpressShift = function() {
-      var e = $.Event( 'keyup', {
+    var shiftUp = function() {
+      keyEvent('keyup', {
         which : 16,
         shiftKey : false
       });
-      $('body').trigger(e);
     };
+
+   var keyEvent = function(eventName, keyAttr) {
+     $('body').trigger($.Event(eventName, keyAttr));
+   };
 
   });
 })(window.ru = window.ru || {}, jQuery);

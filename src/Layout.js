@@ -15,6 +15,10 @@
     return key;
   };
 
+  ru.Layout.prototype.isValidCharacter = function(character) {
+    return this.keyHash[character] !== undefined;
+  };
+
   ru.Layout.prototype.addKey = function(row, key) {
     if(this.rows[row] === undefined) {
       this.rows[row] = [];

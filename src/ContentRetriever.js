@@ -1,10 +1,11 @@
 (function(ru, $) {
   "use strict";
 
-  ru.ContentRetriever = function(onNewContent, url, divId) {
+  ru.ContentRetriever = function(onNewContent, url, divId, isValidCharacter) {
     this.url = url;
     this.divId = divId;
     this.onNewContent = onNewContent;
+    this.isValidCharacter = isValidCharacter;
   };
 
   ru.ContentRetriever.prototype.download = function() {
@@ -34,18 +35,30 @@
 
     var text = $.trim(jQuery(html).text());
 
-    // TODO: ALEX: Reverse the logic to remove anything that is not part of the keyboard
-    text = this._removeNonBreakingSpace(text);
-    text = this._removeInvalidQuotes(text);
+    text = this._changeNonBreakingSpace(text);
+    text = this._changeInvalidQuotes(text);
+    text = this._removeInvalidCharacters(text);
     return text;
   };
 
-  ru.ContentRetriever.prototype._removeNonBreakingSpace = function(text) {
+  ru.ContentRetriever.prototype._changeNonBreakingSpace = function(text) {
     return text.replace(/[\s\xA0]+/g, ' ');
   };
 
-  ru.ContentRetriever.prototype._removeInvalidQuotes = function(text) {
-    return text.replace(/[\u2018\u2019\u201C\u201D]/g, '"');
+  ru.ContentRetriever.prototype._changeInvalidQuotes = function(text) {
+    text = text.replace(/[\u2018\u2019\u201C\u201D]/g, '"');
+    return text.replace(/[`]/g, "'");
+  };
+
+  ru.ContentRetriever.prototype._removeInvalidCharacters = function(text) {
+    if(this.isValidCharacter !== undefined) {
+      for(var i=0; i<text.length; i++) {
+        if(!this.isValidCharacter(text[i])) {
+          text = text.substr(0, i) + '_' + text.substr(i + 2);
+        }
+      }
+    }
+    return text;
   };
 
   ru.ContentRetriever.prototype._fireOnNewContent = function(html) {
