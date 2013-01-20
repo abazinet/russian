@@ -5,6 +5,7 @@
     this.name = name;
     this.rows = [];
     this.keyHash = {};
+    this.mappedKeyHash = {};
   };
 
   ru.Layout.prototype.keyPressed = function(keyPressed) {
@@ -16,7 +17,8 @@
   };
 
   ru.Layout.prototype.isValidCharacter = function(character) {
-    return this.keyHash[character] !== undefined;
+    return this.keyHash[character] !== undefined ||
+           this.mappedKeyHash[character] !== undefined;
   };
 
   ru.Layout.prototype.addKey = function(row, key) {
@@ -25,6 +27,7 @@
     }
     this.rows[row].push(key);
     this.keyHash[key.charKey] = key;
+    this.mappedKeyHash[key.mappedKey] = key;
   };
 
   ru.Layout.prototype.toHtml = function() {

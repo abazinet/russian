@@ -161,12 +161,9 @@ http://www.opensource.org/licenses/mit-license.php
   };
 
   ru.Keyboard.prototype.isValidCharacter = function(character) {
-    return true; // TODO: ALEX: Implement
-//    var valid = false;
-//    this.layouts.forEach(function(layout) {
-//      valid = valid || layout.isValidCharacter(character);
-//    }.bind(this));
-//    return !valid;
+    return this.layouts.some(function(layout) {
+      return layout.isValidCharacter(character);
+    }.bind(this));
   };
 
   ru.Keyboard.prototype.insertText = function(txt) {
