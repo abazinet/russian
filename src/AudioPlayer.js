@@ -6,7 +6,9 @@
   };
 
   ru.AudioPlayer.prototype.play = function(word, lang) {
-    console.log('playing ' + word);
+    if(word.length > 1) {
+      console.log('playing ' + word);
+    }
     if(typeof lang === 'undefined') {
       lang = 'ru';
     }

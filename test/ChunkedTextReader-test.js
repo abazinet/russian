@@ -20,5 +20,13 @@
       var reader = new ru.ChunkedTextReader(15, '');
       expect(reader.nextChunk()).toBe('');
     });
+
+    it("supports reading backwards", function() {
+      var reader = new ru.ChunkedTextReader(10, '0123456789abcdefghij');
+      reader.nextChunk();
+      reader.nextChunk();
+      expect(reader.previousChunk()).toBe('0123456789');
+      expect(reader.previousChunk()).toBe('0123456789');
+    });
   });
 })(window.ru = window.ru || {});

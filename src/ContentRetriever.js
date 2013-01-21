@@ -54,7 +54,7 @@
     if(this.isValidCharacter !== undefined) {
       for(var i=0; i<text.length; i++) {
         if(!this.isValidCharacter(text[i])) {
-          text = text.substr(0, i) + '_' + text.substr(i + 2);
+          text = text.substr(0, i) + ' ' + text.substr(i + 2);
         }
       }
     }

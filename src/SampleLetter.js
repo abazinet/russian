@@ -9,19 +9,12 @@
     return this.letter;
   };
 
-  ru.SampleLetter.prototype.blink = function(enabled) {
-    this.toHtml();
-    this.blinking = (enabled === undefined ? true : enabled);
+  ru.SampleLetter.prototype.stopBlinking = function() {
+    this._blink(false);
+  };
 
-    var blinker = function() {
-      this._toggleBlinking();
-      if(this.blinking) {
-        window.setTimeout(blinker.bind(this), 500);
-      } else {
-        this.html.removeClass('ui-state-hover');
-      }
-    }.bind(this);
-    blinker();
+  ru.SampleLetter.prototype.startBlinking = function() {
+    this._blink(true);
   };
 
   ru.SampleLetter.prototype.guessLetter = function(letter) {
@@ -65,6 +58,21 @@
   ru.SampleLetter.prototype._isBlinking = function() {
     return (this.blinking &&
             this.html.hasClass('ui-state-hover')) === true;
+  };
+
+  ru.SampleLetter.prototype._blink = function(enabled) {
+    this.toHtml();
+    this.blinking = (enabled === undefined ? true : enabled);
+
+    var blinker = function() {
+      this._toggleBlinking();
+      if(this.blinking) {
+        window.setTimeout(blinker.bind(this), 500);
+      } else {
+        this.html.removeClass('ui-state-hover');
+      }
+    }.bind(this);
+    blinker();
   };
 
 })(window.ru = window.ru || {}, jQuery);

@@ -4,20 +4,20 @@
   ru.SampleText = function(sampleText) {
     this.rowsSize = 3;
     this.columnsSize = 20;
-    this.Count =  this.columnsSize * this.rowsSize;
+    this.count =  this.columnsSize * this.rowsSize;
     this.position = 0;
     this.letters = [];
     this.lastWord = '';
     this.replayLastWord = '';
     this.replayLanguage = 'ru';
 
-    this.sampleText = new ru.ChunkedTextReader(this.Count, sampleText);
+    this.sampleText = new ru.ChunkedTextReader(this.count, sampleText);
     this.audioPlayer = new ru.AudioPlayer($.find('audio')[0]);
     this._buildLetters();
   };
 
   ru.SampleText.prototype.updateText = function(newText) {
-    this.sampleText = new ru.ChunkedTextReader(this.Count, newText);
+    this.sampleText = new ru.ChunkedTextReader(this.count, newText);
     this._clearPreviousHtml();
     this._buildLetters();
     this.toHtml();
@@ -25,7 +25,7 @@
 
   ru.SampleText.prototype._buildLetters = function() {
     var text = this.sampleText.nextChunk();
-    for(var i=0; i<this.Count; i++) {
+    for(var i=0; i<this.count; i++) {
       var pos = i + this.position;
       var letter = (pos < text.length) ?
                    text[pos] :
@@ -53,35 +53,19 @@
     }
   };
 
-  ru.SampleText.prototype.guessLetter = function(letter) {
-    var currentLetter = this.letters[this.position];
-    if(currentLetter.guessLetter(letter)) {
-      currentLetter.blink(false);
-      if(currentLetter.isSpace()) {
-        if(this.lastWord.length > 1) {
-          this.audioPlayer.play(this.lastWord);
-        }
-        this.replayLastWord = this.lastWord;
-        this.translatedHasChanged = true;
-        this.lastWord = '';
+  ru.SampleText.prototype.guessLetter = function(character) {
+    var current = this._currentLetter();
+    var guessedRight = current.guessLetter(character);
+    if(guessedRight) {
+      current.stopBlinking();
+      if(this._isLastLetter()) {
+        this._nextPage();
       } else {
-        this.lastWord += currentLetter.getLetter();
-      }
-
-      if(this._isLastLetter(this.position)) {
-        this.position = 0;
-        this._buildLetters();
-        this.toHtml();
-      } else {
-        if(!currentLetter.isSpace()) {
-          this.audioPlayer.play(currentLetter.getLetter());
-        }
         this.position += 1;
-        this.letters[this.position].blink(true);
+        this._currentLetter().startBlinking();
       }
-    } else if(letter === ' ' && this.replayLastWord.length > 1) {
-      this.audioPlayer.play(this.replayLastWord, this.replayLanguage);
     }
+    this._playAudio(character, guessedRight);
   };
 
   ru.SampleText.prototype.toHtml = function() {
@@ -99,7 +83,7 @@
       }
     }.bind(this));
 
-    this.letters[this.position].blink(true);
+    this._currentLetter().startBlinking();
     return this.html;
   };
 
@@ -111,8 +95,8 @@
     return (pos % this.columnsSize) === (this.columnsSize - 1);
   };
 
-  ru.SampleText.prototype._isLastLetter = function(pos) {
-    return pos === this.Count - 1;
+  ru.SampleText.prototype._isLastLetter = function() {
+    return this.position === this.count - 1;
   };
 
   ru.SampleText.prototype._clearPreviousHtml = function() {
@@ -122,6 +106,34 @@
         .css({'margin-bottom' : '1em'});
     } else {
       $('.ui-keyboard-sample-wrapper', this.html).remove();
+    }
+  };
+
+  ru.SampleText.prototype._currentLetter = function() {
+    return this.letters[this.position];
+  };
+
+  ru.SampleText.prototype._nextPage = function() {
+    this.position = 0;
+    this._buildLetters();
+    this.toHtml();
+  };
+
+  ru.SampleText.prototype._playAudio = function(character, guessedRight) {
+    if(guessedRight) {
+      if(character === ' ') {
+        if(this.lastWord.length > 1) {
+          this.audioPlayer.play(this.lastWord);
+        }
+        this.replayLastWord = this.lastWord;
+        this.translatedHasChanged = true;
+        this.lastWord = '';
+      } else {
+        this.lastWord += character;
+        this.audioPlayer.play(character);
+      }
+    } else if(character === ' ' && this.replayLastWord.length > 1) {
+      this.audioPlayer.play(this.replayLastWord, this.replayLanguage);
     }
   };
 })(window.ru = window.ru || {}, jQuery);

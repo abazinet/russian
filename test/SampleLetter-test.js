@@ -20,7 +20,7 @@
       var letter = new ru.SampleLetter('a');
 
       expect(letter._isBlinking()).toBeFalsy();
-      letter.blink(true);
+      letter.startBlinking();
       expect(letter._isBlinking()).toBeTruthy();
       jasmine.Clock.tick(501);
       expect(letter._isBlinking()).toBeFalsy();

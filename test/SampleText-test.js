@@ -37,7 +37,7 @@
       var source = '123456789 123456789 123456789 123456789 123456789 123456789 abcdefghi abcdefghi ';
       var sample = new ru.SampleText(source);
       var html = sample.toHtml();
-      for(var i=0; i<sample.Count; i++){
+      for(var i=0; i<sample.count; i++){
         sample.guessLetter(source[i]);
       }
 

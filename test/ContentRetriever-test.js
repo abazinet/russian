@@ -28,7 +28,7 @@
 
     it("has any other invalid character replaced by '_'", function() {
       expectContent('<div><div id="divId">âll the invalid châraçtàrs (including multibyte \uD834\uDF06) are gönë</div></div>',
-                    '_ll the invalid ch_ra_t_rs (including multibyte _) are g_n_');
+                    ' ll the invalid ch ra t rs (including multibyte  ) are g n ');
     });
 
     var expectContent = function(sourceHtml, expectedText) {

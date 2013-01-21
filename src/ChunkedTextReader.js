@@ -15,4 +15,13 @@
     }
     return chunk;
   };
+
+  ru.ChunkedTextReader.prototype.previousChunk = function() {
+    this.position -= this.chunkSize * 2;
+    if(this.position < 0) {
+      this.position = 0;
+    }
+    return this.nextChunk();
+  };
+
 })(window.ru = window.ru || {});

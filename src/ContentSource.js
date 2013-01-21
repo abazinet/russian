@@ -13,12 +13,12 @@
     var url = input.clone();
     sampleSource.append(url
         .css('margin', '1em')
-        .attr({'name' : 'url', 'placeholder' : 'kommersant.ru/doc/2099157', 'class' : 'ui-keyboard-source-url'}));
+        .attr({'name' : 'url', 'placeholder' : 'www.example.com/text', 'class' : 'ui-keyboard-source-url'}));
 
     var divId = input.clone();
     sampleSource.append(divId
         .css('margin', '0em')
-        .attr({'name' : 'class', 'placeholder' : "divLetterBranding", 'class' : 'ui-keyboard-source-divid'}));
+        .attr({'name' : 'class', 'placeholder' : "div or class id", 'class' : 'ui-keyboard-source-divid'}));
 
     var go = button.clone();
     go.click(function() {
