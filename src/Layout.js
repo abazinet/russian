@@ -2,50 +2,51 @@
   "use strict";
 
   ru.Layout = function(name) {
-    this.name = name;
-    this.rows = [];
-    this.keyHash = {};
-    this.mappedKeyHash = {};
-  };
+    var rows = [];
+    var keyHash = {};
+    var mappedKeyHash = {};
 
-  ru.Layout.prototype.keyPressed = function(keyPressed) {
-    var key = this.keyHash[keyPressed];
-    if(typeof key !== 'undefined') {
-      key.keyPressed(keyPressed);
-    }
-    return key;
-  };
+    return {
+      keyPressed: function(keyPressed) {
+        var key = keyHash[keyPressed];
+        if(typeof key !== 'undefined') {
+          key.keyPressed(keyPressed);
+        }
+        return key;
+      },
 
-  ru.Layout.prototype.isValidCharacter = function(character) {
-    return this.keyHash[character] !== undefined ||
-           this.mappedKeyHash[character] !== undefined;
-  };
+      isValidCharacter: function(character) {
+        return keyHash[character] !== undefined ||
+               mappedKeyHash[character] !== undefined;
+      },
 
-  ru.Layout.prototype.addKey = function(row, key) {
-    if(this.rows[row] === undefined) {
-      this.rows[row] = [];
-    }
-    this.rows[row].push(key);
-    this.keyHash[key.charKey] = key;
-    this.mappedKeyHash[key.mappedKey] = key;
-  };
+      addKey: function(row, key) {
+        if(rows[row] === undefined) {
+           rows[row] = [];
+        }
+        rows[row].push(key);
+        keyHash[key.charKey] = key;
+        mappedKeyHash[key.mappedKey] = key;
+      },
 
-  ru.Layout.prototype.toHtml = function() {
-    var html = $('<div></div>')
-        .attr('name', this.name)
-        .addClass('ui-keyboard-keyset ui-keyboard-keyset-' + this.name);
+      toHtml: function() {
+        var html = $('<div></div>')
+            .attr('name', name)
+            .addClass('ui-keyboard-keyset ui-keyboard-keyset-' + name);
 
-    this.rows.forEach(function(row) {
-      row.forEach(function(key) {
-        html.append(key.toHtml());
-      });
-      html.append('<br class="ui-keyboard-button-endrow">');
-    });
+        rows.forEach(function(row) {
+          row.forEach(function(key) {
+            html.append(key.toHtml());
+          });
+          html.append('<br class="ui-keyboard-button-endrow">');
+        });
 
-    return html;
-  };
+        return html;
+      },
 
-  ru.Layout.prototype.isDefault = function() {
-    return this.name === 'default';
+      isDefault: function() {
+        return name === 'default';
+      }
+    };
   };
 })(window.ru = window.ru || {}, jQuery);

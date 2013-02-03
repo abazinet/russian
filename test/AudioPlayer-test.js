@@ -18,7 +18,7 @@
       var loadSpy = spyOn(audioElement, 'load');
       var playSpy = spyOn(audioElement, 'play');
 
-      var player = new ru.AudioPlayer(audioElement);
+      var player = ru.audioPlayer(audioElement);
       player.play('alex');
       server.respond();
 

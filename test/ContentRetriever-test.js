@@ -43,10 +43,10 @@
         return (!invalid && match === -1);
       };
       var spy = jasmine.createSpy('contentRetrieverSpy');
-      var contentRetriever = new ru.ContentRetriever(spy,
-                                                     'http://www.example.com',
-                                                     'divId',
-                                                     charFilterStub);
+      var contentRetriever = ru.contentRetriever(spy,
+                                                 'http://www.example.com',
+                                                 'divId',
+                                                 charFilterStub);
       contentRetriever.download();
       server.respond();
 

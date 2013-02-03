@@ -3,7 +3,7 @@
 
   describe("a sample text", function() {
     it("can be printed to html", function() {
-      var sample = new ru.SampleText('abcdefghij0123456789');
+      var sample = ru.sampleText('abcdefghij0123456789');
       var html = sample.toHtml();
       var firstLetter = $('#ui-keyboard-sample-wrapper,span:first', html);
       var lastLetter = $('#ui-keyboard-sample-wrapper,span:last', html);
@@ -12,20 +12,20 @@
     });
 
     it("has a blinking first letter", function() {
-      var sample = new ru.SampleText('abcdefghij0123456789');
+      var sample = ru.sampleText('abcdefghij0123456789');
       sample.toHtml();
       expectBlinkingPosition(sample.getLetters(), 0);
     });
 
     it("moves the blinking letter forward when guessed correctly", function() {
-      var sample = new ru.SampleText('abcdefghij0123456789');
+      var sample = ru.sampleText('abcdefghij0123456789');
       sample.toHtml();
       sample.guessLetter('a');
       expectBlinkingPosition(sample.getLetters(), 1);
     });
 
     it("keeps the original letter blinking when guessed incorrectly", function() {
-      var sample = new ru.SampleText('abcdefghij0123456789');
+      var sample = ru.sampleText('abcdefghij0123456789');
       sample.toHtml();
       sample.guessLetter('b');
       sample.guessLetter('9');
@@ -35,9 +35,9 @@
 
     it("scrolls when reaching the end", function() {
       var source = '123456789 123456789 123456789 123456789 123456789 123456789 abcdefghi abcdefghi ';
-      var sample = new ru.SampleText(source);
+      var sample = ru.sampleText(source);
       var html = sample.toHtml();
-      for(var i=0; i<sample.count; i++){
+      for(var i=0; i<sample.getCount(); i++){
         sample.guessLetter(source[i]);
       }
 
@@ -59,18 +59,18 @@
     };
 
     it("says the letter out loud when guessed correctly", function() {
-      var sample = new ru.SampleText('abcdefghij0123456789');
+      var sample = ru.sampleText('abcdefghij0123456789');
       sample.toHtml();
-      var playSpy = spyOn(sample.audioPlayer, 'play');
+      var playSpy = spyOn(sample.getAudioPlayer(), 'play');
       sample.guessLetter('a');
       expect(playSpy.calls.length).toEqual(1);
       expect(playSpy).toHaveBeenCalledWith('a');
     });
 
     it("keeps quiet when a letter is guessed incorrectly", function() {
-      var sample = new ru.SampleText('abcdefghij0123456789');
+      var sample = ru.sampleText('abcdefghij0123456789');
       sample.toHtml();
-      var playSpy = spyOn(sample.audioPlayer, 'play');
+      var playSpy = spyOn(sample.getAudioPlayer(), 'play');
       sample.guessLetter('b');
       sample.guessLetter('9');
       expect(playSpy).not.toHaveBeenCalled();
@@ -78,12 +78,12 @@
 
     it("says the last word when the space key is pressed", function() {
       var source = 'this is a word in the middle';
-      var sample = new ru.SampleText(source);
+      var sample = ru.sampleText(source);
       sample.toHtml();
       for(var i=0; i<'this is a word'.length; i++) {
         sample.guessLetter(source[i]);
       }
-      var playSpy = spyOn(sample.audioPlayer, 'play');
+      var playSpy = spyOn(sample.getAudioPlayer(), 'play');
       sample.guessLetter(' ');
       expect(playSpy.calls.length).toEqual(1);
       expect(playSpy).toHaveBeenCalledWith('word');
@@ -91,12 +91,12 @@
 
     it("only says words longer than two characters", function() {
       var source = 'long long s long long';
-      var sample = new ru.SampleText(source);
+      var sample = ru.sampleText(source);
       sample.toHtml();
       for(var i=0; i<'long long s'.length; i++) {
         sample.guessLetter(source[i]);
       }
-      var playSpy = spyOn(sample.audioPlayer, 'play');
+      var playSpy = spyOn(sample.getAudioPlayer(), 'play');
       sample.guessLetter(' ');
       sample.guessLetter(' ');
       sample.guessLetter('s');

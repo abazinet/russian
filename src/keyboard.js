@@ -124,7 +124,7 @@ http://www.opensource.org/licenses/mit-license.php
         layout.toHtml().appendTo(this.html)[layout.isDefault() ? 'show' : 'hide']();
       }.bind(this));
 
-      var content = new ru.ContentUrlInput(this.onSourceContentChanged.bind(this));
+      var content = ru.contentSource(this.onSourceContentChanged.bind(this));
       this.html.append(content.toHtml());
     }
     return this.html;
@@ -145,7 +145,7 @@ http://www.opensource.org/licenses/mit-license.php
 
   ru.Keyboard.prototype.onSampleSourceChanged = function(text) {
     if(this.sampleText === undefined) {
-      this.sampleText = new ru.SampleText(text);
+      this.sampleText = ru.sampleText(text);
       this.toHtml().prepend(this.sampleText.toHtml());
     } else {
       this.sampleText.updateText(text);
@@ -153,10 +153,10 @@ http://www.opensource.org/licenses/mit-license.php
   };
 
   ru.Keyboard.prototype.onSourceContentChanged = function(url, divId) {
-    var text = new ru.ContentRetriever(this.onSampleSourceChanged.bind(this),
-                                       url,
-                                       divId,
-                                       this.isValidCharacter.bind(this));
+    var text = ru.contentRetriever(this.onSampleSourceChanged.bind(this),
+                                   url,
+                                   divId,
+                                   this.isValidCharacter.bind(this));
     text.download();
   };
 

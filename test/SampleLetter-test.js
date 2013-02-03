@@ -17,7 +17,7 @@
 
     it("can blink", function() {
       jasmine.Clock.useMock();
-      var letter = new ru.SampleLetter('a');
+      var letter = ru.sampleLetter('a');
 
       expect(letter._isBlinking()).toBeFalsy();
       letter.startBlinking();
@@ -27,7 +27,7 @@
     });
 
     var aLetterHtml = function(letter) {
-      return new ru.SampleLetter(letter).toHtml();
+      return ru.sampleLetter(letter).toHtml();
     }.bind(this);
   });
 })(window.ru = window.ru || {});

@@ -16,7 +16,7 @@
                          {'Content-Type': 'application/json'},
                          '{"data": {"translations": [{"translatedText": "hello world"}]}}']);
 
-      var translator = new ru.Translator();
+      var translator = ru.translator();
       var callbackSpy = jasmine.createSpy('callback');
       translator.translate(callbackSpy, '\u043F\u0440\u0438\u0432\u0435\u0442 \u043C\u0438\u0440', 'ru', 'en');
       server.respond();

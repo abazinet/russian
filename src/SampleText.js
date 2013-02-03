@@ -1,139 +1,153 @@
 (function(ru, $) {
   "use strict";
 
-  ru.SampleText = function(sampleText) {
-    this.rowsSize = 3;
-    this.columnsSize = 20;
-    this.count =  this.columnsSize * this.rowsSize;
-    this.position = 0;
-    this.letters = [];
-    this.lastWord = '';
-    this.replayLastWord = '';
-    this.replayLanguage = 'ru';
+  ru.sampleText = function(text) {
+    var rowsSize = 3;
+    var columnsSize = 20;
+    var count =  columnsSize * rowsSize;
+    var position = 0;
+    var letters = [];
+    var lastWord = '';
+    var replayLastWord = '';
+    var replayLanguage = 'ru';
+    var translatedHasChanged = true;
+    var translatedReplay = '';
+    var html;
 
-    this.sampleText = new ru.ChunkedTextReader(this.count, sampleText);
-    this.audioPlayer = new ru.AudioPlayer($.find('audio')[0]);
-    this._buildLetters();
-  };
+    var sampleText = ru.chunkedTextReader(count, text);
+    var audioPlayer = ru.audioPlayer($.find('audio')[0]);
 
-  ru.SampleText.prototype.updateText = function(newText) {
-    this.sampleText = new ru.ChunkedTextReader(this.count, newText);
-    this._clearPreviousHtml();
-    this._buildLetters();
-    this.toHtml();
-  };
-
-  ru.SampleText.prototype._buildLetters = function() {
-    var text = this.sampleText.nextChunk();
-    for(var i=0; i<this.count; i++) {
-      var pos = i + this.position;
-      var letter = (pos < text.length) ?
-                   text[pos] :
-                   ' ';
-      this.letters[i] = new ru.SampleLetter(letter);
-    }
-  };
-
-  ru.SampleText.prototype.sayTranslation = function() {
-    if(this.replayLastWord.length > 1) {
-      if(this.translatedHasChanged) {
-        var translator = new ru.Translator();
-        translator.translate(function(translatedText) {
-            this.translatedReplay = translatedText;
-            this.translatedHasChanged = false;
-            this.audioPlayer.play(this.translatedReplay, 'en');
-          }.bind(this),
-          this.replayLastWord,
-          this.replayLanguage,
-          'en'
-        );
-      } else {
-        this.audioPlayer.play(this.translatedReplay, 'en');
+    var buildLetters = function() {
+      var text = sampleText.nextChunk();
+      for(var i=0; i<count; i++) {
+        var pos = i + position;
+        var letter = (pos < text.length) ?
+            text[pos] :
+            ' ';
+        letters[i] = ru.sampleLetter(letter);
       }
-    }
-  };
+    };
 
-  ru.SampleText.prototype.guessLetter = function(character) {
-    var current = this._currentLetter();
-    var guessedRight = current.guessLetter(character);
-    if(guessedRight) {
-      current.stopBlinking();
-      if(this._isLastLetter()) {
-        this._nextPage();
-      } else {
-        this.position += 1;
-        this._currentLetter().startBlinking();
-      }
-    }
-    this._playAudio(character, guessedRight);
-  };
+    buildLetters();
 
-  ru.SampleText.prototype.toHtml = function() {
-    this._clearPreviousHtml();
+    return {
+      updateText: function(newText) {
+        sampleText = ru.chunkedTextReader(count, newText);
+        this._clearPreviousHtml();
+        buildLetters();
+        this.toHtml();
+      },
 
-    var div = $('<div></div>');
-    var row = div.clone();
-    this.letters.forEach(function(letter, position) {
-      row.append(letter.toHtml());
-
-      if(this._isEndOfLine(position)) {
-        this.position = 0;
-        this.html.append(row.addClass('ui-keyboard-sample-wrapper'));
-        row = div.clone();
-      }
-    }.bind(this));
-
-    this._currentLetter().startBlinking();
-    return this.html;
-  };
-
-  ru.SampleText.prototype.getLetters = function() {
-    return this.letters;
-  };
-
-  ru.SampleText.prototype._isEndOfLine = function(pos) {
-    return (pos % this.columnsSize) === (this.columnsSize - 1);
-  };
-
-  ru.SampleText.prototype._isLastLetter = function() {
-    return this.position === this.count - 1;
-  };
-
-  ru.SampleText.prototype._clearPreviousHtml = function() {
-    if(this.html === undefined) {
-      this.html = $('<div></div>')
-        .addClass('ui-keyboard-sample')
-        .css({'margin-bottom' : '1em'});
-    } else {
-      $('.ui-keyboard-sample-wrapper', this.html).remove();
-    }
-  };
-
-  ru.SampleText.prototype._currentLetter = function() {
-    return this.letters[this.position];
-  };
-
-  ru.SampleText.prototype._nextPage = function() {
-    this.position = 0;
-    this._buildLetters();
-    this.toHtml();
-  };
-
-  ru.SampleText.prototype._playAudio = function(character, guessedRight) {
-    if(guessedRight) {
-      if(character === ' ') {
-        if(this.lastWord.length > 1) {
-          this.audioPlayer.play(this.lastWord);
+      sayTranslation: function() {
+        if(replayLastWord.length > 1) {
+          if(translatedHasChanged) {
+            var translator = ru.translator();
+            translator.translate(function(translatedText) {
+              translatedReplay = translatedText;
+              translatedHasChanged = false;
+              audioPlayer.play(translatedReplay, 'en');
+            }.bind(this),
+                replayLastWord,
+                replayLanguage,
+                'en'
+            );
+          } else {
+            audioPlayer.play(translatedReplay, 'en');
+          }
         }
-        this.replayLastWord = this.lastWord;
-        this.translatedHasChanged = true;
-        this.lastWord = '';
-      } else {
-        this.lastWord += character;
-        this.audioPlayer.play(character);
+      },
+
+      guessLetter: function(character) {
+        var current = this._currentLetter();
+        var guessedRight = current.guessLetter(character);
+        if(guessedRight) {
+          current.stopBlinking();
+          if(this._isLastLetter()) {
+            this._nextPage();
+          } else {
+            position += 1;
+            this._currentLetter().startBlinking();
+          }
+        }
+        this._playAudio(character, guessedRight);
+      },
+
+      toHtml: function() {
+        this._clearPreviousHtml();
+
+        var div = $('<div></div>');
+        var row = div.clone();
+        letters.forEach(function(letter, position) {
+          row.append(letter.toHtml());
+
+          if(this._isEndOfLine(position)) {
+            position = 0;
+            html.append(row.addClass('ui-keyboard-sample-wrapper'));
+            row = div.clone();
+          }
+        }.bind(this));
+
+        this._currentLetter().startBlinking();
+        return html;
+      },
+
+      getLetters: function() {
+        return letters;
+      },
+
+      getCount: function() {
+        return count;
+      },
+
+      getAudioPlayer: function() {
+        return audioPlayer;
+      },
+
+      _isEndOfLine: function(pos) {
+        return (pos % columnsSize) === (columnsSize - 1);
+      },
+
+      _isLastLetter: function() {
+        return position === count - 1;
+      },
+
+      _clearPreviousHtml: function() {
+        if(html === undefined) {
+          html = $('<div></div>')
+            .addClass('ui-keyboard-sample')
+            .css({'margin-bottom' : '1em'});
+        } else {
+          $('.ui-keyboard-sample-wrapper', html).remove();
+        }
+      },
+
+      _currentLetter: function() {
+        return letters[position];
+      },
+
+      _nextPage: function() {
+        position = 0;
+        buildLetters();
+        this.toHtml();
+      },
+
+       _playAudio: function(character, guessedRight) {
+        if(guessedRight) {
+          if(character === ' ') {
+            if(lastWord.length > 1) {
+              audioPlayer.play(lastWord);
+            }
+            replayLastWord = lastWord;
+            translatedHasChanged = true;
+            lastWord = '';
+          } else {
+            lastWord += character;
+            audioPlayer.play(character);
+          }
+        } else if(character === ' ' && replayLastWord.length > 1) {
+          audioPlayer.play(replayLastWord, replayLanguage);
+        }
       }
-    } else if(character === ' ' && this.replayLastWord.length > 1) {
-      this.audioPlayer.play(this.replayLastWord, this.replayLanguage);
-    }
+    };
   };
 })(window.ru = window.ru || {}, jQuery);
