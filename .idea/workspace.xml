@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="8" />
+    <option name="CUSTOM_SCOPE_NAME" value="Selected files" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="89a942c4-4fa6-45be-9669-f800aabfddaf" name="Default" comment="">
+    <list default="true" id="89a942c4-4fa6-45be-9669-f800aabfddaf" name="Default" comment="refactor objects  to create true private variables">
+      <change type="MOVED" beforePath="C:\russian\src\AudioPlayer.js" afterPath="$PROJECT_DIR$/src/audioPlayer.js" />
+      <change type="MOVED" beforePath="C:\russian\src\ChunkedTextReader.js" afterPath="$PROJECT_DIR$/src/chunkedTextReader.js" />
+      <change type="MOVED" beforePath="C:\russian\src\ContentRetriever.js" afterPath="$PROJECT_DIR$/src/contentRetriever.js" />
+      <change type="MOVED" beforePath="C:\russian\src\ContentSource.js" afterPath="$PROJECT_DIR$/src/contentSource.js" />
+      <change type="MOVED" beforePath="C:\russian\src\Key.js" afterPath="$PROJECT_DIR$/src/key.js" />
+      <change type="MOVED" beforePath="C:\russian\src\Layout.js" afterPath="$PROJECT_DIR$/src/layout.js" />
+      <change type="MOVED" beforePath="C:\russian\src\SampleLetter.js" afterPath="$PROJECT_DIR$/src/sampleLetter.js" />
+      <change type="MOVED" beforePath="C:\russian\src\SampleText.js" afterPath="$PROJECT_DIR$/src/sampleText.js" />
+      <change type="MOVED" beforePath="C:\russian\src\Translator.js" afterPath="$PROJECT_DIR$/src/translator.js" />
+      <change type="MOVED" beforePath="C:\russian\test\AudioPlayer-test.js" afterPath="$PROJECT_DIR$/test/audioPlayer-test.js" />
+      <change type="MOVED" beforePath="C:\russian\test\ChunkedTextReader-test.js" afterPath="$PROJECT_DIR$/test/chunkedTextReader-test.js" />
+      <change type="MOVED" beforePath="C:\russian\test\ContentRetriever-test.js" afterPath="$PROJECT_DIR$/test/contentRetriever-test.js" />
+      <change type="MOVED" beforePath="C:\russian\test\Key-test.js" afterPath="$PROJECT_DIR$/test/key-test.js" />
+      <change type="MOVED" beforePath="C:\russian\test\SampleLetter-test.js" afterPath="$PROJECT_DIR$/test/sampleLetter-test.js" />
+      <change type="MOVED" beforePath="C:\russian\test\SampleText-test.js" afterPath="$PROJECT_DIR$/test/sampleText-test.js" />
+      <change type="MOVED" beforePath="C:\russian\test\Translator-test.js" afterPath="$PROJECT_DIR$/test/translator-test.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testrunner.html" afterPath="$PROJECT_DIR$/testrunner.html" />
     </list>
     <ignored path="russian.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,28 +42,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="keyboard-test.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/keyboard-test.js">
+      <file leaf-file-name="keyboard.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/keyboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="3" selection-start="119" selection-end="119" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ContentRetriever-test.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/ContentRetriever-test.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="21" selection-start="617" selection-end="617" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testrunner.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/testrunner.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="0" selection-start="1581" selection-end="1581" vertical-scroll-proportion="0.63786983">
+            <state line="162" column="64" selection-start="5131" selection-end="5131" vertical-scroll-proportion="0.21006945">
               <folding />
             </state>
           </provider>
@@ -63,8 +64,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/test/ContentRetriever-test.js" />
+        <option value="$PROJECT_DIR$/src/audioPlayer.js" />
+        <option value="$PROJECT_DIR$/test/audioPlayer-test.js" />
+        <option value="$PROJECT_DIR$/src/contentSource.js" />
+        <option value="$PROJECT_DIR$/src/Key.js" />
+        <option value="$PROJECT_DIR$/src/Translator.js" />
         <option value="$PROJECT_DIR$/testrunner.html" />
+        <option value="$PROJECT_DIR$/test/translator-test.js" />
+        <option value="$PROJECT_DIR$/src/SampleText.js" />
+        <option value="$PROJECT_DIR$/test/SampleText-test.js" />
+        <option value="$PROJECT_DIR$/src/keyboard.js" />
+        <option value="$PROJECT_DIR$/test/sampleText-test.js" />
+        <option value="$PROJECT_DIR$/src/SampleLetter.js" />
+        <option value="$PROJECT_DIR$/src/sampleText.js" />
+        <option value="$PROJECT_DIR$/test/sampleLetter-test.js" />
+        <option value="$PROJECT_DIR$/src/Layout.js" />
+        <option value="$PROJECT_DIR$/src/contentRetriever.js" />
       </list>
     </option>
   </component>
@@ -73,6 +88,76 @@
     <option name="y" value="-8" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>ActionScript specificJavaScript</id>
+          </State>
+          <State>
+            <id>Assignment issuesJavaScript</id>
+          </State>
+          <State>
+            <id>Bitwise operation issuesJavaScript</id>
+          </State>
+          <State>
+            <id>Code quality toolsJavaScript</id>
+          </State>
+          <State>
+            <id>Code style issuesJavaScript</id>
+          </State>
+          <State>
+            <id>Control flow issuesJavaScript</id>
+          </State>
+          <State>
+            <id>DOM issuesJavaScript</id>
+          </State>
+          <State>
+            <id>Data flow issuesJavaScript</id>
+          </State>
+          <State>
+            <id>Error handlingJavaScript</id>
+          </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript function metricsJavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript validity issuesJavaScript</id>
+          </State>
+          <State>
+            <id>JsTestDriverJavaScript</id>
+          </State>
+          <State>
+            <id>Naming conventionsJavaScript</id>
+          </State>
+          <State>
+            <id>Node.jsJavaScript</id>
+          </State>
+          <State>
+            <id>Potentially confusing code constructsJavaScript</id>
+          </State>
+          <State>
+            <id>Probable bugsJavaScript</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>JSValidateTypes</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -100,7 +185,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -133,18 +217,80 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="russian" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="russian" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="russian" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="russian" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="276" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="305" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="298" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Font" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="JavaScriptLanguageLevel" value="ES5" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="306" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="973" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="980" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="299" />
+    <property name="JavaScriptPreferStrict" value="true" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="297" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="preferences.editor" />
-    <property name="options.searchVisible" value="true" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
+      <setting name="configLocationType" value="CONFIG_FILE" />
+      <setting name="settingsFile" value="" />
+      <setting name="serverType" value="INTERNAL" />
+      <setting name="preferredDebugBrowser" value="CHROME" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
+      <method />
+    </configuration>
     <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -168,38 +314,185 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="89a942c4-4fa6-45be-9669-f800aabfddaf" name="Default" comment="fix broken link" />
       <created>1355609644509</created>
       <updated>1355609644509</updated>
     </task>
+    <task id="LOCAL-00001" summary="fix broken link">
+      <created>1355610379255</created>
+      <updated>1355610379255</updated>
+    </task>
+    <task id="LOCAL-00002" summary="minor ui changes">
+      <created>1355632815203</created>
+      <updated>1355632815203</updated>
+    </task>
+    <task id="LOCAL-00003" summary="another diet for original keyboard">
+      <created>1355699993099</created>
+      <updated>1355699993099</updated>
+    </task>
+    <task id="LOCAL-00004" summary="refactor sample text into separate objects">
+      <created>1355715673802</created>
+      <updated>1355715673802</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added blinking support">
+      <created>1356291926678</created>
+      <updated>1356291926678</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added letter test coverage">
+      <created>1356302247831</created>
+      <updated>1356302247831</updated>
+    </task>
+    <task id="LOCAL-00007" summary="implemented letter guess logic">
+      <created>1356328821636</created>
+      <updated>1356328821636</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fixed missing last letter">
+      <created>1356397335453</created>
+      <updated>1356397335453</updated>
+    </task>
+    <task id="LOCAL-00009" summary="use revealing module pattern + enabled jshint">
+      <created>1356403302669</created>
+      <updated>1356403302669</updated>
+    </task>
+    <task id="LOCAL-00010" summary="add failing test for sample text wrap around">
+      <created>1356406662550</created>
+      <updated>1356406662550</updated>
+    </task>
+    <task id="LOCAL-00011" summary="support sample text wrap around">
+      <created>1356536572556</created>
+      <updated>1356536572556</updated>
+    </task>
+    <task id="LOCAL-00012" summary="introduce a key object">
+      <created>1356547346787</created>
+      <updated>1356547346787</updated>
+    </task>
+    <task id="LOCAL-00013" summary="defaults text to komersant + audio beta">
+      <created>1356575185975</created>
+      <updated>1356575185975</updated>
+    </task>
+    <task id="LOCAL-00014" summary="load text from any url working beta">
+      <created>1356580254718</created>
+      <updated>1356580254718</updated>
+    </task>
+    <task id="LOCAL-00015" summary="replay same word on second space">
+      <created>1356581274742</created>
+      <updated>1356581274742</updated>
+    </task>
+    <task id="LOCAL-00016" summary="style update, still in progress">
+      <created>1356587874161</created>
+      <updated>1356587874161</updated>
+    </task>
+    <task id="LOCAL-00017" summary="shorter namespace, add sample text test coverage">
+      <created>1356808374589</created>
+      <updated>1356808374589</updated>
+    </task>
+    <task id="LOCAL-00018" summary="added sample text test coverage">
+      <created>1356810350384</created>
+      <updated>1356810350384</updated>
+    </task>
+    <task id="LOCAL-00019" summary="refactor key">
+      <created>1356891434245</created>
+      <updated>1356891434245</updated>
+    </task>
+    <task id="LOCAL-00020" summary="introduce a layout object">
+      <created>1356896919321</created>
+      <updated>1356896919321</updated>
+    </task>
+    <task id="LOCAL-00021" summary="minor refactoring">
+      <created>1356897971062</created>
+      <updated>1356897971062</updated>
+    </task>
+    <task id="LOCAL-00022" summary="take more ownership of the original code">
+      <created>1356930062142</created>
+      <updated>1356930062142</updated>
+    </task>
+    <task id="LOCAL-00023" summary="introduce a simple key test">
+      <created>1356988974207</created>
+      <updated>1356988974207</updated>
+    </task>
+    <task id="LOCAL-00024" summary="remove audio for single letter words">
+      <created>1356990048711</created>
+      <updated>1356990048711</updated>
+    </task>
+    <task id="LOCAL-00025" summary="style update, white sample background">
+      <created>1356993717349</created>
+      <updated>1356993717349</updated>
+    </task>
+    <task id="LOCAL-00026" summary="added sample text specs to be implemented">
+      <created>1356994448294</created>
+      <updated>1356994448294</updated>
+    </task>
+    <task id="LOCAL-00027" summary="added support for english audio">
+      <created>1357103689279</created>
+      <updated>1357103689279</updated>
+    </task>
+    <task id="LOCAL-00028" summary="fix for this scope">
+      <created>1357104303780</created>
+      <updated>1357104303780</updated>
+    </task>
+    <task id="LOCAL-00029" summary="begin cleaning up mouse event code">
+      <created>1357176015330</created>
+      <updated>1357176015330</updated>
+    </task>
+    <task id="LOCAL-00030" summary="remove non breaking spaces from articles">
+      <created>1357177784275</created>
+      <updated>1357177784275</updated>
+    </task>
+    <task id="LOCAL-00031" summary="added test coverage for shift key">
+      <created>1357516734189</created>
+      <updated>1357516734189</updated>
+    </task>
+    <task id="LOCAL-00032" summary="refactor keyboard test and remove unused options">
+      <created>1357517523195</created>
+      <updated>1357517523195</updated>
+    </task>
+    <task id="LOCAL-00033" summary="filter out invalid characters on content download">
+      <created>1357881632697</created>
+      <updated>1357881632697</updated>
+    </task>
+    <task id="LOCAL-00034" summary="remove invalid letters from sample text">
+      <created>1358707295390</created>
+      <updated>1358707295390</updated>
+    </task>
+    <task id="LOCAL-00035" summary="refactoring guess letter, use space for invalid char">
+      <created>1358734722760</created>
+      <updated>1358734722760</updated>
+    </task>
+    <task id="LOCAL-00036" summary="refactor objects  to create true private variables">
+      <created>1359925909155</created>
+      <updated>1359925909155</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32924107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24986821" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16183448" sideWeight="0.6707589" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22991072" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39955357" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="true" />
     <option name="myTodoPanelSettings">
@@ -230,7 +523,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" />
+    <option name="LAST_COMMIT_MESSAGE" value="rename files" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -243,28 +536,55 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <MESSAGE value="load text from any url working beta" />
+    <MESSAGE value="replay same word on second space" />
+    <MESSAGE value="style update, still in progress" />
+    <MESSAGE value="shorter namespace, add sample text test coverage" />
+    <MESSAGE value="added sample text test coverage" />
+    <MESSAGE value="refactor key" />
+    <MESSAGE value="introduce a layout object" />
+    <MESSAGE value="minor refactoring" />
+    <MESSAGE value="take more ownership of the original code" />
+    <MESSAGE value="introduce a simple key test" />
+    <MESSAGE value="remove audio for single letter words" />
+    <MESSAGE value="style update, white sample background" />
+    <MESSAGE value="added sample text specs to be implemented" />
+    <MESSAGE value="use revealing module pattern + enabled jshint" />
+    <MESSAGE value="added support for english audio" />
+    <MESSAGE value="fix for this scope" />
+    <MESSAGE value="begin cleaning up mouse event code" />
+    <MESSAGE value="remove non breaking spaces from articles" />
+    <MESSAGE value="added test coverage for shift key" />
+    <MESSAGE value="refactor keyboard test and remove unused options" />
+    <MESSAGE value="filter out invalid characters on content download" />
+    <MESSAGE value="remove invalid letters from sample text" />
+    <MESSAGE value="refactoring guess letter, use space for invalid char" />
+    <MESSAGE value="refactor objects  to create true private variables" />
+    <MESSAGE value="rename files" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/keyboard-test.js">
+    <entry file="file://$PROJECT_DIR$/src/keyboard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="3" selection-start="119" selection-end="119" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/ContentRetriever-test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="21" selection-start="617" selection-end="617" vertical-scroll-proportion="0.0">
+        <state line="162" column="64" selection-start="5131" selection-end="5131" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testrunner.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="1581" selection-end="1581" vertical-scroll-proportion="0.63786983">
+        <state line="39" column="43" selection-start="2050" selection-end="2050" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/keyboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="162" column="64" selection-start="5131" selection-end="5131" vertical-scroll-proportion="0.21006945">
           <folding />
         </state>
       </provider>
