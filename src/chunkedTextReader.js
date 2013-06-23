@@ -11,6 +11,12 @@
           chunk += text.charAt(position);
           position = (++position) % text.length;
         }
+
+        while(chunk.indexOf(' ') !== -1 &&
+              chunk.slice(-1) !== ' ') {
+          position--;
+          chunk = chunk.slice(0, -1);
+        }
         return chunk;
       },
 

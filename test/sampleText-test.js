@@ -42,9 +42,7 @@
       }
 
       var firstLetter = $('#ui-keyboard-sample-wrapper,span:first', html);
-      var lastLetter = $('#ui-keyboard-sample-wrapper,span:last', html);
       expect(firstLetter).toHaveText('a');
-      expect(lastLetter).toHaveClass('ui-keyboard-spacer');
       expectBlinkingPosition(sample.getLetters(), 0);
     });
 
@@ -89,7 +87,7 @@
       expect(playSpy).toHaveBeenCalledWith('word');
     });
 
-    it("only says words longer than two characters", function() {
+    it("only says words longer than one character", function() {
       var source = 'long long s long long';
       var sample = ru.sampleText(source);
       sample.toHtml();
@@ -103,16 +101,21 @@
       expect(playSpy).not.toHaveBeenCalled();
     });
 
-    xit("keeps track of most often english translated words and displays them as a learning exercise", function() {
-    });
+    it("can scroll to the right", function() {
+      var source = '123456789 123456789 123456789 123456789 123456789 123456789 abcdefghi abcdefghi ';
+      var sample = ru.sampleText(source);
+      var html = sample.toHtml();
+      sample.scrollRight();
 
-    xit("does not truncate the last word", function() {
-    });
-
-    xit("scrolls to the right when the right arrow is pressed", function() {
+      var firstLetter = $('#ui-keyboard-sample-wrapper,span:first', html);
+      expect(firstLetter).toHaveText('a');
+      expectBlinkingPosition(sample.getLetters(), 0);
     });
 
     xit("scrolls to the left when the left arrow is pressed", function() {
+    });
+
+    xit("keeps track of most often english translated words and displays them as a learning exercise", function() {
     });
 
     xit("disables a letter once it has been guessed successfully", function() {

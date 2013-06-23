@@ -103,6 +103,10 @@
         return audioPlayer;
       },
 
+      scrollRight: function () {
+        this._nextPage();
+      },
+
       _isEndOfLine: function(pos) {
         return (pos % columnsSize) === (columnsSize - 1);
       },

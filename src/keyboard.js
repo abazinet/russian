@@ -85,6 +85,8 @@ http://www.opensource.org/licenses/mit-license.php
         } else if(e.which === 18) {
           this.altActive = true;
           this.refreshKeyset();
+        } else if(e.which === 39) {
+          this.nextSampleText();
         }
       }.bind(this));
 
@@ -182,6 +184,12 @@ http://www.opensource.org/licenses/mit-license.php
         .find('.ui-keyboard-keyset').hide().end()
         .find('.ui-keyboard-keyset' + key + this.rows[toShow]).show().end()
         .find('.ui-keyboard-actionkey.ui-keyboard' + key).addClass('ui-state-active');
+  };
+
+  ru.Keyboard.prototype.nextSampleText = function() {
+    if(this.sampleText !== undefined) { // TODO: ALEX: spyOn fails to intercept the call thus the if, remove
+      this.sampleText.scrollRight();
+    }
   };
 
 })(window.ru = window.ru || {}, jQuery);

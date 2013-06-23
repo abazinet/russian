@@ -28,5 +28,11 @@
       expect(reader.previousChunk()).toBe('0123456789');
       expect(reader.previousChunk()).toBe('0123456789');
     });
+
+    it("does not truncate words", function() {
+      var reader = ru.chunkedTextReader(3, 'a bc');
+      expect(reader.nextChunk()).toBe('a ');
+    });
+
   });
 })(window.ru = window.ru || {});
