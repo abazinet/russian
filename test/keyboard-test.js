@@ -26,13 +26,38 @@
       expect(saySpy).toHaveBeenCalled();
     });
 
-    it("goes to the next page of sample text when the right arrow is pressed", function() {
+    it("goes to the next page of sample text when the down arrow is pressed", function() {
       var keyboard = new ru.Keyboard(ru.RussianLayout);
       keyboard.toHtml();
       var scrollSpy = spyOn(keyboard, 'nextSampleText');
-      rightArrowPressed();
+      downArrowPressed();
       expect(scrollSpy).toHaveBeenCalled();
     });
+
+    it("goes to the previous page of sample text when the up arrow is pressed", function() {
+      var keyboard = new ru.Keyboard(ru.RussianLayout);
+      keyboard.toHtml();
+      var scrollSpy = spyOn(keyboard, 'previousSampleText');
+      upArrowPressed();
+      expect(scrollSpy).toHaveBeenCalled();
+    });
+
+    it("moves cursor to the right when the right arrow is pressed", function() {
+      var keyboard = new ru.Keyboard(ru.RussianLayout);
+      keyboard.toHtml();
+      var cursorSpy = spyOn(keyboard, 'cursorRight');
+      rightArrowPressed();
+      expect(cursorSpy).toHaveBeenCalled();
+    });
+
+    it("moves cursor to the left when the left arrow is pressed", function() {
+      var keyboard = new ru.Keyboard(ru.RussianLayout);
+      keyboard.toHtml();
+      var cursorSpy = spyOn(keyboard, 'cursorLeft');
+      leftArrowPressed();
+      expect(cursorSpy).toHaveBeenCalled();
+    });
+
 
     var firstVisibleKey = function(html) {
       return $('.ui-keyboard-keyset', html).filter(function() {
@@ -43,6 +68,24 @@
     var rightArrowPressed = function() {
       keyEvent('keydown', {
         which : 39
+      });
+    };
+
+    var leftArrowPressed = function() {
+      keyEvent('keydown', {
+        which : 37
+      });
+    };
+
+    var upArrowPressed = function() {
+      keyEvent('keydown', {
+        which : 38
+      });
+    };
+
+    var downArrowPressed = function() {
+      keyEvent('keydown', {
+        which : 40
       });
     };
 

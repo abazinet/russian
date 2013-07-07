@@ -56,8 +56,10 @@ http://www.opensource.org/licenses/mit-license.php
   ru.Keyboard = function(multiLayout) {
     this.layouts = [];
     this._buildKeys(multiLayout);
+    this.onSampleSourceChanged('Loading...                                              ');
     this.shiftActive = this.altActive = false;
     this.rows = [ '', '-shift', '-alt', '-alt-shift' ];
+
 
     $('body')
       .bind('keypress', function(e) {
@@ -85,8 +87,14 @@ http://www.opensource.org/licenses/mit-license.php
         } else if(e.which === 18) {
           this.altActive = true;
           this.refreshKeyset();
-        } else if(e.which === 39) {
+        } else if(e.which === 40) {
           this.nextSampleText();
+        } else if(e.which === 38) {
+          this.previousSampleText();
+        } else if(e.which === 39) {
+          this.cursorRight();
+        } else if(e.which === 37) {
+          this.cursorLeft();
         }
       }.bind(this));
 
@@ -133,9 +141,7 @@ http://www.opensource.org/licenses/mit-license.php
   };
 
   ru.Keyboard.prototype.sayTranslation = function() {
-    if(this.sampleText !== undefined) {
-      this.sampleText.sayTranslation();
-    }
+    this.sampleText.sayTranslation();
   };
 
   ru.Keyboard.prototype.keyPressed = function(layoutPos, key) {
@@ -187,9 +193,19 @@ http://www.opensource.org/licenses/mit-license.php
   };
 
   ru.Keyboard.prototype.nextSampleText = function() {
-    if(this.sampleText !== undefined) { // TODO: ALEX: spyOn fails to intercept the call thus the if, remove
-      this.sampleText.scrollRight();
-    }
+    this.sampleText.scrollDown();
+  };
+
+  ru.Keyboard.prototype.previousSampleText = function() {
+    this.sampleText.scrollUp();
+  };
+
+  ru.Keyboard.prototype.cursorRight = function() {
+    this.sampleText.cursorRight();
+  };
+
+  ru.Keyboard.prototype.cursorLeft = function() {
+    this.sampleText.cursorLeft();
   };
 
 })(window.ru = window.ru || {}, jQuery);

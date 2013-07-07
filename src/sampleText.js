@@ -17,12 +17,14 @@
     var sampleText = ru.chunkedTextReader(count, text);
     var audioPlayer = ru.audioPlayer($.find('audio')[0]);
 
-    var buildLetters = function() {
-      var text = sampleText.nextChunk();
+    var buildLetters = function(chunk) {
+      if(chunk === undefined) {
+        chunk = sampleText.nextChunk();
+      }
       for(var i=0; i<count; i++) {
         var pos = i + position;
-        var letter = (pos < text.length) ?
-            text[pos] :
+        var letter = (pos < chunk.length) ?
+            chunk[pos] :
             ' ';
         letters[i] = ru.sampleLetter(letter);
       }
@@ -61,15 +63,14 @@
         var current = this._currentLetter();
         var guessedRight = current.guessLetter(character);
         if(guessedRight) {
-          current.stopBlinking();
-          if(this._isLastLetter()) {
-            this._nextPage();
-          } else {
-            position += 1;
-            this._currentLetter().startBlinking();
-          }
+          this.cursorRight();
         }
-        this._playAudio(character, guessedRight);
+
+        if(character === ' ' && this._currentLetter().isSpace()) {
+          this.guessLetter(' ');
+        } else {
+          this._playAudio(character, guessedRight);
+        }
       },
 
       toHtml: function() {
@@ -103,8 +104,34 @@
         return audioPlayer;
       },
 
-      scrollRight: function () {
+      scrollDown: function() {
         this._nextPage();
+      },
+
+      scrollUp: function() {
+        this._previousPage();
+      },
+      
+      cursorRight: function() {
+        var current = this._currentLetter();
+        current.stopBlinking();
+        if(this._isLastLetter()) {
+          this._nextPage();
+        } else {
+          position += 1;
+          this._currentLetter().startBlinking();
+        }
+      },
+
+      cursorLeft: function() {
+        var current = this._currentLetter();
+        current.stopBlinking();
+        if(this._isFirstLetter()) {
+          this._previousPage();
+        } else {
+          position -= 1;
+          this._currentLetter().startBlinking();
+        }
       },
 
       _isEndOfLine: function(pos) {
@@ -113,6 +140,10 @@
 
       _isLastLetter: function() {
         return position === count - 1;
+      },
+
+      _isFirstLetter: function() {
+        return position === 0;
       },
 
       _clearPreviousHtml: function() {
@@ -132,6 +163,12 @@
       _nextPage: function() {
         position = 0;
         buildLetters();
+        this.toHtml();
+      },
+
+      _previousPage: function() {
+        position = 0;
+        buildLetters(sampleText.previousChunk());
         this.toHtml();
       },
 

@@ -101,19 +101,57 @@
       expect(playSpy).not.toHaveBeenCalled();
     });
 
-    it("can scroll to the right", function() {
+    it("scrolls text down", function() {
       var source = '123456789 123456789 123456789 123456789 123456789 123456789 abcdefghi abcdefghi ';
       var sample = ru.sampleText(source);
       var html = sample.toHtml();
-      sample.scrollRight();
+      sample.scrollDown();
 
       var firstLetter = $('#ui-keyboard-sample-wrapper,span:first', html);
       expect(firstLetter).toHaveText('a');
       expectBlinkingPosition(sample.getLetters(), 0);
     });
 
-    xit("scrolls to the left when the left arrow is pressed", function() {
+    it("scrolls text up", function() {
+      var source = '123456789 123456789 123456789 123456789 123456789 123456789 abcdefghi abcdefghi ';
+      var sample = ru.sampleText(source);
+      var html = sample.toHtml();
+      for(var i=0; i<60; i++) {
+        sample.guessLetter(source[i]);
+      }
+      sample.scrollUp();
+
+      var firstLetter = $('#ui-keyboard-sample-wrapper,span:first', html);
+      expect(firstLetter).toHaveText('1');
+      expectBlinkingPosition(sample.getLetters(), 0);
     });
+
+    it("scrolls cursor right", function() {
+      var source = 'abdc';
+      var sample = ru.sampleText(source);
+      sample.toHtml();
+      sample.cursorRight();
+      expectBlinkingPosition(sample.getLetters(), 1);
+    });
+
+    it("scrolls cursor left", function() {
+      var source = 'abdc';
+      var sample = ru.sampleText(source);
+      sample.toHtml();
+      sample.guessLetter('a');
+      sample.cursorLeft();
+      expectBlinkingPosition(sample.getLetters(), 0);
+    });
+
+    it("one space eats x number of consecutive spaces", function() {
+      var source = 'a         b';
+      var sample = ru.sampleText(source);
+      sample.toHtml();
+      sample.guessLetter('a');
+      sample.guessLetter(' ');
+      expectBlinkingPosition(sample.getLetters(), 10);
+    });
+
 
     xit("keeps track of most often english translated words and displays them as a learning exercise", function() {
     });

@@ -1,7 +1,7 @@
 (function(ru, $) {
   "use strict";
 
-  ru.audioPlayer = function(audioElement) {
+  ru.audioPlayer = function(audioE) {
     return {
       play: function(word, lang) {
         if(word.length > 1) {
@@ -12,9 +12,9 @@
         }
         word = $.trim(word);
         if(word.length > 0) {
-          audioElement.src = 'http://translate.google.com/translate_tts?tl=' + lang + '&q=' + word;
-          audioElement.load();
-          audioElement.play();
+          audioE.src = 'http://translate.google.com/translate_tts?tl=' + lang + '&q=' + word;
+          audioE.load();
+          audioE.play();
         }
       }
     };
