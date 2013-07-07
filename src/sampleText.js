@@ -14,12 +14,12 @@
     var translatedReplay = '';
     var html;
 
-    var sampleText = ru.chunkedTextReader(count, text);
+    var sampleText = ru.textReader(count, text);
     var audioPlayer = ru.audioPlayer($.find('audio')[0]);
 
     var buildLetters = function(chunk) {
       if(chunk === undefined) {
-        chunk = sampleText.nextChunk();
+        chunk = sampleText.next();
       }
       for(var i=0; i<count; i++) {
         var pos = i + position;
@@ -34,7 +34,7 @@
 
     return {
       updateText: function(newText) {
-        sampleText = ru.chunkedTextReader(count, newText);
+        sampleText = ru.textReader(count, newText);
         this._clearPreviousHtml();
         buildLetters();
         this.toHtml();
@@ -168,7 +168,7 @@
 
       _previousPage: function() {
         position = 0;
-        buildLetters(sampleText.previousChunk());
+        buildLetters(sampleText.previous());
         this.toHtml();
       },
 

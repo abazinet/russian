@@ -1,11 +1,11 @@
 (function(ru) {
   "use strict";
 
-  ru.chunkedTextReader = function(chunkSize, text) {
+  ru.textReader = function(chunkSize, text) {
     var position = 0;
 
     return {
-      nextChunk: function() {
+      next: function() {
         var chunk = '';
         for (var i=0; i<chunkSize; i++) {
           chunk += text.charAt(position);
@@ -20,12 +20,12 @@
         return chunk;
       },
 
-      previousChunk: function() {
+      previous: function() {
         position -= chunkSize * 2;
         if(position < 0) {
           position = 0;
         }
-        return this.nextChunk();
+        return this.next();
       }
     };
   };
