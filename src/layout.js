@@ -9,20 +9,20 @@
     return {
       keyPressed: function(keyPressed) {
         var key = keyHash[keyPressed];
-        if(typeof key !== 'undefined') {
+        if(ru.isUndefined(key)) {
           key.keyPressed(keyPressed);
         }
         return key;
       },
 
       isValidCharacter: function(character) {
-        return keyHash[character] !== undefined ||
-               mappedKeyHash[character] !== undefined;
+        return ru.isUndefined(keyHash[character]) ||
+               ru.isUndefined(mappedKeyHash[character]);
       },
 
       addKey: function(row, key) {
-        if(rows[row] === undefined) {
-           rows[row] = [];
+        if(ru.isUndefined(rows[row])) {
+          rows[row] = [];
         }
         rows[row].push(key);
         keyHash[key.charKey] = key;

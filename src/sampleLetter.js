@@ -19,7 +19,7 @@
       },
 
       toHtml: function() {
-        if(html === undefined) {
+        if(ru.isUndefined(html)) {
           html = this.isSpace() ?
                  this._toSpaceHtml() :
                  this._toLetterHtml();
@@ -58,7 +58,7 @@
 
       _blink: function(enabled) {
         this.toHtml();
-        blinking = (enabled === undefined ? true : enabled);
+        blinking = ru.isUndefined(enabled) || enabled;
 
         var blinker = function() {
           this._toggleBlinking();

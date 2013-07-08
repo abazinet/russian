@@ -1,7 +1,7 @@
 (function(ru, $) {
   "use strict";
 
-  ru.sampleText = function(text) {
+  ru.sampleText = function(source) {
     var rowsSize = 3;
     var columnsSize = 20;
     var count =  columnsSize * rowsSize;
@@ -14,12 +14,12 @@
     var translatedReplay = '';
     var html;
 
-    var sampleText = ru.textReader(count, text);
-    var audioPlayer = ru.audioPlayer($.find('audio')[0]);
+    var text = ru.textReader(count, source);
+    var audio = ru.audioPlayer($.find('audio')[0]);
 
     var buildLetters = function(chunk) {
-      if(chunk === undefined) {
-        chunk = sampleText.next();
+      if(ru.isUndefined(chunk)) {
+        chunk = text.next();
       }
       for(var i=0; i<count; i++) {
         var pos = i + position;
@@ -34,7 +34,7 @@
 
     return {
       updateText: function(newText) {
-        sampleText = ru.textReader(count, newText);
+        text = ru.textReader(count, newText);
         this._clearPreviousHtml();
         buildLetters();
         this.toHtml();
@@ -47,14 +47,14 @@
             translator.translate(function(translatedText) {
               translatedReplay = translatedText;
               translatedHasChanged = false;
-              audioPlayer.play(translatedReplay, 'en');
+              audio.play(translatedReplay, 'en');
             }.bind(this),
                 replayLastWord,
                 replayLanguage,
                 'en'
             );
           } else {
-            audioPlayer.play(translatedReplay, 'en');
+            audio.play(translatedReplay, 'en');
           }
         }
       },
@@ -101,7 +101,7 @@
       },
 
       getAudioPlayer: function() {
-        return audioPlayer;
+        return audio;
       },
 
       scrollDown: function() {
@@ -111,7 +111,7 @@
       scrollUp: function() {
         this._previousPage();
       },
-      
+
       cursorRight: function() {
         var current = this._currentLetter();
         current.stopBlinking();
@@ -147,7 +147,7 @@
       },
 
       _clearPreviousHtml: function() {
-        if(html === undefined) {
+        if(ru.isUndefined(html)) {
           html = $('<div></div>')
             .addClass('ui-keyboard-sample')
             .css({'margin-bottom' : '1em'});
@@ -168,7 +168,7 @@
 
       _previousPage: function() {
         position = 0;
-        buildLetters(sampleText.previous());
+        buildLetters(text.previous());
         this.toHtml();
       },
 
@@ -176,17 +176,17 @@
         if(guessedRight) {
           if(character === ' ') {
             if(lastWord.length > 1) {
-              audioPlayer.play(lastWord);
+              audio.play(lastWord);
             }
             replayLastWord = lastWord;
             translatedHasChanged = true;
             lastWord = '';
           } else {
             lastWord += character;
-            audioPlayer.play(character);
+            audio.play(character);
           }
         } else if(character === ' ' && replayLastWord.length > 1) {
-          audioPlayer.play(replayLastWord, replayLanguage);
+          audio.play(replayLastWord, replayLanguage);
         }
       }
     };

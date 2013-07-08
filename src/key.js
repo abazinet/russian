@@ -38,7 +38,7 @@
   };
 
   ru.Key.prototype.toHtml = function() {
-    if(this.html === undefined) {
+    if(ru.isUndefined(this.html)) {
       this.html = $('<div></div>');
       if (this.key.length !== 0) {
         this.html = this._htmlKey();

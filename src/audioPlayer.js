@@ -4,7 +4,7 @@
   ru.audioPlayer = function(audioE) {
     return {
       play: function(word, lang) {
-        lang = (lang === undefined) ? 'ru' : lang;
+        lang = ru.isUndefined(lang) ? 'ru' : lang;
         word = $.trim(word);
 
         if(word.length > 0) {

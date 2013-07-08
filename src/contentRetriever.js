@@ -24,11 +24,11 @@
       },
 
       _extractText: function(html) {
-        if(typeof divId !== 'undefined') {
+        if(ru.isDefined(divId)) {
           html = $(html).find('#' + divId + ',.' + divId);
         }
 
-        var text = $.trim(jQuery(html).text());
+        var text = $.trim($(html).text());
 
         text = this._changeNonBreakingSpace(text);
         text = this._changeInvalidQuotes(text);
@@ -46,7 +46,7 @@
       },
 
       _removeInvalidCharacters: function(text) {
-        if(isValidCharacter !== undefined) {
+        if(ru.isDefined(isValidCharacter)) {
           for(var i=0; i<text.length; i++) {
             if(!isValidCharacter(text[i])) {
               text = text.substr(0, i) + ' ' + text.substr(i + 2);
