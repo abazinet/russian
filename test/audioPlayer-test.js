@@ -2,16 +2,8 @@
   "use strict";
 
   describe("an audio player", function() {
-    var server;
-    beforeEach(function() {
-      server = sinon.fakeServer.create();
-    });
-
-    afterEach(function () {
-      server.restore();
-    });
-
     it("plays a word", function() {
+      var server = sinon.fakeServer.create();
       server.respondWith([200, {}, '']);
 
       var audioElement = $.find('audio')[0];

@@ -9,15 +9,15 @@
     return {
       keyPressed: function(keyPressed) {
         var key = keyHash[keyPressed];
-        if(ru.isUndefined(key)) {
+        if(ru.isDefined(key)) {
           key.keyPressed(keyPressed);
         }
         return key;
       },
 
       isValidCharacter: function(character) {
-        return ru.isUndefined(keyHash[character]) ||
-               ru.isUndefined(mappedKeyHash[character]);
+        return ru.isDefined(keyHash[character]) ||
+               ru.isDefined(mappedKeyHash[character]);
       },
 
       addKey: function(row, key) {
@@ -25,8 +25,9 @@
           rows[row] = [];
         }
         rows[row].push(key);
-        keyHash[key.charKey] = key;
-        mappedKeyHash[key.mappedKey] = key;
+        key.toHtml();
+        keyHash[key.getCharKey()] = key;
+        mappedKeyHash[key.getMappedKey()] = key;
       },
 
       toHtml: function() {

@@ -32,7 +32,7 @@ http://www.opensource.org/licenses/mit-license.php
         if (key.keyaction.hasOwnProperty(key.keyName) &&
             $(this).hasClass('ui-keyboard-actionkey')) {
           key.keyaction[key.keyName](base, this, e);
-        } else if (ru.isUndefined(key.key)) {
+        } else if (ru.isDefined(key.key)) {
           txt = key.getDisplay();
           base.ooKeyboard.insertText(txt);
         }
@@ -116,7 +116,7 @@ http://www.opensource.org/licenses/mit-license.php
         var keys = currentSet.split(/\s+/);
 
         keys.forEach(function(key, keyId) {
-          layout.addKey(rowId, new ru.Key(key, rowId, keyId));
+          layout.addKey(rowId, ru.Key(key, rowId, keyId));
         });
       });
       this.layouts.push(layout);
@@ -146,7 +146,7 @@ http://www.opensource.org/licenses/mit-license.php
 
   ru.Keyboard.prototype.keyPressed = function(layoutPos, key) {
     var k = this.layouts[layoutPos].keyPressed(key);
-    if(ru.isUndefined(k)) {
+    if(ru.isDefined(k)) {
       this.sampleText.guessLetter(k.getDisplay());
     }
   };
