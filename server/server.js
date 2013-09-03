@@ -3,4 +3,4 @@ var connect = require('connect'),
 
 connect()
     .use(connect.static('../'))
-    .listen(3000);
+    .listen(80);
