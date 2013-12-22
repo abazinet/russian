@@ -65,7 +65,6 @@
         if(guessedRight) {
           this.cursorRight();
         }
-
         if(character === ' ' && this._currentLetter().isSpace()) {
           this.guessLetter(' ');
         } else {

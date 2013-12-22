@@ -61,7 +61,7 @@
         return keyDescription;
       },
 
-      _actionKey: function(keyDescription) {
+      _actionKey: function() {
         return (/^\{\S+\}$/.test(keyDescription));
       },
 
@@ -82,7 +82,8 @@
         if (keyDescription.length !== 0) {
           var map, nm, m;
           var a = this._keyDisplay();
-          var n = !this._actionKey() ? a : display[a] || a;
+          var n = this._actionKey() ? (display[a] || a) : a;
+
           // map defined keys - format "key(A):Label_for_key"
           // "key" = key that is seen (can any character; but it might need to be escaped using "\" or entered as unicode "\u####"
           // "(A)" = the actual key on the real keyboard to remap, ":Label_for_key" ends up in the title/tooltip
@@ -93,7 +94,6 @@
             nm = map.split(':');
             map = (nm[0] !== '' && nm.length > 1) ? nm[0] : map; // get "\u0391" from "\u0391:alpha"
             mappedKey = map;
-            charKey = m;
           }
 
           // find key label
@@ -106,7 +106,8 @@
           // '\u2190'.length = 1 because the unicode is converted, so if more than one character, add the wide class
           keyType = (n.length > 1) ? ' ui-keyboard-widekey' : '';
           keyType += (!this._actionKey()) ? '' : ' ui-keyboard-actionkey';
-          charKey = charKey || n;
+
+          charKey = m || n;
 
           if(charKey === '&nbsp;') {
             charKey = ' ';

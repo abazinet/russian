@@ -16,11 +16,16 @@
           success: function(html) {
             this._fireOnNewContent(html);
           },
-          error: function(xhr, textStatus, errorThrown) {
-            console.log('contentRetriever:download failed with ' + textStatus + ' ' + errorThrown);
-            throw errorThrown;
+          error: function(xhr) {
+            console.log(xhr);
+            console.log('Content retrieval failed: ' + this._htmlToText(xhr.responseText));
+            onNewContent('Content retrieval failed.');
           }
         });
+      },
+
+      _htmlToText: function(html) {
+        return $.trim($(html).text());
       },
 
       _extractText: function(html) {
@@ -28,8 +33,7 @@
           html = $(html).find('#' + divId + ',.' + divId);
         }
 
-        var text = $.trim($(html).text());
-
+        var text = this._htmlToText(html);
         text = this._changeNonBreakingSpace(text);
         text = this._changeInvalidQuotes(text);
         text = this._removeInvalidCharacters(text);

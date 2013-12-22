@@ -18,9 +18,10 @@
             var translation = answer.data.translations[0].translatedText;
             callback(translation);
           },
-          error: function(xhr, textStatus, errorThrown) {
-            console.log('Translator:translate failed with ' + textStatus);
-            throw errorThrown;
+          error: function(xhr) {
+            console.log(xhr);
+            console.log('Translation failed: ' + $.trim($(xhr.responseText).text()));
+            callback('Translation failed.');
           }
         });
       }
