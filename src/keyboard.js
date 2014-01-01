@@ -21,7 +21,7 @@ http://www.opensource.org/licenses/mit-license.php
 
     base.ooKeyboard = new ru.Keyboard(ru.RussianLayout);
     base.$keyboard = this.ooKeyboard.toHtml();
-    base.ooKeyboard.onSourceContentChanged('kommersant.ru/doc/2099157', 'divLetterBranding');
+    base.ooKeyboard.onSourceContentChanged('www.kommersant.ru/doc/2375142', 'divLetterBranding');
 
     base.$allKeys = base.$keyboard.find('button.ui-keyboard-button');
     base.$allKeys

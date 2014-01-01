@@ -162,5 +162,9 @@
     xit("highlights the key to press when too much time has elapsed", function() {
     });
 
+    xit("never have words wrap around", function() {
+
+    });
+
   });
 })(window.ru = window.ru || {}, jQuery);

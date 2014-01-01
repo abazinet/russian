@@ -1,38 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AnalysisUIOptions">
-    <option name="SCOPE_TYPE" value="8" />
-    <option name="CUSTOM_SCOPE_NAME" value="Selected files" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="89a942c4-4fa6-45be-9669-f800aabfddaf" name="Default" comment="support to scroll right, fix page word truncation">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" afterPath="$PROJECT_DIR$/.idea/jsLinters/jshint.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/russian.iml" afterPath="$PROJECT_DIR$/.idea/russian.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    <list default="true" id="133a2cfd-04f7-4994-8eb0-3f609d4ac6dd" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/audioPlayer-test.js" afterPath="$PROJECT_DIR$/test/audioPlayer-test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/audioPlayer.js" afterPath="$PROJECT_DIR$/src/audioPlayer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/keyboard.js" afterPath="$PROJECT_DIR$/src/keyboard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/sampleText-test.js" afterPath="$PROJECT_DIR$/test/sampleText-test.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/translator.js" afterPath="$PROJECT_DIR$/src/translator.js" />
     </list>
     <ignored path="russian.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373823234929" ignored="false" />
-    <file path="/sampleText-test.js" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373223899181" ignored="false" />
-    <file path="/sampleText.js" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373226174195" ignored="false" />
-    <file path="/keyboard.js" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373822471690" ignored="false" />
-    <file path="/keyboard-test.js" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373224019739" ignored="false" />
-    <file path="/chunkedTextReader.js" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1372012180090" ignored="false" />
-    <file path="/audioPlayer.js" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373245503270" ignored="false" />
-    <file path="/textReader.js" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373224601109" ignored="false" />
-    <file path="/a.dummy" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373822039682" ignored="false" />
-    <file path="/all.txt" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373224747176" ignored="false" />
-    <file path="/index.html" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373244546260" ignored="false" />
-    <file path="/a.js" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373244860263" ignored="false" />
-    <file path="/utils.js" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373246138114" ignored="false" />
-    <file path="/contentRetriever.js" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373822391659" ignored="false" />
-    <file path="/testrunner.html" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373245846467" ignored="false" />
-    <file path="/sampleLetter.js" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373245968507" ignored="false" />
-    <file path="/audioPlayer-test.js" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373246779722" ignored="false" />
-    <file path="/key.js" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373822871042" ignored="false" />
-    <file path="/layout.js" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373823080740" ignored="false" />
-    <file path="/key-test.js" changelist="89a942c4-4fa6-45be-9669-f800aabfddaf" time="1373823147103" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,46 +30,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="russian.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/russian.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="82" selection-start="147" selection-end="147" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="key.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="key.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/key.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="8" selection-start="844" selection-end="844" vertical-scroll-proportion="0.66765577">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="328" selection-end="328" vertical-scroll-proportion="-7.352941">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="testrunner.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testrunner.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="0" selection-start="242" selection-end="242" vertical-scroll-proportion="-5.882353">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="keyboard.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/keyboard.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="120" column="9" selection-start="3814" selection-end="3814" vertical-scroll-proportion="0.0">
+            <state line="102" column="74" selection-start="3515" selection-end="3515" vertical-scroll-proportion="0.0" vertical-offset="2091" max-vertical-offset="3720">
               <folding />
             </state>
           </provider>
@@ -100,16 +42,45 @@
       <file leaf-file-name="layout.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/layout.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="21" selection-start="663" selection-end="663" vertical-scroll-proportion="0.0">
+            <state line="6" column="27" selection-start="135" selection-end="135" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1740">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="key-test.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/key-test.js">
+      <file leaf-file-name="russian.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/russian.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="5" selection-start="350" selection-end="350" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1350">
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sampleLetter.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/sampleLetter.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="64" column="24" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.35309973" vertical-offset="1658" max-vertical-offset="2400">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="translator.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/translator.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="5" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1050">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="textReader.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/textReader.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="41" selection-start="247" selection-end="247" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1110">
               <folding />
             </state>
           </provider>
@@ -118,25 +89,34 @@
       <file leaf-file-name="sampleText.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sampleText.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="0" selection-start="1006" selection-end="1006" vertical-scroll-proportion="0.0">
+            <state line="56" column="47" selection-start="1560" selection-end="1560" vertical-scroll-proportion="-67.2" vertical-offset="0" max-vertical-offset="5940">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contentSource.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/contentSource.js">
+      <file leaf-file-name="utils.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contentRetriever.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/contentRetriever.js">
+      <file leaf-file-name="sampleLetter-test.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/sampleLetter-test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="9" selection-start="916" selection-end="916" vertical-scroll-proportion="0.0">
+            <state line="3" column="42" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1140">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="keyboard-test.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/keyboard-test.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="117" column="40" selection-start="3348" selection-end="3348" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3690">
               <folding />
             </state>
           </provider>
@@ -160,22 +140,8 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/textReader.js" />
-        <option value="$PROJECT_DIR$/all.txt" />
-        <option value="$PROJECT_DIR$/test/textReader-test.js" />
-        <option value="$PROJECT_DIR$/lib/underscore/underscore.js" />
         <option value="$PROJECT_DIR$/src/audioPlayer.js" />
-        <option value="$PROJECT_DIR$/src/sampleText.js" />
-        <option value="$PROJECT_DIR$/src/sampleLetter.js" />
-        <option value="$PROJECT_DIR$/src/utils.js" />
         <option value="$PROJECT_DIR$/test/audioPlayer-test.js" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/testrunner.html" />
-        <option value="$PROJECT_DIR$/src/contentRetriever.js" />
-        <option value="$PROJECT_DIR$/src/key.js" />
-        <option value="$PROJECT_DIR$/src/keyboard.js" />
-        <option value="$PROJECT_DIR$/src/layout.js" />
-        <option value="$PROJECT_DIR$/test/key-test.js" />
       </list>
     </option>
   </component>
@@ -193,19 +159,7 @@
             <id />
           </State>
           <State>
-            <id>ActionScript specificJavaScript</id>
-          </State>
-          <State>
-            <id>Assignment issuesJavaScript</id>
-          </State>
-          <State>
-            <id>Bitwise operation issuesJavaScript</id>
-          </State>
-          <State>
-            <id>Code quality toolsJavaScript</id>
-          </State>
-          <State>
-            <id>Code style issuesJavaScript</id>
+            <id>CoffeeScript</id>
           </State>
           <State>
             <id>Control flow issuesJavaScript</id>
@@ -214,13 +168,10 @@
             <id>DOM issuesJavaScript</id>
           </State>
           <State>
-            <id>Data flow issuesJavaScript</id>
-          </State>
-          <State>
-            <id>Error handlingJavaScript</id>
-          </State>
-          <State>
             <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>HTML</id>
           </State>
           <State>
             <id>JavaScript</id>
@@ -229,27 +180,21 @@
             <id>JavaScript function metricsJavaScript</id>
           </State>
           <State>
-            <id>JavaScript validity issuesJavaScript</id>
-          </State>
-          <State>
-            <id>JsTestDriverJavaScript</id>
-          </State>
-          <State>
-            <id>Naming conventionsJavaScript</id>
-          </State>
-          <State>
-            <id>Node.jsJavaScript</id>
+            <id>Portability issues</id>
           </State>
           <State>
             <id>Potentially confusing code constructsJavaScript</id>
           </State>
           <State>
-            <id>Probable bugsJavaScript</id>
+            <id>Probable bugsCoffeeScript</id>
+          </State>
+          <State>
+            <id>XPath</id>
           </State>
         </expanded-state>
         <selected-state>
           <State>
-            <id>JSValidateTypes</id>
+            <id>CoffeeScript</id>
           </State>
         </selected-state>
       </profile-state>
@@ -273,7 +218,7 @@
       <flattenPackages />
       <showMembers />
       <showModules />
-      <showLibraryContents ProjectPane="true" />
+      <showLibraryContents />
       <hideEmptyPackages />
       <abbreviatePackageNames />
       <autoscrollToSource />
@@ -338,35 +283,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="server" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="russian" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="russian" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="russian" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="russian" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -375,50 +292,29 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="276" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="305" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
-    <property name="recentsLimit" value="5" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="298" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/underscore/underscore.js" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="306" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="980" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="973" />
-    <property name="JavaScriptPreferStrict" value="true" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="299" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="297" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="options.lastSelected" value="Settings.JavaScript.Linters.JSHint" />
-    <property name="JavaScriptLanguageLevel" value="ES5" />
-    <property name="restartRequiresConfirmation" value="true" />
+    <property name="options.lastSelected" value="diff" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
-  <component name="RunManager" selected="Node.js.server.js">
-    <configuration default="false" name="server.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="server.js" working-dir="$PROJECT_DIR$/server">
-      <envs>
-        <env name="NODE_PATH" value=".;C:\Program Files\nodejs\node_modules\npm\node_modules;C:\Users\abazinet-deschamps\node_modules" />
-      </envs>
-      <RunnerSettings RunnerId="NodeJS.run" />
-      <ConfigurationWrapper RunnerId="NodeJS.run" />
-      <method />
-    </configuration>
+  <component name="RunManager">
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
       <option name="filePath" />
       <option name="scope" value="ALL" />
       <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="name" value="Dart" />
+      <option name="saveOutputToFile" value="false" />
+      <option name="showConsoleOnStdErr" value="false" />
+      <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -428,27 +324,18 @@
       <setting name="preferredDebugBrowser" value="CHROME" />
       <method />
     </configuration>
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="$PROJECT_DIR$">
-      <envs>
-        <env name="NODE_PATH" value=".;C:\Program Files\nodejs\node_modules\npm\node_modules;C:\Users\abazinet-deschamps\node_modules" />
-      </envs>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
+      <envs />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Local" singleton="true">
-      <JSDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSDebuggerConfigurationSettings>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
-    <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Node.js.server.js" />
-    </list>
-    <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Node.js.server.js" />
-      </list>
-    </recent_temporary>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <browser start="false" url="" with-js-debugger="false" />
+      <method />
+    </configuration>
+    <list size="0" />
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
@@ -470,396 +357,157 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="89a942c4-4fa6-45be-9669-f800aabfddaf" name="Default" comment="fix broken link" />
-      <created>1355609644509</created>
-      <updated>1355609644509</updated>
+      <changelist id="133a2cfd-04f7-4994-8eb0-3f609d4ac6dd" name="Default" comment="" />
+      <created>1388596773630</created>
+      <updated>1388596773630</updated>
     </task>
-    <task id="LOCAL-00001" summary="fix broken link">
-      <created>1355610379255</created>
-      <updated>1355610379255</updated>
-    </task>
-    <task id="LOCAL-00002" summary="minor ui changes">
-      <created>1355632815203</created>
-      <updated>1355632815203</updated>
-    </task>
-    <task id="LOCAL-00003" summary="another diet for original keyboard">
-      <created>1355699993099</created>
-      <updated>1355699993099</updated>
-    </task>
-    <task id="LOCAL-00004" summary="refactor sample text into separate objects">
-      <created>1355715673802</created>
-      <updated>1355715673802</updated>
-    </task>
-    <task id="LOCAL-00005" summary="added blinking support">
-      <created>1356291926678</created>
-      <updated>1356291926678</updated>
-    </task>
-    <task id="LOCAL-00006" summary="added letter test coverage">
-      <created>1356302247831</created>
-      <updated>1356302247831</updated>
-    </task>
-    <task id="LOCAL-00007" summary="implemented letter guess logic">
-      <created>1356328821636</created>
-      <updated>1356328821636</updated>
-    </task>
-    <task id="LOCAL-00008" summary="fixed missing last letter">
-      <created>1356397335453</created>
-      <updated>1356397335453</updated>
-    </task>
-    <task id="LOCAL-00009" summary="use revealing module pattern + enabled jshint">
-      <created>1356403302669</created>
-      <updated>1356403302669</updated>
-    </task>
-    <task id="LOCAL-00010" summary="add failing test for sample text wrap around">
-      <created>1356406662550</created>
-      <updated>1356406662550</updated>
-    </task>
-    <task id="LOCAL-00011" summary="support sample text wrap around">
-      <created>1356536572556</created>
-      <updated>1356536572556</updated>
-    </task>
-    <task id="LOCAL-00012" summary="introduce a key object">
-      <created>1356547346787</created>
-      <updated>1356547346787</updated>
-    </task>
-    <task id="LOCAL-00013" summary="defaults text to komersant + audio beta">
-      <created>1356575185975</created>
-      <updated>1356575185975</updated>
-    </task>
-    <task id="LOCAL-00014" summary="load text from any url working beta">
-      <created>1356580254718</created>
-      <updated>1356580254718</updated>
-    </task>
-    <task id="LOCAL-00015" summary="replay same word on second space">
-      <created>1356581274742</created>
-      <updated>1356581274742</updated>
-    </task>
-    <task id="LOCAL-00016" summary="style update, still in progress">
-      <created>1356587874161</created>
-      <updated>1356587874161</updated>
-    </task>
-    <task id="LOCAL-00017" summary="shorter namespace, add sample text test coverage">
-      <created>1356808374589</created>
-      <updated>1356808374589</updated>
-    </task>
-    <task id="LOCAL-00018" summary="added sample text test coverage">
-      <created>1356810350384</created>
-      <updated>1356810350384</updated>
-    </task>
-    <task id="LOCAL-00019" summary="refactor key">
-      <created>1356891434245</created>
-      <updated>1356891434245</updated>
-    </task>
-    <task id="LOCAL-00020" summary="introduce a layout object">
-      <created>1356896919321</created>
-      <updated>1356896919321</updated>
-    </task>
-    <task id="LOCAL-00021" summary="minor refactoring">
-      <created>1356897971062</created>
-      <updated>1356897971062</updated>
-    </task>
-    <task id="LOCAL-00022" summary="take more ownership of the original code">
-      <created>1356930062142</created>
-      <updated>1356930062142</updated>
-    </task>
-    <task id="LOCAL-00023" summary="introduce a simple key test">
-      <created>1356988974207</created>
-      <updated>1356988974207</updated>
-    </task>
-    <task id="LOCAL-00024" summary="remove audio for single letter words">
-      <created>1356990048711</created>
-      <updated>1356990048711</updated>
-    </task>
-    <task id="LOCAL-00025" summary="style update, white sample background">
-      <created>1356993717349</created>
-      <updated>1356993717349</updated>
-    </task>
-    <task id="LOCAL-00026" summary="added sample text specs to be implemented">
-      <created>1356994448294</created>
-      <updated>1356994448294</updated>
-    </task>
-    <task id="LOCAL-00027" summary="added support for english audio">
-      <created>1357103689279</created>
-      <updated>1357103689279</updated>
-    </task>
-    <task id="LOCAL-00028" summary="fix for this scope">
-      <created>1357104303780</created>
-      <updated>1357104303780</updated>
-    </task>
-    <task id="LOCAL-00029" summary="begin cleaning up mouse event code">
-      <created>1357176015330</created>
-      <updated>1357176015330</updated>
-    </task>
-    <task id="LOCAL-00030" summary="remove non breaking spaces from articles">
-      <created>1357177784275</created>
-      <updated>1357177784275</updated>
-    </task>
-    <task id="LOCAL-00031" summary="added test coverage for shift key">
-      <created>1357516734189</created>
-      <updated>1357516734189</updated>
-    </task>
-    <task id="LOCAL-00032" summary="refactor keyboard test and remove unused options">
-      <created>1357517523195</created>
-      <updated>1357517523195</updated>
-    </task>
-    <task id="LOCAL-00033" summary="filter out invalid characters on content download">
-      <created>1357881632697</created>
-      <updated>1357881632697</updated>
-    </task>
-    <task id="LOCAL-00034" summary="remove invalid letters from sample text">
-      <created>1358707295390</created>
-      <updated>1358707295390</updated>
-    </task>
-    <task id="LOCAL-00035" summary="refactoring guess letter, use space for invalid char">
-      <created>1358734722760</created>
-      <updated>1358734722760</updated>
-    </task>
-    <task id="LOCAL-00036" summary="refactor objects  to create true private variables">
-      <created>1359925909155</created>
-      <updated>1359925909155</updated>
-    </task>
-    <task id="LOCAL-00037" summary="support to scroll right, fix page word truncation">
-      <created>1372012525314</created>
-      <updated>1372012525314</updated>
-    </task>
-    <task id="LOCAL-00038" summary="support full keyboard arrow navigation">
-      <created>1373224249085</created>
-      <updated>1373224249085</updated>
-    </task>
-    <task id="LOCAL-00039" summary="small refactoring / rename">
-      <created>1373225145328</created>
-      <updated>1373225145328</updated>
-    </task>
-    <task id="LOCAL-00040" summary="refactoring, introduce isDefined util">
-      <created>1373246500448</created>
-      <updated>1373246500448</updated>
-    </task>
-    <task id="LOCAL-00041" summary="start converting key to module pattern">
-      <created>1373823241805</created>
-      <updated>1373823241805</updated>
-    </task>
-    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32887402" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21962096" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16183448" sideWeight="0.78037906" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1670282" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.8329718" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17745535" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39955357" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="CHECK_NEW_TODO" value="true" />
     <option name="myTodoPanelSettings">
-      <value>
-        <are-packages-shown value="false" />
-        <are-modules-shown value="false" />
-        <flatten-packages value="false" />
-        <is-autoscroll-to-source value="false" />
-      </value>
+      <TodoPanelSettings />
     </option>
-    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
-    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
-    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
-    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
-    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
-    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
-    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
-    <option name="SHORT_DIFF_HORIZONTALLY" value="true" />
-    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
-    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
-    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
-    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
-    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
-    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
-    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
-    <option name="LIMIT_HISTORY" value="true" />
-    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
-    <option name="UPDATE_FILTER_SCOPE_NAME" />
-    <option name="USE_COMMIT_MESSAGE_MARGIN" value="false" />
-    <option name="COMMIT_MESSAGE_MARGIN_SIZE" value="72" />
-    <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
-    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="start converting key to module pattern" />
-    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
-    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
-    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
-    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
-    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
-    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
-    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
-    <option name="ACTIVE_VCS_NAME" />
-    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
-    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
-    <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
-    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
-    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="refactor key" />
-    <MESSAGE value="introduce a layout object" />
-    <MESSAGE value="minor refactoring" />
-    <MESSAGE value="take more ownership of the original code" />
-    <MESSAGE value="introduce a simple key test" />
-    <MESSAGE value="remove audio for single letter words" />
-    <MESSAGE value="style update, white sample background" />
-    <MESSAGE value="added sample text specs to be implemented" />
-    <MESSAGE value="use revealing module pattern + enabled jshint" />
-    <MESSAGE value="added support for english audio" />
-    <MESSAGE value="fix for this scope" />
-    <MESSAGE value="begin cleaning up mouse event code" />
-    <MESSAGE value="remove non breaking spaces from articles" />
-    <MESSAGE value="added test coverage for shift key" />
-    <MESSAGE value="refactor keyboard test and remove unused options" />
-    <MESSAGE value="filter out invalid characters on content download" />
-    <MESSAGE value="remove invalid letters from sample text" />
-    <MESSAGE value="refactoring guess letter, use space for invalid char" />
-    <MESSAGE value="refactor objects  to create true private variables" />
-    <MESSAGE value="rename files" />
-    <MESSAGE value="support to scroll right, fix page word truncation" />
-    <MESSAGE value="support full keyboard arrow navigation" />
-    <MESSAGE value="small refactoring / rename" />
-    <MESSAGE value="refactoring, introduce isDefined util" />
-    <MESSAGE value="start converting key to module pattern" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="1" />
-    </breakpoint-manager>
+    <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/HTML5.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="377" column="27" selection-start="5831" selection-end="5831" vertical-scroll-proportion="0.33333334" vertical-offset="11067" max-vertical-offset="65160">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/contentRetriever-test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="53" selection-start="1923" selection-end="1923" vertical-scroll-proportion="0.0">
+        <state line="36" column="18" selection-start="1305" selection-end="1305" vertical-scroll-proportion="0.0" vertical-offset="831" max-vertical-offset="1830">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/keyboard-test.js">
+    <entry file="file://$PROJECT_DIR$/test/audioPlayer-test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="44" selection-start="321" selection-end="321" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/sampleLetter-test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="48" selection-start="678" selection-end="678" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sampleLetter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/translator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="72" selection-start="728" selection-end="738" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/textReader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="21" selection-start="100" selection-end="100" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/russian.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="82" selection-start="147" selection-end="147" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="328" selection-end="328" vertical-scroll-proportion="-7.352941">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testrunner.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="242" selection-end="242" vertical-scroll-proportion="-5.882353">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/contentSource.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="25" column="42" selection-start="698" selection-end="698" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1440">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/contentRetriever.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="9" selection-start="916" selection-end="916" vertical-scroll-proportion="0.0">
+        <state line="38" column="11" selection-start="1177" selection-end="1177" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2250">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/contentSource.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="33" selection-start="383" selection-end="383" vertical-scroll-proportion="0.0" vertical-offset="518" max-vertical-offset="1260">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/audioPlayer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="7" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/sampleLetter-test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="42" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1140">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/keyboard-test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="117" column="40" selection-start="3348" selection-end="3348" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3690">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/textReader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="41" selection-start="247" selection-end="247" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1110">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/translator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="5" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="1050">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sampleText.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="1006" selection-end="1006" vertical-scroll-proportion="0.0">
+        <state line="56" column="47" selection-start="1560" selection-end="1560" vertical-scroll-proportion="-67.2" vertical-offset="0" max-vertical-offset="5940">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/layout.js">
+    <entry file="file://$PROJECT_DIR$/src/utils.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="21" selection-start="663" selection-end="663" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/keyboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="9" selection-start="3814" selection-end="3814" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/key-test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="5" selection-start="350" selection-end="350" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="742">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/key.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="8" selection-start="844" selection-end="844" vertical-scroll-proportion="0.66765577">
+        <state line="102" column="74" selection-start="3515" selection-end="3515" vertical-scroll-proportion="0.0" vertical-offset="2091" max-vertical-offset="3720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/layout.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="27" selection-start="135" selection-end="135" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1740">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/russian.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1350">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sampleLetter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="24" selection-start="1591" selection-end="1591" vertical-scroll-proportion="0.35309973" vertical-offset="1658" max-vertical-offset="2400">
           <folding />
         </state>
       </provider>

@@ -9,7 +9,7 @@
           url: 'https://www.googleapis.com/language/translate/v2',
           dataType: 'json',
           data: {
-            key: 'AIzaSyD1GoUR_J0a2wTsazAhadhxf1GFNoTCX8s',
+            key: 'AIzaSyB9P1cq1-6OYzDbNHq_LAlj2dVtzMp3GRs',
             q: word,
             source: srcLang,
             target: dstLang
