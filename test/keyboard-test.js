@@ -2,15 +2,20 @@
   "use strict";
 
   describe("a russian keyboard", function() {
-    xit("displays lowercase russian letters", function() {
-      var keyboard = new ru.Keyboard(ru.RussianLayout);
-      var html = keyboard.toHtml();
+    var keyboard;
+    var html;
+
+    beforeEach(function() {
+      keyboard = new ru.Keyboard(ru.RussianLayout);
+      html = keyboard.toHtml();
+    });
+
+    it("displays lowercase russian letters", function() {
       var firstKey = firstVisibleKey(html);
       expect(firstKey).toHaveText('\u0451');
     });
 
-    xit("displays uppercase russian letters when shift is pressed", function() {
-      var html = new ru.Keyboard(ru.RussianLayout).toHtml();
+    it("displays uppercase russian letters when shift is pressed", function() {
       expect(firstVisibleKey(html)).toHaveText('\u0451');
       shiftDown();
       expect(firstVisibleKey(html)).toHaveText('\u0401');
@@ -19,40 +24,30 @@
     });
 
     it("says the english translation when ctrl-space is pressed", function() {
-      var keyboard = new ru.Keyboard(ru.RussianLayout);
-      keyboard.toHtml();
       var saySpy = spyOn(keyboard, 'sayTranslation');
       ctrlSpacePressed();
       expect(saySpy).toHaveBeenCalled();
     });
 
     it("goes to the next page of sample text when the down arrow is pressed", function() {
-      var keyboard = new ru.Keyboard(ru.RussianLayout);
-      keyboard.toHtml();
       var scrollSpy = spyOn(keyboard, 'nextSampleText');
       downArrowPressed();
       expect(scrollSpy).toHaveBeenCalled();
     });
 
     it("goes to the previous page of sample text when the up arrow is pressed", function() {
-      var keyboard = new ru.Keyboard(ru.RussianLayout);
-      keyboard.toHtml();
       var scrollSpy = spyOn(keyboard, 'previousSampleText');
       upArrowPressed();
       expect(scrollSpy).toHaveBeenCalled();
     });
 
     it("moves cursor to the right when the right arrow is pressed", function() {
-      var keyboard = new ru.Keyboard(ru.RussianLayout);
-      keyboard.toHtml();
       var cursorSpy = spyOn(keyboard, 'cursorRight');
       rightArrowPressed();
       expect(cursorSpy).toHaveBeenCalled();
     });
 
     it("moves cursor to the left when the left arrow is pressed", function() {
-      var keyboard = new ru.Keyboard(ru.RussianLayout);
-      keyboard.toHtml();
       var cursorSpy = spyOn(keyboard, 'cursorLeft');
       leftArrowPressed();
       expect(cursorSpy).toHaveBeenCalled();
