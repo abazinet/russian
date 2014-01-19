@@ -13,17 +13,27 @@
 
     it("plays a word", function() {
       var url = expectAudioToPlay(['aWord']);
-      expect(url.indexOf('q=aWord') !== -1).toBeTruthy();
+      expect(url).toContain('q=aWord');
     });
 
     it("defaults to the Russian language", function() {
       var url = expectAudioToPlay(['aWord']);
-      expect(url.indexOf('tl=ru') !== -1).toBeTruthy();
+      expect(url).toContain('tl=ru');
     });
 
-    it("supports a different language", function() {
+    it("supports a different language when specified", function() {
       var url = expectAudioToPlay(['aWord', 'en']);
-      expect(url.indexOf('tl=en') !== -1).toBeTruthy();
+      expect(url).toContain('tl=en');
+    });
+
+    it("plays single letters using custom sounds from ec2", function() {
+      var url = expectAudioToPlay(['a']);
+      expect(url).toContain('ec2-');
+    });
+
+    it("converts russian characters to lowercase before playing", function() {
+      var url = expectAudioToPlay(['\u0401']);
+      expect(url).toContain('%D1%91.mp3');
     });
 
     var expectAudioToPlay = function(playArgs) {

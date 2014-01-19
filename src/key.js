@@ -54,6 +54,10 @@
         return mappedKey || charKey;
       },
 
+      _isPressed: function() {
+        return html.hasClass('ui-state-hover') === true;
+      },
+
       _keyDisplay: function() {
         if(this._actionKey()) {
           return keyDescription.match(/^\{(\S+)\}$/)[1].toLowerCase();
