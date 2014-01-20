@@ -29,7 +29,7 @@
       },
 
       _extractText: function(html) {
-        if(ru.isDefined(divId)) {
+        if(ru.def(divId)) {
           html = $(html).find('#' + divId + ',.' + divId);
         }
 
@@ -50,7 +50,7 @@
       },
 
       _removeInvalidCharacters: function(text) {
-        if(ru.isDefined(isValidCharacter)) {
+        if(ru.def(isValidCharacter)) {
           for(var i=0; i<text.length; i++) {
             if(!isValidCharacter(text[i])) {
               text = text.substr(0, i) + ' ' + text.substr(i + 2);

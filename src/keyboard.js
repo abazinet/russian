@@ -32,7 +32,7 @@ http://www.opensource.org/licenses/mit-license.php
         if (key.keyaction.hasOwnProperty(key.keyName) &&
             $(this).hasClass('ui-keyboard-actionkey')) {
           key.keyaction[key.keyName](base, this, e);
-        } else if (ru.isDefined(key.key)) {
+        } else if (ru.def(key.key)) {
           txt = key.getDisplay();
           base.ooKeyboard.insertText(txt);
         }
@@ -124,7 +124,7 @@ http://www.opensource.org/licenses/mit-license.php
   };
 
   ru.Keyboard.prototype.toHtml = function() {
-    if(ru.isUndefined(this.html)) {
+    if(ru.undef(this.html)) {
       this.html = $('<div></div>')
           .addClass('ui-keyboard ui-widget-content ui-widget ui-corner-all ui-helper-clearfix ui-keyboard-always-open')
           .attr({ 'role': 'textbox' })
@@ -146,13 +146,13 @@ http://www.opensource.org/licenses/mit-license.php
 
   ru.Keyboard.prototype.keyPressed = function(layoutPos, key) {
     var k = this.layouts[layoutPos].keyPressed(key);
-    if(ru.isDefined(k)) {
+    if(ru.def(k)) {
       this.sampleText.guessLetter(k.getDisplay());
     }
   };
 
   ru.Keyboard.prototype.onSampleSourceChanged = function(text) {
-    if(ru.isUndefined(this.sampleText)) {
+    if(ru.undef(this.sampleText)) {
       this.sampleText = ru.sampleText(text);
       this.toHtml().prepend(this.sampleText.toHtml());
     } else {

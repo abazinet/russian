@@ -9,19 +9,19 @@
     return {
       keyPressed: function(keyPressed) {
         var key = keyHash[keyPressed];
-        if(ru.isDefined(key)) {
+        if(ru.def(key)) {
           key.keyPressed(keyPressed);
         }
         return key;
       },
 
       isValidCharacter: function(character) {
-        return ru.isDefined(keyHash[character]) ||
-               ru.isDefined(mappedKeyHash[character]);
+        return ru.def(keyHash[character]) ||
+               ru.def(mappedKeyHash[character]);
       },
 
       addKey: function(row, key) {
-        if(ru.isUndefined(rows[row])) {
+        if(ru.undef(rows[row])) {
           rows[row] = [];
         }
         rows[row].push(key);

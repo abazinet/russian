@@ -40,7 +40,7 @@
       },
 
       toHtml: function() {
-        if(ru.isUndefined(html)) {
+        if(ru.undef(html)) {
           html = $('<div></div>');
           this._buildKey();
           if (keyDescription !== 0) {

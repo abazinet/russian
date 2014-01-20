@@ -1,12 +1,12 @@
 (function(ru) {
   "use strict";
 
-  ru.isUndefined = function(obj) {
+  ru.undef = function(obj) {
     return obj === void 0;
   };
 
-  ru.isDefined = function(obj) {
-    return !this.isUndefined(obj);
+  ru.def = function(obj) {
+    return !this.undef(obj);
   };
 
 })(window.ru = window.ru || {});

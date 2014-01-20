@@ -2,10 +2,9 @@
   "use strict";
 
   ru.sampleText = function(source) {
-    var rowsSize = 3;
-    var columnsSize = 20;
-    var count =  columnsSize * rowsSize;
     var position = 0;
+    var rows = 3;
+    var columns = 20;
     var letters = [];
     var lastWord = '';
     var replayLastWord = '';
@@ -14,19 +13,17 @@
     var translatedReplay = '';
     var html;
 
-    var text = ru.textReader(count, source);
+    var text = ru.textReader(columns, source);
     var audio = ru.audioPlayer($.find('audio')[0]);
 
-    var buildLetters = function(chunk) {
-      if(ru.isUndefined(chunk)) {
-        chunk = text.next();
-      }
-      for(var i=0; i<count; i++) {
-        var pos = i + position;
-        var letter = (pos < chunk.length) ?
-            chunk[pos] :
-            ' ';
-        letters[i] = ru.sampleLetter(letter);
+    var buildLetters = function() {
+      letters = [];
+      for(var i=0; i<rows; i++) {
+        var line = text.next();
+        for(var j=0; j<line.length; j++) {
+          letters.push(ru.sampleLetter(line[j]));
+        }
+        letters.push(ru.sampleLetter('\n'));
       }
     };
 
@@ -34,7 +31,7 @@
 
     return {
       updateText: function(newText) {
-        text = ru.textReader(count, newText);
+        text = ru.textReader(columns, newText);
         this._clearPreviousHtml();
         buildLetters();
         this.toHtml();
@@ -78,9 +75,9 @@
         var div = $('<div></div>');
         var row = div.clone();
         letters.forEach(function(letter, position) {
-          row.append(letter.toHtml());
-
-          if(this._isEndOfLine(position)) {
+          if(!letter.isEndOfLine()) {
+            row.append(letter.toHtml());
+          } else if(position < letters.length) {
             position = 0;
             html.append(row.addClass('ui-keyboard-sample-wrapper'));
             row = div.clone();
@@ -96,7 +93,7 @@
       },
 
       getCount: function() {
-        return count;
+        return letters.length;
       },
 
       getAudioPlayer: function() {
@@ -118,6 +115,9 @@
           this._nextPage();
         } else {
           position += 1;
+          if(this._currentLetter().isEndOfLine()) {
+            position += 1;
+          }
           this._currentLetter().startBlinking();
         }
       },
@@ -129,16 +129,15 @@
           this._previousPage();
         } else {
           position -= 1;
+          if(this._currentLetter().isEndOfLine()) {
+            position -= 1;
+          }
           this._currentLetter().startBlinking();
         }
       },
 
-      _isEndOfLine: function(pos) {
-        return (pos % columnsSize) === (columnsSize - 1);
-      },
-
       _isLastLetter: function() {
-        return position === count - 1;
+        return position === (letters.length - 2);
       },
 
       _isFirstLetter: function() {
@@ -146,7 +145,7 @@
       },
 
       _clearPreviousHtml: function() {
-        if(ru.isUndefined(html)) {
+        if(ru.undef(html)) {
           html = $('<div></div>')
             .addClass('ui-keyboard-sample')
             .css({'margin-bottom' : '1em'});
@@ -167,7 +166,10 @@
 
       _previousPage: function() {
         position = 0;
-        buildLetters(text.previous());
+        for(var i=0; i<rows; i++) {
+          text.previous();
+        }
+        buildLetters();
         this.toHtml();
       },
 

@@ -11,6 +11,7 @@
       },
 
       startBlinking: function() {
+        console.log('blink: ');
         this._blink(true);
       },
 
@@ -19,8 +20,8 @@
       },
 
       toHtml: function() {
-        if(ru.isUndefined(html)) {
-          html = this.isSpace() ?
+        if(ru.undef(html)) {
+          html = this.isSpace() || this.isEndOfLine() ?
                  this._toSpaceHtml() :
                  this._toLetterHtml();
         }
@@ -29,6 +30,10 @@
 
       isSpace: function() {
         return letter === ' ';
+      },
+
+      isEndOfLine: function() {
+        return letter === '\n';
       },
 
       _toSpaceHtml: function() {
@@ -58,7 +63,7 @@
 
       _blink: function(enabled) {
         this.toHtml();
-        blinking = ru.isUndefined(enabled) || enabled;
+        blinking = ru.undef(enabled) || enabled;
 
         var blinker = function() {
           this._toggleBlinking();

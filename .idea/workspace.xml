@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="133a2cfd-04f7-4994-8eb0-3f609d4ac6dd" name="Default" comment="added an alphabet html page">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/audioPlayer-test.js" afterPath="$PROJECT_DIR$/test/audioPlayer-test.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/audioPlayer.js" afterPath="$PROJECT_DIR$/src/audioPlayer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/key-test.js" afterPath="$PROJECT_DIR$/test/key-test.js" />
+    <list default="true" id="133a2cfd-04f7-4994-8eb0-3f609d4ac6dd" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/contentRetriever.js" afterPath="$PROJECT_DIR$/src/contentRetriever.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/key.js" afterPath="$PROJECT_DIR$/src/key.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/keyboard.js" afterPath="$PROJECT_DIR$/src/keyboard.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/layout.js" afterPath="$PROJECT_DIR$/src/layout.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sampleLetter.js" afterPath="$PROJECT_DIR$/src/sampleLetter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sampleText.js" afterPath="$PROJECT_DIR$/src/sampleText.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils.js" afterPath="$PROJECT_DIR$/src/utils.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="russian.iws" />
@@ -32,16 +35,7 @@
       <file leaf-file-name="key.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/key.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="0" selection-start="187" selection-end="187" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3840">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="russian.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/russian.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="7" selection-start="803" selection-end="809" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1260">
+            <state line="42" column="11" selection-start="1182" selection-end="1182" vertical-scroll-proportion="0.0" vertical-offset="1017" max-vertical-offset="3840">
               <folding />
             </state>
           </provider>
@@ -50,34 +44,7 @@
       <file leaf-file-name="sampleLetter.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sampleLetter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="21" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.0" vertical-offset="1290" max-vertical-offset="2400">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="key-test.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/key-test.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="30" selection-start="482" selection-end="482" vertical-scroll-proportion="0.5188172" vertical-offset="154" max-vertical-offset="1050">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="audioPlayer.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/audioPlayer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="0" selection-start="181" selection-end="181" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="930">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="audioPlayer-test.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/audioPlayer-test.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="25" selection-start="868" selection-end="868" vertical-scroll-proportion="0.0" vertical-offset="636" max-vertical-offset="1740">
+            <state line="35" column="6" selection-start="721" selection-end="721" vertical-scroll-proportion="0.0" vertical-offset="815" max-vertical-offset="2550">
               <folding />
             </state>
           </provider>
@@ -86,10 +53,8 @@
       <file leaf-file-name="keyboard.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/keyboard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6510">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+            <state line="148" column="7" selection-start="4689" selection-end="4689" vertical-scroll-proportion="0.0" vertical-offset="4197" max-vertical-offset="6510">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -97,7 +62,7 @@
       <file leaf-file-name="layout.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/layout.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1740">
+            <state line="18" column="20" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="1740">
               <folding />
             </state>
           </provider>
@@ -106,16 +71,52 @@
       <file leaf-file-name="sampleText.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sampleText.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="31" selection-start="2454" selection-end="2454" vertical-scroll-proportion="0.0" vertical-offset="2288" max-vertical-offset="5940">
+            <state line="94" column="6" selection-start="2530" selection-end="2530" vertical-scroll-proportion="0.0" vertical-offset="2615" max-vertical-offset="6000">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="keyboard.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/keyboard.css">
+      <file leaf-file-name="sampleLetter-test.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/sampleLetter-test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="43" selection-start="219" selection-end="219" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="870">
+            <state line="32" column="32" selection-start="911" selection-end="911" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1140">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sampleText-test.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/sampleText-test.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="4" selection-start="1231" selection-end="1231" vertical-scroll-proportion="0.09966777" vertical-offset="990" max-vertical-offset="5250">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contentRetriever.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/contentRetriever.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="52" column="11" selection-start="1571" selection-end="1571" vertical-scroll-proportion="0.0" vertical-offset="1313" max-vertical-offset="2250">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utils.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="4" selection-start="155" selection-end="155" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="textReader.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/textReader.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="6" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1110">
               <folding />
             </state>
           </provider>
@@ -140,14 +141,20 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/test/keyboard-test.js" />
-        <option value="$PROJECT_DIR$/src/key.js" />
         <option value="$PROJECT_DIR$/test/sampleLetter-test.js" />
         <option value="$PROJECT_DIR$/test/key-test.js" />
         <option value="$PROJECT_DIR$/css/keyboard.css" />
-        <option value="$PROJECT_DIR$/src/sampleLetter.js" />
-        <option value="$PROJECT_DIR$/src/sampleText.js" />
         <option value="$PROJECT_DIR$/test/audioPlayer-test.js" />
         <option value="$PROJECT_DIR$/src/audioPlayer.js" />
+        <option value="$PROJECT_DIR$/lib/jasmine/jasmine-html.js" />
+        <option value="$PROJECT_DIR$/src/utils.js" />
+        <option value="$PROJECT_DIR$/src/key.js" />
+        <option value="$PROJECT_DIR$/src/contentRetriever.js" />
+        <option value="$PROJECT_DIR$/src/keyboard.js" />
+        <option value="$PROJECT_DIR$/src/layout.js" />
+        <option value="$PROJECT_DIR$/src/sampleLetter.js" />
+        <option value="$PROJECT_DIR$/src/sampleText.js" />
+        <option value="$PROJECT_DIR$/test/sampleText-test.js" />
       </list>
     </option>
   </component>
@@ -232,7 +239,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -309,6 +315,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -316,10 +323,18 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="diff" />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -330,23 +345,15 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
-      <envs />
-      <method />
-    </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
       <setting name="configLocationType" value="CONFIG_FILE" />
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="CHROME" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
@@ -394,7 +401,11 @@
       <created>1388946743120</created>
       <updated>1388946743120</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="only keep lowercase russian letters in the cloud">
+      <created>1390161774708</created>
+      <updated>1390161774708</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -404,17 +415,17 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30477223" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.835141" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.69522774" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.164859" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30477223" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1670282" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -431,67 +442,16 @@
     <MESSAGE value="fix russian audio, add test" />
     <MESSAGE value="amazon ec2 for single letter sounds" />
     <MESSAGE value="added an alphabet html page" />
-    <option name="LAST_COMMIT_MESSAGE" value="added an alphabet html page" />
+    <MESSAGE value="only keep lowercase russian letters in the cloud" />
+    <option name="LAST_COMMIT_MESSAGE" value="only keep lowercase russian letters in the cloud" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/alphabet.htm">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="20" selection-start="374" selection-end="374" vertical-scroll-proportion="-7.6923075" vertical-offset="0" max-vertical-offset="480" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/translator-test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="231" selection-end="231" vertical-scroll-proportion="0.0" vertical-offset="137" max-vertical-offset="1020" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/sampleText-test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="51" selection-start="5660" selection-end="5660" vertical-scroll-proportion="0.0" vertical-offset="4367" max-vertical-offset="5250">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/textReader-test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1290">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/sampleLetter-test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="31" selection-start="650" selection-end="661" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="1140">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/keyboard-test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="19" selection-start="2624" selection-end="2624" vertical-scroll-proportion="0.0" vertical-offset="2604" max-vertical-offset="3540">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/keyboard.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="43" selection-start="219" selection-end="219" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sampleLetter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="21" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.0" vertical-offset="787" max-vertical-offset="2400">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sampleText.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="31" selection-start="2454" selection-end="2454" vertical-scroll-proportion="0.0" vertical-offset="2288" max-vertical-offset="5940">
           <folding />
         </state>
       </provider>
@@ -503,32 +463,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/keyboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6510">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/layout.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1740">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/audioPlayer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="0" selection-start="181" selection-end="181" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="930">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/key.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="187" selection-end="187" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3840">
           <folding />
         </state>
       </provider>
@@ -542,7 +479,84 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/key-test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="30" selection-start="482" selection-end="482" vertical-scroll-proportion="0.5188172" vertical-offset="154" max-vertical-offset="1050">
+        <state line="14" column="0" selection-start="381" selection-end="381" vertical-scroll-proportion="0.0" vertical-offset="154" max-vertical-offset="1050">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/jasmine/jasmine-html.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="242" column="0" selection-start="6526" selection-end="6526" vertical-scroll-proportion="0.041152265" vertical-offset="7230" max-vertical-offset="20610">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/key.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="11" selection-start="1182" selection-end="1182" vertical-scroll-proportion="0.0" vertical-offset="1017" max-vertical-offset="3840">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/contentRetriever.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="11" selection-start="1571" selection-end="1571" vertical-scroll-proportion="0.0" vertical-offset="1313" max-vertical-offset="2250">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/keyboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="148" column="7" selection-start="4689" selection-end="4689" vertical-scroll-proportion="0.0" vertical-offset="4197" max-vertical-offset="6510">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/layout.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="20" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="1740">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="4" selection-start="155" selection-end="155" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/textReader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="6" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1110">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sampleLetter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="6" selection-start="721" selection-end="721" vertical-scroll-proportion="0.0" vertical-offset="815" max-vertical-offset="2550">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/sampleLetter-test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="32" selection-start="911" selection-end="911" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1140">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sampleText.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="94" column="6" selection-start="2530" selection-end="2530" vertical-scroll-proportion="0.0" vertical-offset="2615" max-vertical-offset="6000">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/sampleText-test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="4" selection-start="1231" selection-end="1231" vertical-scroll-proportion="0.09966777" vertical-offset="990" max-vertical-offset="5250">
           <folding />
         </state>
       </provider>
