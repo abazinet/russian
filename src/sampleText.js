@@ -23,7 +23,6 @@
         for(var j=0; j<line.length; j++) {
           letters.push(ru.sampleLetter(line[j]));
         }
-        letters.push(ru.sampleLetter('\n'));
       }
     };
 
@@ -62,6 +61,7 @@
         if(guessedRight) {
           this.cursorRight();
         }
+
         if(character === ' ' && this._currentLetter().isSpace()) {
           this.guessLetter(' ');
         } else {
@@ -75,14 +75,14 @@
         var div = $('<div></div>');
         var row = div.clone();
         letters.forEach(function(letter, position) {
-          if(!letter.isEndOfLine()) {
-            row.append(letter.toHtml());
-          } else if(position < letters.length) {
+          row.append(letter.toHtml());
+          if(((position + 1) % columns) === 0 && position < letters.length) {
             position = 0;
             html.append(row.addClass('ui-keyboard-sample-wrapper'));
             row = div.clone();
           }
         }.bind(this));
+        html.append(row.addClass('ui-keyboard-sample-wrapper'));
 
         this._currentLetter().startBlinking();
         return html;
@@ -115,9 +115,6 @@
           this._nextPage();
         } else {
           position += 1;
-          if(this._currentLetter().isEndOfLine()) {
-            position += 1;
-          }
           this._currentLetter().startBlinking();
         }
       },
@@ -129,9 +126,6 @@
           this._previousPage();
         } else {
           position -= 1;
-          if(this._currentLetter().isEndOfLine()) {
-            position -= 1;
-          }
           this._currentLetter().startBlinking();
         }
       },

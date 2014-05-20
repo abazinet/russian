@@ -21,7 +21,7 @@
 
       toHtml: function() {
         if(ru.undef(html)) {
-          html = this.isSpace() || this.isEndOfLine() ?
+          html = this.isSpace() ?
                  this._toSpaceHtml() :
                  this._toLetterHtml();
         }
@@ -30,10 +30,6 @@
 
       isSpace: function() {
         return letter === ' ';
-      },
-
-      isEndOfLine: function() {
-        return letter === '\n';
       },
 
       _toSpaceHtml: function() {
