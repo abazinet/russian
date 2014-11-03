@@ -1,0 +1,14 @@
+.grunt/
+.idea/
+.settings/
+bin/
+build/
+dist/
+node/
+node_modules/
+*.bak
+*.iml
+*.log
+*.orig
+app-bundle.js
+spec-bundle.js

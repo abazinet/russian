@@ -3,32 +3,13 @@
 <head>
 	<meta charset="utf-8">
 	<title>Learning Russian</title>
-	
-	<!-- jQuery -->
+
 	<link rel="stylesheet" type="text/css" href="lib/jquery/jquery-ui.css">
-	<script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="lib/jquery/jquery-ui.min.js"></script>
-
-	<!-- keyboard  -->
 	<link rel="stylesheet" type="text/css" href="css/keyboard.css">
-	<script type="text/javascript" src="src/keyboard.js"></script>
-  <script type="text/javascript" src="src/russian.js"></script>
-  <script type="text/javascript" src="src/audioPlayer.js"></script>
-  <script type="text/javascript" src="src/sampleText.js"></script>
-  <script type="text/javascript" src="src/sampleLetter.js"></script>
-  <script type="text/javascript" src="src/textReader.js"></script>
-  <script type="text/javascript" src="src/contentRetriever.js"></script>
-  <script type="text/javascript" src="src/key.js"></script>
-  <script type="text/javascript" src="src/contentSource.js"></script>
-  <script type="text/javascript" src="src/layout.js"></script>
-  <script type="text/javascript" src="src/translator.js"></script>
-  <script type="text/javascript" src="src/utils.js"></script>
 
-	<script>
-    $(document).ready(function() {
-			$('#inputContainer').keyboard();
-		});
-	</script>
+  <script src="app-bundle.js"></script>
+	<script>require('app').init();</script>
+
 </head>
 <body>
   <div id="inputContainer"></div>

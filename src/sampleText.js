@@ -1,7 +1,15 @@
-(function(ru, $) {
-  "use strict";
+"use strict";
 
-  ru.sampleText = function(source) {
+var $ = require('jquery');
+
+var utils = require('./utils');
+var translator = require('./translator');
+var textReader = require('./textReader').textReader;
+var audioPlayer = require('./audioPlayer').audioPlayer;
+var sampleLetter = require('./sampleLetter').sampleLetter;
+
+module.exports = {
+  sampleText: function(source) {
     var position = 0;
     var rows = 3;
     var columns = 20;
@@ -13,15 +21,15 @@
     var translatedReplay = '';
     var html;
 
-    var text = ru.textReader(columns, source);
-    var audio = ru.audioPlayer($.find('audio')[0]);
+    var text = textReader(columns, source);
+    var audio = audioPlayer($('<audio controls src="" hidden="hidden"></audio>')[0]);
 
     var buildLetters = function() {
       letters = [];
-      for(var i=0; i<rows; i++) {
+      for (var i = 0; i < rows; i++) {
         var line = text.next();
-        for(var j=0; j<line.length; j++) {
-          letters.push(ru.sampleLetter(line[j]));
+        for (var j = 0; j < line.length; j++) {
+          letters.push(sampleLetter(line[j]));
         }
       }
     };
@@ -30,24 +38,23 @@
 
     return {
       updateText: function(newText) {
-        text = ru.textReader(columns, newText);
+        text = textReader(columns, newText);
         this._clearPreviousHtml();
         buildLetters();
         this.toHtml();
       },
 
       sayTranslation: function() {
-        if(replayLastWord.length > 1) {
-          if(translatedHasChanged) {
-            var translator = ru.translator();
+        if (replayLastWord.length > 1) {
+          if (translatedHasChanged) {
             translator.translate(function(translatedText) {
-              translatedReplay = translatedText;
-              translatedHasChanged = false;
-              audio.play(translatedReplay, 'en');
-            }.bind(this),
-                replayLastWord,
-                replayLanguage,
-                'en'
+                translatedReplay = translatedText;
+                translatedHasChanged = false;
+                audio.play(translatedReplay, 'en');
+              }.bind(this),
+              replayLastWord,
+              replayLanguage,
+              'en'
             );
           } else {
             audio.play(translatedReplay, 'en');
@@ -58,11 +65,11 @@
       guessLetter: function(character) {
         var current = this._currentLetter();
         var guessedRight = current.guessLetter(character);
-        if(guessedRight) {
+        if (guessedRight) {
           this.cursorRight();
         }
 
-        if(character === ' ' && this._currentLetter().isSpace()) {
+        if (character === ' ' && this._currentLetter().isSpace()) {
           this.guessLetter(' ');
         } else {
           this._playAudio(character, guessedRight);
@@ -76,7 +83,7 @@
         var row = div.clone();
         letters.forEach(function(letter, position) {
           row.append(letter.toHtml());
-          if(((position + 1) % columns) === 0 && position < letters.length) {
+          if (((position + 1) % columns) === 0 && position < letters.length) {
             position = 0;
             html.append(row.addClass('ui-keyboard-sample-wrapper'));
             row = div.clone();
@@ -111,7 +118,7 @@
       cursorRight: function() {
         var current = this._currentLetter();
         current.stopBlinking();
-        if(this._isLastLetter()) {
+        if (this._isLastLetter()) {
           this._nextPage();
         } else {
           position += 1;
@@ -122,7 +129,7 @@
       cursorLeft: function() {
         var current = this._currentLetter();
         current.stopBlinking();
-        if(this._isFirstLetter()) {
+        if (this._isFirstLetter()) {
           this._previousPage();
         } else {
           position -= 1;
@@ -139,10 +146,10 @@
       },
 
       _clearPreviousHtml: function() {
-        if(ru.undef(html)) {
+        if (utils.undef(html)) {
           html = $('<div></div>')
             .addClass('ui-keyboard-sample')
-            .css({'margin-bottom' : '1em'});
+            .css({'margin-bottom': '1em'});
         } else {
           $('.ui-keyboard-sample-wrapper', html).remove();
         }
@@ -160,17 +167,17 @@
 
       _previousPage: function() {
         position = 0;
-        for(var i=0; i<rows; i++) {
+        for (var i = 0; i < rows; i++) {
           text.previous();
         }
         buildLetters();
         this.toHtml();
       },
 
-       _playAudio: function(character, guessedRight) {
-        if(guessedRight) {
-          if(character === ' ') {
-            if(lastWord.length > 1) {
+      _playAudio: function(character, guessedRight) {
+        if (guessedRight) {
+          if (character === ' ') {
+            if (lastWord.length > 1) {
               audio.play(lastWord);
             }
             replayLastWord = lastWord;
@@ -180,10 +187,10 @@
             lastWord += character;
             audio.play(character);
           }
-        } else if(character === ' ' && replayLastWord.length > 1) {
+        } else if (character === ' ' && replayLastWord.length > 1) {
           audio.play(replayLastWord, replayLanguage);
         }
       }
     };
-  };
-})(window.ru = window.ru || {}, jQuery);
+  }
+};

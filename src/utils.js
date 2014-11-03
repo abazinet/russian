@@ -1,12 +1,11 @@
-(function(ru) {
-  "use strict";
+"use strict";
 
-  ru.undef = function(obj) {
+module.exports = {
+  undef: function(obj) {
     return obj === void 0;
-  };
+  },
 
-  ru.def = function(obj) {
+  def: function(obj) {
     return !this.undef(obj);
-  };
-
-})(window.ru = window.ru || {});
+  }
+};

@@ -1,7 +1,10 @@
-(function(ru, $) {
-  "use strict";
+"use strict";
 
-  ru.contentRetriever = function(onNewContent, url, divId, isValidCharacter) {
+var $ = require('jquery');
+var utils = require('./utils');
+
+module.exports = {
+  contentRetriever: function(onNewContent, url, divId, isValidCharacter) {
     return {
       download: function() {
         console.log('downloading content from ' + url);
@@ -29,7 +32,7 @@
       },
 
       _extractText: function(html) {
-        if(ru.def(divId)) {
+        if (utils.def(divId)) {
           html = $(html).find('#' + divId + ',.' + divId);
         }
 
@@ -50,10 +53,10 @@
       },
 
       _removeInvalidCharacters: function(text) {
-        if(ru.def(isValidCharacter)) {
-          for(var i=0; i<text.length; i++) {
-            if(!isValidCharacter(text[i])) {
-              text = text.substr(0, i) + ' ' + text.substr(i + 2);
+        if (utils.def(isValidCharacter)) {
+          for (var i = 0; i < text.length; i++) {
+            if (!isValidCharacter(text[i])) {
+              text = text.substr(0, i) + ' ' + text.substr(i + 1);
             }
           }
         }
@@ -65,6 +68,5 @@
         onNewContent(text);
       }
     };
-  };
-
-})(window.ru = window.ru || {}, jQuery);
+  }
+};

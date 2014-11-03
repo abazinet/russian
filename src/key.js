@@ -1,7 +1,11 @@
-(function(ru, $) {
-  "use strict";
+"use strict";
 
-  ru.Key = function(keyDescription, rowId, colId) {
+var utils = require('./utils');
+
+var $ = require('jquery');
+
+module.exports = {
+  key: function(keyDescription, rowId, colId) {
     var charKey = keyDescription;
     var html;
     var mappedKey;
@@ -9,17 +13,17 @@
     var title;
 
     var defaultButton = $('<button></button>')
-      .attr({ 'role': 'button', 'aria-disabled': 'false', 'tabindex' : '-1' })
+      .attr({ 'role': 'button', 'aria-disabled': 'false', 'tabindex': '-1' })
       .addClass('ui-keyboard-button');
 
     var display = {
-      'alt'    : 'AltGr:Alternate Graphemes',
-      'e'      : '\u21b5:Enter',        // down, then left arrow - enter symbol
-      'enter'  : 'Enter:Enter',
-      'shift'  : 'Shift:Shift',
-      'space'  : '&nbsp;:Space',
-      't'      : '\u21e5:Tab',          // right arrow to bar (used since this virtual keyboard works with one directional tabs)
-      'tab'    : '\u21e5 Tab:Tab'
+      'alt': 'AltGr:Alternate Graphemes',
+      'e': '\u21b5:Enter',        // down, then left arrow - enter symbol
+      'enter': 'Enter:Enter',
+      'shift': 'Shift:Shift',
+      'space': '&nbsp;:Space',
+      't': '\u21e5:Tab',          // right arrow to bar (used since this virtual keyboard works with one directional tabs)
+      'tab': '\u21e5 Tab:Tab'
     };
 
     return {
@@ -40,7 +44,7 @@
       },
 
       toHtml: function() {
-        if(ru.undef(html)) {
+        if (utils.undef(html)) {
           html = $('<div></div>');
           this._buildKey();
           if (keyDescription !== 0) {
@@ -59,7 +63,7 @@
       },
 
       _keyDisplay: function() {
-        if(this._actionKey()) {
+        if (this._actionKey()) {
           return keyDescription.match(/^\{(\S+)\}$/)[1].toLowerCase();
         }
         return keyDescription;
@@ -71,15 +75,15 @@
 
       _htmlKey: function() {
         var displayChar = this.getDisplay();
-        if(displayChar === ' ') {
+        if (displayChar === ' ') {
           displayChar = '&nbsp;';
         }
         return defaultButton
-            .clone()
-            .attr({ 'data-value' : charKey, 'name': displayChar, 'data-pos': rowId + ',' + colId, 'title' : title })
-            .data('key', this)
-            .addClass('ui-keyboard-' + displayChar + keyType + ' ' + 'ui-state-default ui-corner-all')
-            .html('<span>' + displayChar + '</span>');
+          .clone()
+          .attr({ 'data-value': charKey, 'name': displayChar, 'data-pos': rowId + ',' + colId, 'title': title })
+          .data('key', this)
+          .addClass('ui-keyboard-' + displayChar + keyType + ' ' + 'ui-state-default ui-corner-all')
+          .html('<span>' + displayChar + '</span>');
       },
 
       _buildKey: function() {
@@ -102,7 +106,9 @@
 
           // find key label
           nm = n.split(':');
-          if (nm[0] === '' && nm[1] === '') { n = ':'; } // corner case of ":(:):;" reduced to "::;", split as ["", "", ";"]
+          if (nm[0] === '' && nm[1] === '') {
+            n = ':';
+          } // corner case of ":(:):;" reduced to "::;", split as ["", "", ";"]
           n = (nm[0] !== '' && nm.length > 1) ? $.trim(nm[0]) : n;
           title = (nm.length > 1) ? $.trim(nm[1]).replace(/_/g, " ") || '' : ''; // added to title
 
@@ -113,11 +119,11 @@
 
           charKey = m || n;
 
-          if(charKey === '&nbsp;') {
+          if (charKey === '&nbsp;') {
             charKey = ' ';
           }
         }
       }
     };
-  };
-})(window.ru = window.ru || {}, jQuery);
+  }
+};

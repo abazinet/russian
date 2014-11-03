@@ -1,16 +1,17 @@
-(function(ru, $) {
-  "use strict";
+"use strict";
 
-  ru.audioPlayer = function(audioE) {
+var $ = require('jquery');
 
+module.exports = {
+  audioPlayer: function(audioE){
     return {
       play: function(word, lang) {
         word = $.trim(word);
         lang = lang || 'ru';
 
-        if(word.length > 0) {
+        if (word.length > 0) {
           console.log('playing ' + word);
-          if(word.length > 1 || !isNaN(word) ) {
+          if (word.length > 1 || !isNaN(word)) {
             audioE.src = 'http://translate.google.com/translate_tts?tl=' + lang + '&q=' + word;
           } else {
             word = word.toLowerCase();
@@ -22,5 +23,5 @@
         }
       }
     };
-  };
-})(window.ru = window.ru || {}, jQuery);
+  }
+};

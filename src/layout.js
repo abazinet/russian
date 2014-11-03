@@ -1,7 +1,10 @@
-(function(ru, $) {
-  "use strict";
+"use strict";
 
-  ru.Layout = function(name) {
+var utils = require('./utils');
+var $ = require('jquery');
+
+module.exports = {
+  Layout: function(name) {
     var rows = [];
     var keyHash = {};
     var mappedKeyHash = {};
@@ -9,19 +12,19 @@
     return {
       keyPressed: function(keyPressed) {
         var key = keyHash[keyPressed];
-        if(ru.def(key)) {
+        if (utils.def(key)) {
           key.keyPressed(keyPressed);
         }
         return key;
       },
 
       isValidCharacter: function(character) {
-        return ru.def(keyHash[character]) ||
-               ru.def(mappedKeyHash[character]);
+        return utils.def(keyHash[character]) ||
+          utils.def(mappedKeyHash[character]);
       },
 
       addKey: function(row, key) {
-        if(ru.undef(rows[row])) {
+        if (utils.undef(rows[row])) {
           rows[row] = [];
         }
         rows[row].push(key);
@@ -32,8 +35,8 @@
 
       toHtml: function() {
         var html = $('<div></div>')
-            .attr('name', name)
-            .addClass('ui-keyboard-keyset ui-keyboard-keyset-' + name);
+          .attr('name', name)
+          .addClass('ui-keyboard-keyset ui-keyboard-keyset-' + name);
 
         rows.forEach(function(row) {
           row.forEach(function(key) {
@@ -49,5 +52,5 @@
         return name === 'default';
       }
     };
-  };
-})(window.ru = window.ru || {}, jQuery);
+  }
+};
