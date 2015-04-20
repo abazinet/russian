@@ -2,7 +2,7 @@ A russian learning tool for programmers.
 
 This project is not longer maintained, has probably only ever worked on my machine and does not accurately reflect my current knowledge of javascript. :)
 
-I wanted to learn a new language. Russian seemed exotic enough. After a week, I could not pronounce a single sentence. However, I could touch type the entire Russian alphabet. Reflecting on this interesting side effect of being a programmer, I wrote this code to validate an idea. If I could only piggy back on my brain's overdeveloped keyboard representation to help connect the somewhat important other parts of the Russian language such as the meaning of words and their pronunciation.
+I wanted to learn a new language. Russian seemed exotic enough. After a week, I could not pronounce a single sentence. However, I could touch type the entire Russian alphabet. Reflecting on this interesting side effect of being a programmer, I wrote this code to validate an idea. Could I piggy back on my brain's overdeveloped keyboard representation to help connect the somewhat important other parts of the Russian language such as the meaning of words and their pronunciation.
 
 Pointing this code to a Russian page presents the user with an interface similar to those for learning to touch type. For each character properly entered, its phonetic sound is played over audio. At the end of each word (when space is pressed), the full word is played. Using ctrl-space plays the English translation.
 
