@@ -6,4 +6,4 @@ I wanted to learn a new language. Russian seemed exotic enough. After a week, I 
 
 Pointing this code to a Russian page presents the user with an interface similar to those for learning to touch type. For each character properly entered, its phonetic sound is played over audio. At the end of each word (when space is pressed), the full word is played. Using ctrl-space plays the English translation.
 
-In order to experiment with a few other ideas, the code is expected to be run within the browser but without a server.Since the concept of what is a server and what is a client is becoming fuzzier everyday, why not simply remove the server and see what happens. The code depends on CORS compatible APIs from google and yahoo to fetch remote web pages, create audio and perform translations.
+In order to experiment with a few other ideas, the code is expected to be run within the browser but without a server. Being that what is a server and what is a client is becoming fuzzier everyday, why not simply remove the server and see what happens. The code depends on CORS compatible APIs from google and yahoo to fetch remote web pages, create audio and perform translations.
